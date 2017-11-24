@@ -1,0 +1,54 @@
+package menucontroleur;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.AnchorPane;
+
+/**
+ * FXML Controller class
+ *
+ * @author jmppr
+ */
+public class ChoisirAdversaireControleur implements Initializable {
+
+    @FXML
+    AnchorPane paneChoisirAdversaire;
+    
+    @FXML
+    private void buttonJoueurHumain(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
+        paneChoisirAdversaire.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void buttonJoueurIADebutant(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
+        paneChoisirAdversaire.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void buttonJoueurIAAvance(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
+        paneChoisirAdversaire.getChildren().setAll(pane);
+    }
+    
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+    
+}

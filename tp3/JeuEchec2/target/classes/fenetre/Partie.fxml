@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="panePartie" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="partiecontroleur.PartieControleur">
+   <children>
+      <Button layoutX="428.0" layoutY="355.0" mnemonicParsing="false" onAction="#buttonRetourMenu" text="Retour au Menu" />
+      <Button layoutX="361.0" layoutY="308.0" mnemonicParsing="false" onAction="#buttonVisualiserPartieTermine" prefHeight="4.0" prefWidth="195.0" text="Visualiser la partie terminé" />
+      <Button layoutX="406.0" layoutY="259.0" mnemonicParsing="false" onAction="#buttonEnregistrerPartie" text="Enregistrer la partie" />
+   </children>
+</AnchorPane>
