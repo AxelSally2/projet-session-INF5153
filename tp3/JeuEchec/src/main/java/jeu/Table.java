@@ -29,6 +29,7 @@ import piece.Tour;
  * @author jmppr
  */
 public class Table {
+
     final String COULEUR1 = "Noir";
     final String COULEUR2 = "Blanc";
     final int NB_COL = 8;
@@ -48,6 +49,11 @@ public class Table {
         tablePieces[x][y] = piece;
     }
 
+    /**
+     * Retourne une liste de tous les pieces pour débuter une partie d'échec
+     *
+     * @return Une liste de tous les pieces pour débuter une partie d'échec
+     */
     private ArrayList<Piece> listeTousLesPieces() {
         ArrayList<Piece> piecesListe = new ArrayList<>();
 
@@ -56,6 +62,13 @@ public class Table {
         return piecesListe;
     }
 
+    /**
+     * Retourne une liste de tous les pieces pour débuter une partie pour la
+     * couleur sélectionné en paramètre.
+     *
+     * @param couleur La couleur Blanc ou Noir
+     * @return Une liste de tous les pieces pour une couleur
+     */
     private ArrayList<Piece> listePiecesCouleur(String couleur) {
         ArrayList<Piece> piecesListe = new ArrayList<>();
         int col = (COULEUR1.equals(couleur)) ? 0 : 7;
@@ -73,6 +86,13 @@ public class Table {
         return piecesListe;
     }
 
+    /**
+     * Retourne une liste de tous les pions pour la colonne passé en parametre
+     *
+     * @param col La colonne ou tous les pions vont être initialisé (Doit etre 1
+     * ou 6)
+     * @return Une liste de tous les pions d'une colonne
+     */
     private ArrayList<Piece> listePiecesPion(int col) {
         ArrayList<Piece> pionsListe = new ArrayList<>();
         for (int i = 0; i < NB_COL; i++) {
@@ -81,6 +101,10 @@ public class Table {
         return pionsListe;
     }
 
+    /**
+     * La table d'échec est initialisé avec les pieces en position pour débuter
+     * une nouvelle partie
+     */
     public void initialiserNouvelleTable() {
         for (int i = 0; i < NB_COL; i++) {
             for (int j = 0; j < NB_ROW; j++) {
@@ -93,6 +117,10 @@ public class Table {
         }
     }
 
+    /**
+     * La table d'échec est initialisé avec la position des pieces contenu dans
+     * le fichier de sauvegade
+     */
     public void initialiserTableSauvegarder() {
         //TODO
     }
