@@ -39,7 +39,7 @@ public abstract class Piece {
         return posY;
     }
 
-    public String couleur() {
+    public String getCouleur() {
         return couleur;
     }
 
