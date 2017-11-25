@@ -6,10 +6,74 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="panePartie" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="partiecontroleur.PartieControleur">
-   <children>
-      <Button layoutX="428.0" layoutY="355.0" mnemonicParsing="false" onAction="#buttonRetourMenu" text="Retour au Menu" />
-      <Button layoutX="361.0" layoutY="308.0" mnemonicParsing="false" onAction="#buttonVisualiserPartieTermine" prefHeight="4.0" prefWidth="195.0" text="Visualiser la partie terminé" />
-      <Button layoutX="406.0" layoutY="259.0" mnemonicParsing="false" onAction="#buttonEnregistrerPartie" text="Enregistrer la partie" />
-   </children>
+<AnchorPane id="AnchorPane" fx:id="panePartie" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="partiecontroleur.PartieControleur">
+    <children>
+        <Button layoutX="1074.0" layoutY="644.0" mnemonicParsing="false" onAction="#buttonRetourMenu" text="Retour au Menu" />
+        <Button layoutX="1007.0" layoutY="601.0" mnemonicParsing="false" onAction="#buttonVisualiserPartieTermine" prefHeight="4.0" prefWidth="195.0" text="Visualiser la partie terminé" />
+        <Button layoutX="1052.0" layoutY="558.0" mnemonicParsing="false" onAction="#buttonEnregistrerPartie" text="Enregistrer la partie" />
+        <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="14.0" layoutY="100.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="14.0" layoutY="186.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="14.0" layoutY="272.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="14.0" layoutY="358.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="14.0" layoutY="444.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="14.0" layoutY="530.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="14.0" layoutY="616.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="100.0" layoutY="14.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="100.0" layoutY="100.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="100.0" layoutY="272.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="100.0" layoutY="444.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="100.0" layoutY="616.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="100.0" layoutY="530.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="100.0" layoutY="358.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="100.0" layoutY="186.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="186.0" layoutY="14.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="186.0" layoutY="186.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="186.0" layoutY="358.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="186.0" layoutY="530.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="186.0" layoutY="616.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="186.0" layoutY="444.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="186.0" layoutY="272.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="186.0" layoutY="100.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="272.0" layoutY="100.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="272.0" layoutY="272.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="272.0" layoutY="444.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="272.0" layoutY="616.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="272.0" layoutY="530.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="272.0" layoutY="358.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="272.0" layoutY="186.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="272.0" layoutY="14.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="358.0" layoutY="14.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="358.0" layoutY="186.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="358.0" layoutY="358.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="358.0" layoutY="530.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="358.0" layoutY="616.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="358.0" layoutY="444.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="358.0" layoutY="272.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="358.0" layoutY="100.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="444.0" layoutY="530.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="444.0" layoutY="358.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="444.0" layoutY="186.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="444.0" layoutY="14.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="444.0" layoutY="100.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="444.0" layoutY="272.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="444.0" layoutY="444.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="444.0" layoutY="616.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="530.0" layoutY="530.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="530.0" layoutY="358.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="530.0" layoutY="186.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="530.0" layoutY="14.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="530.0" layoutY="100.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="530.0" layoutY="272.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="530.0" layoutY="444.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="530.0" layoutY="616.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="616.0" layoutY="616.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="616.0" layoutY="444.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="616.0" layoutY="272.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="616.0" layoutY="100.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="616.0" layoutY="530.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="616.0" layoutY="358.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="616.0" layoutY="186.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button layoutX="616.0" layoutY="14.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+    </children>
 </AnchorPane>

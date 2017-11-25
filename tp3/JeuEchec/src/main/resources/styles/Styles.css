@@ -1,3 +1,12 @@
 .button {
     -fx-font-weight: bold;
+    -fx-stroke: green;
+}
+
+.tuilePale {
+    -fx-background-color: #f2e6d9; 
+}
+
+.tuileFonce {
+    -fx-background-color: #bf8040; 
 }

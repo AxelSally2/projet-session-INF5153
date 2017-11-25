@@ -37,13 +37,13 @@ public class MeilleursTempsControleur implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/MenuPrincipal.fxml"));
         paneMeilleursTemps.getChildren().setAll(pane);
     }
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
