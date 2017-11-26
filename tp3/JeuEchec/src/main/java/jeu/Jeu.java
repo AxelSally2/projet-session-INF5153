@@ -22,8 +22,8 @@ package jeu;
 public class Jeu {
     private Table table;
     
-    public Jeu(Table table) {
-        this.table = table;
+    public Jeu() {
+        table = new Table();
     }
     
     public Table getTable() {

@@ -22,33 +22,33 @@ package piece;
 public abstract class Piece {
 
     private String couleur;
-    private int posX;
-    private int posY;
+    private int row;
+    private int col;
 
-    public Piece(String couleur, int posX, int posY) {
+    public Piece(String couleur, int row, int col) {
         this.couleur = couleur;
-        this.posX = posX;
-        this.posY = posY;
+        this.row = row;
+        this.col = col;
     }
 
-    public int getPosX() {
-        return posX;
+    public int getRow() {
+        return row;
     }
 
-    public int getPosY() {
-        return posY;
+    public int getCol() {
+        return col;
     }
 
     public String getCouleur() {
         return couleur;
     }
 
-    public void setPosX(int posX) {
-        this.posX = posX;
+    public void setRow(int row) {
+        this.row = row;
     }
 
-    public void setPosY(int posY) {
-        this.posY = posY;
+    public void setCol(int col) {
+        this.col = col;
     }
 
     public abstract boolean estDeplacementValide(int posX, int posY);

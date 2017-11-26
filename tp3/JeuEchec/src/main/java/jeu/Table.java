@@ -38,7 +38,7 @@ public class Table {
     Piece tablePieces[][];
 
     public Table() {
-        this.tablePieces = new Piece[NB_COL][NB_ROW];
+        this.tablePieces = new Piece[NB_ROW][NB_COL];
     }
 
     public Piece getPiece(int x, int y) {
@@ -71,32 +71,32 @@ public class Table {
      */
     private ArrayList<Piece> listePiecesCouleur(String couleur) {
         ArrayList<Piece> piecesListe = new ArrayList<>();
-        int col = (COULEUR1.equals(couleur)) ? 0 : 7;
-        int colPion = (COULEUR2.equals(couleur)) ? 1 : 6;
+        int row = (COULEUR1.equals(couleur)) ? 0 : 7;
+        int rowPion = (COULEUR2.equals(couleur)) ? 1 : 6;
 
-        piecesListe.add(new Tour(couleur, 0, col));
-        piecesListe.add(new Cavalier(couleur, 1, col));
-        piecesListe.add(new Fou(couleur, 2, col));
-        piecesListe.add(new Dame(couleur, 3, col));
-        piecesListe.add(new Roi(couleur, 4, col));
-        piecesListe.add(new Fou(couleur, 5, col));
-        piecesListe.add(new Cavalier(couleur, 6, col));
-        piecesListe.add(new Tour(couleur, 7, col));
-        piecesListe.addAll(listePiecesPion(colPion));
+        piecesListe.add(new Tour(couleur, row, 0));
+        piecesListe.add(new Cavalier(couleur, row, 1));
+        piecesListe.add(new Fou(couleur, row, 2));
+        piecesListe.add(new Dame(couleur, row, 3));
+        piecesListe.add(new Roi(couleur, row, 4));
+        piecesListe.add(new Fou(couleur, row, 5));
+        piecesListe.add(new Cavalier(couleur, row, 6));
+        piecesListe.add(new Tour(couleur, row, 7));
+        piecesListe.addAll(listePiecesPion(rowPion));
         return piecesListe;
     }
 
     /**
-     * Retourne une liste de tous les pions pour la colonne passé en parametre
+     * Retourne une liste de tous les pions pour la ligne passé en parametre
      *
-     * @param col La colonne ou tous les pions vont être initialisé (Doit etre 1
+     * @param row La ligne ou tous les pions vont être initialisé (Doit etre 1
      * ou 6)
-     * @return Une liste de tous les pions d'une colonne
+     * @return Une liste de tous les pions d'une ligne
      */
-    private ArrayList<Piece> listePiecesPion(int col) {
+    private ArrayList<Piece> listePiecesPion(int row) {
         ArrayList<Piece> pionsListe = new ArrayList<>();
         for (int i = 0; i < NB_COL; i++) {
-            pionsListe.add(new Pion((col == 1) ? COULEUR1 : COULEUR2, i, col));
+            pionsListe.add(new Pion((row == 1) ? COULEUR1 : COULEUR2, row, i));
         }
         return pionsListe;
     }
@@ -106,10 +106,10 @@ public class Table {
      * une nouvelle partie
      */
     public void initialiserNouvelleTable() {
-        for (int i = 0; i < NB_COL; i++) {
-            for (int j = 0; j < NB_ROW; j++) {
+        for (int i = 0; i < NB_ROW; i++) {
+            for (int j = 0; j < NB_COL; j++) {
                 for (int k = 0; k < listeTousLesPieces().size(); k++) {
-                    if (i == listeTousLesPieces().get(k).getPosX() && j == listeTousLesPieces().get(k).getPosY()) {
+                    if (i == listeTousLesPieces().get(k).getRow() && j == listeTousLesPieces().get(k).getCol()) {
                         tablePieces[i][j] = listeTousLesPieces().get(k);
                     }
                 }

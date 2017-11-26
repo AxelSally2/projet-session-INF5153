@@ -32,23 +32,30 @@ public class ChoisirAdversaireControleur implements Initializable {
     @FXML
     AnchorPane paneChoisirAdversaire;
     
+    protected int joueurChoisie;
+    
     @FXML
     private void buttonJoueurHumain(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
         paneChoisirAdversaire.getChildren().setAll(pane);
+        joueurChoisie = 1;
     }
 
     @FXML
     private void buttonJoueurIADebutant(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
         paneChoisirAdversaire.getChildren().setAll(pane);
+        joueurChoisie = 2;
     }
 
     @FXML
     private void buttonJoueurIAAvance(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
         paneChoisirAdversaire.getChildren().setAll(pane);
+        joueurChoisie = 3;
     }
+    
+    
     
     /**
      * Initializes the controller class.

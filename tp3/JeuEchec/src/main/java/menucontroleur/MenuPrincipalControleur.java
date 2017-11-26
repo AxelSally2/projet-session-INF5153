@@ -35,17 +35,21 @@ public class MenuPrincipalControleur implements Initializable {
     
     @FXML 
     AnchorPane paneMenu;
+    
+    public static int partieChoisie;
 
     @FXML
     private void buttonNouvellePartie(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/ChoisirAdversaire.fxml"));
         paneMenu.getChildren().setAll(pane);
+        partieChoisie = 1;
     }
 
     @FXML
     private void buttonChargerPartie(ActionEvent event) {
         System.out.println("TODO!");
-        label.setText("TODO!");
+        label.setText("TODO");
+        partieChoisie = 2;
     }
 
     @FXML
@@ -64,6 +68,7 @@ public class MenuPrincipalControleur implements Initializable {
 //        System.out.println("You clicked me!");
 //        label.setText("Hello World!");
 //    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

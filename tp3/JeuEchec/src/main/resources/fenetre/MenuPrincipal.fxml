@@ -8,7 +8,8 @@
 
 <AnchorPane id="AnchorPane" fx:id="paneMenu" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menucontroleur.MenuPrincipalControleur">
     <children>
-        <Button fx:id="button" layoutX="240.0" layoutY="59.0" onAction="#buttonNouvellePartie" text="Nouvelle Partie" />
+        <Button fx:id="ee" layoutX="240.0" layoutY="59.0" text="Nouvelle Partie" />
+        <Button fx:id="button1" layoutX="240.0" layoutY="59.0" onAction="#buttonNouvellePartie" text="Nouvelle Partie" />
         <Label fx:id="label" layoutX="266.0" layoutY="177.0" minHeight="16" minWidth="69" />
         <Button fx:id="button2" layoutX="228.0" layoutY="146.0" mnemonicParsing="false" onAction="#buttonChargerPartie" text="Charger une Partie" />
         <Button fx:id="button3" layoutX="194.0" layoutY="236.0" mnemonicParsing="false" onAction="#buttonConsulterTemps" text="Consulter les meilleurs temps" />
