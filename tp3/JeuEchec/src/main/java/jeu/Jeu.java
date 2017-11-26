@@ -20,12 +20,13 @@ package jeu;
  * @author jmppr
  */
 public class Jeu {
+
     private Table table;
-    
+
     public Jeu() {
         table = new Table();
     }
-    
+
     public Table getTable() {
         return table;
     }

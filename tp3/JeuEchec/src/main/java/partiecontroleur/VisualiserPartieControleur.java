@@ -37,13 +37,13 @@ public class VisualiserPartieControleur implements Initializable {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/MenuPrincipal.fxml"));
         paneVisualiserPartie.getChildren().setAll(pane);
     }
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

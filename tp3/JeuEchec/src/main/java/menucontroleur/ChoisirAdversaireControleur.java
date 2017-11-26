@@ -31,9 +31,9 @@ public class ChoisirAdversaireControleur implements Initializable {
 
     @FXML
     AnchorPane paneChoisirAdversaire;
-    
+
     protected int joueurChoisie;
-    
+
     @FXML
     private void buttonJoueurHumain(ActionEvent event) throws IOException {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
@@ -54,15 +54,13 @@ public class ChoisirAdversaireControleur implements Initializable {
         paneChoisirAdversaire.getChildren().setAll(pane);
         joueurChoisie = 3;
     }
-    
-    
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

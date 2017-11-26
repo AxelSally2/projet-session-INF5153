@@ -32,10 +32,10 @@ public class MenuPrincipalControleur implements Initializable {
 
     @FXML
     private Label label;
-    
-    @FXML 
+
+    @FXML
     AnchorPane paneMenu;
-    
+
     public static int partieChoisie;
 
     @FXML
@@ -68,7 +68,6 @@ public class MenuPrincipalControleur implements Initializable {
 //        System.out.println("You clicked me!");
 //        label.setText("Hello World!");
 //    }
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
