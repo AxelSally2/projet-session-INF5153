@@ -30,6 +30,7 @@ public class Dame extends Piece {
         return (Math.abs(this.row - row) == Math.abs(this.col - col)
                 || this.row == row
                 || this.col == col)
+                && !(this.row == row && this.col == col)
                 && estDansLaTable(row, col);
     }
 }

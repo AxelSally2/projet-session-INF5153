@@ -27,8 +27,9 @@ public class Fou extends Piece {
 
     @Override
     public boolean estDeplacementValide(int row, int col) {
-        return Math.abs(this.row - row) == Math.abs(this.col - col) 
+        return Math.abs(this.row - row) == Math.abs(this.col - col)
+                && !(this.row == row && this.col == col)
                 && estDansLaTable(row, col);
-    }    
+    }
 
 }

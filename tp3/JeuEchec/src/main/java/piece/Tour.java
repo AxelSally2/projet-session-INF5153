@@ -29,6 +29,7 @@ public class Tour extends Piece {
     public boolean estDeplacementValide(int row, int col) {
         return (this.row == row
                 || this.col == col)
+                && !(this.row == row && this.col == col)
                 && estDansLaTable(row, col);
     }
 }
