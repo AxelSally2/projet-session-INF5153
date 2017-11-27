@@ -21,9 +21,9 @@ package piece;
  */
 public abstract class Piece {
 
-    private String couleur;
-    private int row;
-    private int col;
+    protected String couleur;
+    protected int row;
+    protected int col;
 
     public Piece(String couleur, int row, int col) {
         this.couleur = couleur;
@@ -51,5 +51,28 @@ public abstract class Piece {
         this.col = col;
     }
 
-    public abstract boolean estDeplacementValide(int posX, int posY);
+    /**
+     * Retourne vrai si la colonne et la ligne de la piece sélection et la
+     * destination de la colonne et la ligne de cette piece se situe bien dans
+     * la table d'échec.
+     *
+     * @param row La ligne de destionation d'une piece
+     * @param col La colonee de destionation d'une piece
+     * @return Vrai si la colonne et la ligne de la piece sélection et la
+     * destination de la colonne et la ligne de cette piece se situe bien dans
+     * la table d'échec
+     */
+    protected boolean estDansLaTable(int row, int col) {
+        return row >= 0 && row <= 7 && col >= 0 && col <= 7
+                && this.row >= 0 && this.row <= 7 && this.col >= 0 && this.col <= 7;
+    }
+
+    /**
+     * Retourne vrai si la piece sélectionne effectue un mouvement valide.
+     *
+     * @param row La ligne de destionation d'une piece
+     * @param col La colonee de destionation d'une piece
+     * @return Vrai si la piece sélectionne effectue un mouvement valide
+     */
+    public abstract boolean estDeplacementValide(int row, int col);
 }

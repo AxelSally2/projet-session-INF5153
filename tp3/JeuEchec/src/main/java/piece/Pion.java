@@ -21,13 +21,34 @@ package piece;
  */
 public class Pion extends Piece {
 
-    public Pion(String couleur, int posX, int posY) {
-        super(couleur, posX, posY);
+    public Pion(String couleur, int row, int col) {
+        super(couleur, row, col);
     }
 
     @Override
-    public boolean estDeplacementValide(int posX, int posY) {
-        //TODO
-        return false;
+    public boolean estDeplacementValide(int row, int col) {
+        boolean resultat = false;
+        if (couleur.equals("Noir")) {
+            if (this.row == 1) {
+                if (this.col == col && (this.row + 1 == row || this.row + 2 == row)) {
+                    resultat = true;
+                }
+            } else {
+                if (this.col == col && this.row + 1 == row) {
+                    resultat = true;
+                }
+            }
+        } else if (couleur.equals("Blanc")) {
+            if (this.row == 6) {
+                if (this.col == col && (this.row - 1 == row || this.row - 2 == row)) {
+                    resultat = true;
+                }
+            } else {
+                if (this.col == col && this.row - 1 == row) {
+                    resultat = true;
+                }
+            }
+        }
+        return resultat;
     }
 }

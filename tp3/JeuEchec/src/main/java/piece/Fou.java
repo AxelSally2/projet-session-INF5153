@@ -21,13 +21,14 @@ package piece;
  */
 public class Fou extends Piece {
 
-    public Fou(String couleur, int posX, int posY) {
-        super(couleur, posX, posY);
+    public Fou(String couleur, int row, int col) {
+        super(couleur, row, col);
     }
 
     @Override
-    public boolean estDeplacementValide(int posX, int posY) {
-        //TODO
-        return false;
-    }
+    public boolean estDeplacementValide(int row, int col) {
+        return Math.abs(this.row - row) == Math.abs(this.col - col) 
+                && estDansLaTable(row, col);
+    }    
+
 }

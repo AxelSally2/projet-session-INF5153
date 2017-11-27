@@ -21,12 +21,12 @@ package piece;
  */
 public class Cavalier extends Piece {
 
-    public Cavalier(String couleur, int posX, int posY) {
-        super(couleur, posX, posY);
+    public Cavalier(String couleur, int row, int col) {
+        super(couleur, row, col);
     }
 
     @Override
-    public boolean estDeplacementValide(int posX, int posY) {
+    public boolean estDeplacementValide(int row, int col) {
         //TODO
         return false;
     }

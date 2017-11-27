@@ -75,6 +75,5 @@
         <Button fx:id="case57" layoutX="616.0" layoutY="444.0" mnemonicParsing="false" onAction="#case57Action" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
         <Button fx:id="case67" layoutX="616.0" layoutY="530.0" mnemonicParsing="false" onAction="#case67Action" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
         <Button fx:id="case77" layoutX="616.0" layoutY="616.0" mnemonicParsing="false" onAction="#case77Action" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
-
     </children>
 </AnchorPane>

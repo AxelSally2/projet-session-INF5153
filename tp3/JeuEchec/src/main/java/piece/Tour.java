@@ -21,13 +21,14 @@ package piece;
  */
 public class Tour extends Piece {
 
-    public Tour(String couleur, int posX, int posY) {
-        super(couleur, posX, posY);
+    public Tour(String couleur, int row, int col) {
+        super(couleur, row, col);
     }
 
     @Override
-    public boolean estDeplacementValide(int posX, int posY) {
-        //TODO
-        return false;
+    public boolean estDeplacementValide(int row, int col) {
+        return (this.row == row
+                || this.col == col)
+                && estDansLaTable(row, col);
     }
 }

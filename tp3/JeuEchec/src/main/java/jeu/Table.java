@@ -124,5 +124,9 @@ public class Table {
     public void initialiserTableSauvegarder() {
         //TODO
     }
+    
+//    public void estDeplacementValide(Piece piece, int row, int col) {
+//        piece.estDeplacementValide(row, col);
+//    }
 
 }

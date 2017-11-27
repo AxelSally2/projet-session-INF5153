@@ -20,14 +20,21 @@ package piece;
  * @author jmppr
  */
 public class Roi extends Piece {
-
-    public Roi(String couleur, int posX, int posY) {
-        super(couleur, posX, posY);
+    
+    public Roi(String couleur, int row, int col) {
+        super(couleur, row, col);
     }
-
+    
     @Override
-    public boolean estDeplacementValide(int posX, int posY) {
-        //TODO
-        return false;
+    public boolean estDeplacementValide(int row, int col) {
+        return ((this.row - row == 1 && this.col - col == 0)
+                || (this.row - row == 0 && this.col - col == 1)
+                || (this.row - row == -1 && this.col - col == 0)
+                || (this.row - row == 0 && this.col - col == -1)
+                || (this.row - row == -1 && this.col - col == 1)
+                || (this.row - row == 1 && this.col - col == -1)
+                || (this.row - row == 1 && this.col - col == 1)
+                || (this.row - row == -1 && this.col - col == -1))
+                && estDansLaTable(row, col);
     }
 }

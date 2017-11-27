@@ -29,6 +29,7 @@ import menucontroleur.MenuPrincipalControleur;
 import piece.Cavalier;
 import piece.Dame;
 import piece.Fou;
+import piece.Piece;
 import piece.Pion;
 import piece.Roi;
 import piece.Tour;
@@ -38,8 +39,8 @@ import piece.Tour;
  */
 public class PartieControleur implements Initializable {
 
-    private int row, newRow;
-    private int col, newCol;
+    private int row;
+    private int col;
     private int cpt = 0;
 
     @FXML
@@ -123,14 +124,25 @@ public class PartieControleur implements Initializable {
                 col = colValue;
             }
         } else if (cpt == 2) {
-            newRow = rowValue;
-            newCol = colValue;
-            partie.getTable().setPiece(newRow, newCol, partie.getTable().getPiece(row, col));
-            partie.getTable().getPiece(newRow, newCol).setRow(newRow);
-            partie.getTable().getPiece(newRow, newCol).setCol(newCol);
-            partie.getTable().setPiece(row, col, null);
+            if (partie.getTable().getPiece(row, col).estDeplacementValide(rowValue, colValue)) {
+                partie.getTable().setPiece(rowValue, colValue, partie.getTable().getPiece(row, col));
+                partie.getTable().getPiece(rowValue, colValue).setRow(rowValue);
+                partie.getTable().getPiece(rowValue, colValue).setCol(colValue);
+                partie.getTable().setPiece(row, col, null);
+                remplacerPionParDame(partie.getTable().getPiece(rowValue, colValue));
+            }
             afficherPieces();
             cpt = 0;
+        }
+    }
+
+    private void remplacerPionParDame(Piece piece) {
+        if (piece instanceof Pion) {
+            if (piece.getCouleur().equals("Blanc") && piece.getRow() == 0) {
+                partie.getTable().setPiece(piece.getRow(), piece.getCol(), new Dame(piece.getCouleur(), piece.getRow(), piece.getCol()));
+            } else if (piece.getCouleur().equals("Noir") && piece.getRow() == 7) {
+                partie.getTable().setPiece(piece.getRow(), piece.getCol(), new Dame(piece.getCouleur(), piece.getRow(), piece.getCol()));
+            }
         }
     }
 
