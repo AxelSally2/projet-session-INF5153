@@ -2,6 +2,7 @@ piece\Piece.class
 tempscontroleur\MeilleursTempsControleur.class
 piece\Pion.class
 piece\Roi.class
+fichier\ChargerFichier.class
 menucontroleur\MenuPrincipalControleur.class
 piece\Cavalier.class
 menucontroleur\ChoisirAdversaireControleur.class
@@ -12,4 +13,5 @@ jeu\Table.class
 piece\Tour.class
 partiecontroleur\PartieControleur.class
 piece\Fou.class
+fichier\EnregistrerFichier.class
 jeu\Jeu.class

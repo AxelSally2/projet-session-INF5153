@@ -15,6 +15,7 @@
  */
 package jeu;
 
+import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
 import piece.Cavalier;
 import piece.Dame;
@@ -35,7 +36,7 @@ public class Table {
     final int NB_COL = 8;
     final int NB_ROW = 8;
 
-    Piece tablePieces[][];
+    private Piece tablePieces[][];
 
     public Table() {
         this.tablePieces = new Piece[NB_ROW][NB_COL];
@@ -123,6 +124,16 @@ public class Table {
      */
     public void initialiserTableSauvegarder() {
         //TODO
+    }
+    
+    /**
+     * Retourne le tableau de pieces en format XML
+     * @return le tableau de pieces en format XML
+     */
+    public String tableToXML() {
+        XStream xstream = new XStream();
+        String xml = xstream.toXML(tablePieces);
+        return xml;
     }
     
 //    public void estDeplacementValide(Piece piece, int row, int col) {

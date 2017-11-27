@@ -33,6 +33,7 @@ import piece.Piece;
 import piece.Pion;
 import piece.Roi;
 import piece.Tour;
+import fichier.EnregistrerFichier;
 
 /**
  * FXML Controller class
@@ -468,8 +469,11 @@ public class PartieControleur implements Initializable {
 
     @FXML
     private void buttonEnregistrerPartie(ActionEvent event) throws IOException {
-        //TODO
+        EnregistrerFichier fichier = new EnregistrerFichier();
+        fichier.sauvegarderDansFichier(partie.getTable().tableToXML(), "XML files (*.xml)", "*.xml");
     }
+
+
 
     @FXML
     private void buttonVisualiserPartieTermine(ActionEvent event) throws IOException {
