@@ -27,8 +27,14 @@ public class Cavalier extends Piece {
 
     @Override
     public boolean estDeplacementValide(int row, int col) {
-        //TODO
-        return false;
+        return (this.row + 2 == row && this.col + 1 == col)
+                || (this.row + 1 == row && this.col + 2 == col)
+                || (this.row - 2 == row && this.col - 1 == col)
+                || (this.row - 1 == row && this.col - 2 == col)
+                || (this.row + 1 == row && this.col - 2 == col)
+                || (this.row - 1 == row && this.col + 2 == col)
+                || (this.row + 2 == row && this.col - 1 == col)
+                || (this.row - 2 == row && this.col + 1 == col)
+                && estDansLaTable(row, col);
     }
-
 }
