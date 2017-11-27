@@ -16,6 +16,8 @@
 package jeu;
 
 import com.thoughtworks.xstream.XStream;
+import fichier.ChargerFichier;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import piece.Cavalier;
 import piece.Dame;
@@ -121,20 +123,35 @@ public class Table {
     /**
      * La table d'échec est initialisé avec la position des pieces contenu dans
      * le fichier de sauvegade
+     * @throws java.io.FileNotFoundException
      */
-    public void initialiserTableSauvegarder() {
-        //TODO
+    public void initialiserTableSauvegarder() throws FileNotFoundException {
+        ChargerFichier fichier = new ChargerFichier();
+        tablePieces = XMLToTable(fichier.contenuFichier());
     }
     
     /**
-     * Retourne le tableau de pieces en format XML
-     * @return le tableau de pieces en format XML
+     * Transforme le tableau de pièces en une chaine de caractères en format XML
+     * @return Une chaine de caractère en format XML
      */
     public String tableToXML() {
         XStream xstream = new XStream();
-        String xml = xstream.toXML(tablePieces);
+        String xml = xstream.toXML(tablePieces);   
         return xml;
     }
+    
+    /**
+     * Transforme la chaine de caractère en format XML dans un tableau de pièces
+     * @param tableXML
+     * @return Un tableau de pièces
+     */
+    private Piece [][] XMLToTable(String tableXML){
+        XStream xstream = new XStream();
+        Piece pieces[][];
+        pieces = (Piece [][]) xstream.fromXML(tableXML);
+        return pieces;
+    }
+    
     
 //    public void estDeplacementValide(Piece piece, int row, int col) {
 //        piece.estDeplacementValide(row, col);

@@ -32,7 +32,7 @@ public class ChoisirAdversaireControleur implements Initializable {
     @FXML
     AnchorPane paneChoisirAdversaire;
 
-    protected int joueurChoisie;
+    public static int joueurChoisie;
 
     @FXML
     private void buttonJoueurHumain(ActionEvent event) throws IOException {

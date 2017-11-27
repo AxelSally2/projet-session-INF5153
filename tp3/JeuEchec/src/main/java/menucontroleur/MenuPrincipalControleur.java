@@ -40,16 +40,16 @@ public class MenuPrincipalControleur implements Initializable {
 
     @FXML
     private void buttonNouvellePartie(ActionEvent event) throws IOException {
+        partieChoisie = 1;
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/ChoisirAdversaire.fxml"));
         paneMenu.getChildren().setAll(pane);
-        partieChoisie = 1;
     }
 
     @FXML
-    private void buttonChargerPartie(ActionEvent event) {
-        System.out.println("TODO!");
-        label.setText("TODO");
+    private void buttonChargerPartie(ActionEvent event) throws IOException {
         partieChoisie = 2;
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
+        paneMenu.getChildren().setAll(pane);
     }
 
     @FXML

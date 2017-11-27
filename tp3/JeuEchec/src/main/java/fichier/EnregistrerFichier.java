@@ -30,7 +30,7 @@ public class EnregistrerFichier {
     private File fichier;
 
     public EnregistrerFichier() {
-        this.fichier = new File("");
+        fichier = new File("");
 
     }
 
@@ -40,12 +40,11 @@ public class EnregistrerFichier {
      *
      * @return Le fichier
      */
-    private void fichierAvecPath(String nomExtension, String extension) {
-        Stage primaryStage = new Stage();
-        FileChooser fileChooser = new FileChooser();
+    private void associerPathAuFichier(String nomExtension, String extension) {
+        FileChooser fichierChoisie = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(nomExtension, extension);
-        fileChooser.getExtensionFilters().add(extFilter);
-        fichier = fileChooser.showSaveDialog(primaryStage);
+        fichierChoisie.getExtensionFilters().add(extFilter);
+        fichier = fichierChoisie.showSaveDialog(new Stage());
     }
 
     /**
@@ -56,7 +55,7 @@ public class EnregistrerFichier {
      * @param extension l'extension du fichier
      */
     public void sauvegarderDansFichier(String contenu, String nomExtension, String extension) {
-        fichierAvecPath(nomExtension, extension);
+        associerPathAuFichier(nomExtension, extension);
         if (fichier != null) {
             try {
                 FileWriter fileWriter;

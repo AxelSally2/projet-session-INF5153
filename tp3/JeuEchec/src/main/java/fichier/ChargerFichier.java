@@ -15,10 +15,37 @@
  */
 package fichier;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
 /**
  *
  * @author jmppr
  */
 public class ChargerFichier {
-    
+
+    private File fichier;
+
+    public ChargerFichier() {
+        fichier = new File("");
+
+    }
+
+    /**
+     * Retourne le contenu du fichier dans une chaine de caractere
+     *
+     * @return Le contenu du fichier
+     * @throws FileNotFoundException
+     */
+    public String contenuFichier() throws FileNotFoundException {
+        FileChooser fichierChoisie = new FileChooser();
+        fichierChoisie.setTitle("Ouvrir fichier");
+        fichier = fichierChoisie.showOpenDialog(new Stage());
+        Scanner scan = new Scanner(fichier);
+        scan.useDelimiter("\\Z");
+        return scan.next();
+    }
 }

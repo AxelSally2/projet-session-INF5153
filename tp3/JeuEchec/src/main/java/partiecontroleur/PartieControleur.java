@@ -34,6 +34,10 @@ import piece.Pion;
 import piece.Roi;
 import piece.Tour;
 import fichier.EnregistrerFichier;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import menucontroleur.ChoisirAdversaireControleur;
 
 /**
  * FXML Controller class
@@ -59,7 +63,7 @@ public class PartieControleur implements Initializable {
 
     private Jeu partie;
 
-    private Jeu initialiserPartie() {
+    private Jeu initialiserPartie() throws FileNotFoundException {
         partie = new Jeu();
         if (MenuPrincipalControleur.partieChoisie == 1) {
             partie.getTable().initialiserNouvelleTable();
@@ -471,9 +475,9 @@ public class PartieControleur implements Initializable {
     private void buttonEnregistrerPartie(ActionEvent event) throws IOException {
         EnregistrerFichier fichier = new EnregistrerFichier();
         fichier.sauvegarderDansFichier(partie.getTable().tableToXML(), "XML files (*.xml)", "*.xml");
+
+
     }
-
-
 
     @FXML
     private void buttonVisualiserPartieTermine(ActionEvent event) throws IOException {
@@ -483,6 +487,8 @@ public class PartieControleur implements Initializable {
 
     @FXML
     private void buttonRetourMenu(ActionEvent event) throws IOException {
+        MenuPrincipalControleur.partieChoisie = 0;
+        ChoisirAdversaireControleur.joueurChoisie = 0;
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/MenuPrincipal.fxml"));
         panePartie.getChildren().setAll(pane);
     }
@@ -492,9 +498,12 @@ public class PartieControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        initialiserPartie();
+        try {
+            initialiserPartie();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PartieControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
         afficherPieces();
-
     }
 
 }
