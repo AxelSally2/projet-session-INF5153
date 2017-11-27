@@ -123,38 +123,78 @@ public class Table {
     /**
      * La table d'échec est initialisé avec la position des pieces contenu dans
      * le fichier de sauvegade
+     *
      * @throws java.io.FileNotFoundException
      */
     public void initialiserTableSauvegarder() throws FileNotFoundException {
         ChargerFichier fichier = new ChargerFichier();
         tablePieces = XMLToTable(fichier.contenuFichier());
     }
-    
+
     /**
      * Transforme le tableau de pièces en une chaine de caractères en format XML
+     *
      * @return Une chaine de caractère en format XML
      */
     public String tableToXML() {
         XStream xstream = new XStream();
-        String xml = xstream.toXML(tablePieces);   
+        String xml = xstream.toXML(tablePieces);
         return xml;
     }
-    
+
     /**
      * Transforme la chaine de caractère en format XML dans un tableau de pièces
+     *
      * @param tableXML
      * @return Un tableau de pièces
      */
-    private Piece [][] XMLToTable(String tableXML){
+    private Piece[][] XMLToTable(String tableXML) {
         XStream xstream = new XStream();
         Piece pieces[][];
-        pieces = (Piece [][]) xstream.fromXML(tableXML);
+        pieces = (Piece[][]) xstream.fromXML(tableXML);
         return pieces;
     }
-    
-    
-//    public void estDeplacementValide(Piece piece, int row, int col) {
-//        piece.estDeplacementValide(row, col);
-//    }
+
+    /**
+     * Retourne vrai si un pion de la couleur passer en parametre peut faire un
+     * mouvement diagonal (dans tous les directions) pour manger une piece de
+     * l'adversaire.
+     *
+     * @param piece La piece à déplacer (doit être un pion)
+     * @param row La ligne où le pion va se déplacer
+     * @param col La colonne où le pion va se déplacer
+     * @return Vrai si un pion de la couleur passer en parametre peut faire un
+     * mouvement diagonal (dans tous les directions) pour manger une piece de
+     * l'adversaire.
+     */
+    public boolean pionPeutMangerADroite(Piece piece, int row, int col) {
+        return pionPeutManger(piece, row, col, "Noir", 1, 1)
+                || pionPeutManger(piece, row, col, "Noir", 1, -1)
+                || pionPeutManger(piece, row, col, "Blanc", -1, 1)
+                || pionPeutManger(piece, row, col, "Blanc", -1, -1);
+    }
+
+    /**
+     * Retourne vrai si un pion de la couleur passer en parametre peut faire un
+     * mouvement diagonal (dans une seul direction) pour manger une piece de
+     * l'adversaire.
+     *
+     * @param piece La piece à déplacer (doit être un pion)
+     * @param row La ligne où le pion va se déplacer
+     * @param col La colonne où le pion va se déplacer
+     * @param pionCouleur La couleur du pion
+     * @param x Le nombre de case en X pour faire le déplacement (1 ou -1) (Si
+     * de couleur blanc -1, si de couleur noir +1)
+     * @param y Le nombre de case en Y pour faire le déplacement (1 ou -1)
+     * @return vrai si un pion de la couleur passer en parametre peut faire un
+     * mouvement diagonal (dans une seul direction) pour manger une piece de
+     * l'adversaire.
+     */
+    private boolean pionPeutManger(Piece piece, int row, int col, String pionCouleur, int x, int y) {
+        return piece instanceof Pion && piece.getCouleur().equals(pionCouleur)
+                && row == piece.getRow() + x && col == piece.getCol() + y
+                && (tablePieces[piece.getRow() + x][piece.getCol() + y] != null
+                && tablePieces[piece.getRow() + x][piece.getCol() + y].getCouleur().equals((pionCouleur.equals("Blanc")) ? "Noir" : "Blanc"));
+    }
 
 }

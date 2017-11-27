@@ -129,7 +129,8 @@ public class PartieControleur implements Initializable {
                 col = colValue;
             }
         } else if (cpt == 2) {
-            if (partie.getTable().getPiece(row, col).estDeplacementValide(rowValue, colValue)) {
+            if (partie.getTable().getPiece(row, col).estDeplacementValide(rowValue, colValue)
+                    || partie.getTable().pionPeutMangerADroite(partie.getTable().getPiece(row, col), rowValue, colValue)) {
                 partie.getTable().setPiece(rowValue, colValue, partie.getTable().getPiece(row, col));
                 partie.getTable().getPiece(rowValue, colValue).setRow(rowValue);
                 partie.getTable().getPiece(rowValue, colValue).setCol(colValue);
@@ -475,7 +476,6 @@ public class PartieControleur implements Initializable {
     private void buttonEnregistrerPartie(ActionEvent event) throws IOException {
         EnregistrerFichier fichier = new EnregistrerFichier();
         fichier.sauvegarderDansFichier(partie.getTable().tableToXML(), "XML files (*.xml)", "*.xml");
-
 
     }
 
