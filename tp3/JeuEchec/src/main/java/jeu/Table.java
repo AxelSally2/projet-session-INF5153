@@ -167,11 +167,11 @@ public class Table {
      * mouvement diagonal (dans tous les directions) pour manger une piece de
      * l'adversaire.
      */
-    public boolean pionPeutMangerADroite(Piece piece, int row, int col) {
-        return pionPeutManger(piece, row, col, "Noir", 1, 1)
-                || pionPeutManger(piece, row, col, "Noir", 1, -1)
-                || pionPeutManger(piece, row, col, "Blanc", -1, 1)
-                || pionPeutManger(piece, row, col, "Blanc", -1, -1);
+    private boolean pionPeutManger(Piece piece, int row, int col) {
+        return pionPeutMangerUneDirection(piece, row, col, "Noir", 1, 1) // Droite
+                || pionPeutMangerUneDirection(piece, row, col, "Noir", 1, -1) // Gauhce
+                || pionPeutMangerUneDirection(piece, row, col, "Blanc", -1, 1) // Droite
+                || pionPeutMangerUneDirection(piece, row, col, "Blanc", -1, -1); // Gauhce
     }
 
     /**
@@ -183,18 +183,100 @@ public class Table {
      * @param row La ligne où le pion va se déplacer
      * @param col La colonne où le pion va se déplacer
      * @param pionCouleur La couleur du pion
-     * @param x Le nombre de case en X pour faire le déplacement (1 ou -1) (Si
-     * de couleur blanc -1, si de couleur noir +1)
-     * @param y Le nombre de case en Y pour faire le déplacement (1 ou -1)
+     * @param dirX Le nombre de case en X pour faire le déplacement (1 ou -1)
+     * (Si de couleur blanc -1, si de couleur noir +1)
+     * @param dirY Le nombre de case en Y pour faire le déplacement (1 ou -1)
      * @return vrai si un pion de la couleur passer en parametre peut faire un
      * mouvement diagonal (dans une seul direction) pour manger une piece de
      * l'adversaire.
      */
-    private boolean pionPeutManger(Piece piece, int row, int col, String pionCouleur, int x, int y) {
+    private boolean pionPeutMangerUneDirection(Piece piece, int row, int col, String pionCouleur, int dirX, int dirY) {
         return piece instanceof Pion && piece.getCouleur().equals(pionCouleur)
-                && row == piece.getRow() + x && col == piece.getCol() + y
-                && (tablePieces[piece.getRow() + x][piece.getCol() + y] != null
-                && tablePieces[piece.getRow() + x][piece.getCol() + y].getCouleur().equals((pionCouleur.equals("Blanc")) ? "Noir" : "Blanc"));
+                && row == piece.getRow() + dirX && col == piece.getCol() + dirY
+                && (tablePieces[piece.getRow() + dirX][piece.getCol() + dirY] != null
+                && tablePieces[piece.getRow() + dirX][piece.getCol() + dirY].getCouleur().equals((pionCouleur.equals("Blanc")) ? "Noir" : "Blanc"));
     }
 
+    private boolean fouACheminDegage(Piece piece, int row, int col) {
+        if (!(piece instanceof Fou)) {
+            return true;
+        }
+        boolean resultat;
+        int dirX = col > piece.getCol() ? 1 : -1;
+        int dirY = row > piece.getRow() ? 1 : -1;
+        resultat = estObstrueDiagonalement(piece, row, col, dirY, dirX);
+        return resultat;
+    }
+
+    private boolean tourACheminDegage(Piece piece, int row, int col) {
+        if (!(piece instanceof Tour)) {
+            return true;
+        }
+        boolean resultat = true;
+        int dirX = col > piece.getCol() ? 1 : -1;
+        int dirY = row > piece.getRow() ? 1 : -1;
+        if (row == piece.getRow()) {
+            resultat = estObstrueHorizontalement(piece, col, dirX);
+        } else if (col == piece.getCol()) {
+            resultat = estObstrueVerticalement(piece, row, dirY);
+        }
+        return resultat;
+    }
+
+    private boolean dameACheminDegage(Piece piece, int row, int col) {
+        if (!(piece instanceof Dame)) {
+            return true;
+        }
+        boolean resultat;
+        int dirX = col > piece.getCol() ? 1 : -1;
+        int dirY = row > piece.getRow() ? 1 : -1;
+        if (row == piece.getRow()) {
+            resultat = estObstrueHorizontalement(piece, col, dirX);
+        } else if (col == piece.getCol()) {
+            resultat = estObstrueVerticalement(piece, row, dirY);
+        } else {
+            resultat = estObstrueDiagonalement(piece, row, col, dirY, dirX);
+        }
+        return resultat;
+    }
+
+    private boolean estObstrueHorizontalement(Piece piece, int col, int dirX) {
+        for (int i = 1; i < Math.abs(col - piece.getCol()); i++) {
+            if (tablePieces[piece.getRow()][piece.getCol() + i * dirX] != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean estObstrueVerticalement(Piece piece, int row, int dirY) {
+        for (int i = 1; i < Math.abs(row - piece.getRow()); i++) {
+            if (tablePieces[piece.getRow() + i * dirY][piece.getCol()] != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean estObstrueDiagonalement(Piece piece, int row, int col, int dirY, int dirX) {
+        for (int i = 1; i < Math.abs(row - piece.getRow()); i++) {
+            if (tablePieces[piece.getRow() + i * dirY][piece.getCol() + i * dirX] != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean cheminEstDegage(Piece piece, int row, int col) {
+        return dameACheminDegage(piece, row, col)
+                && tourACheminDegage(piece, row, col)
+                && fouACheminDegage(piece, row, col);
+    }
+
+    public boolean estValide(int row, int col, int rowDest, int colDest) {
+        //System.out.println(tablePieces[row][col].estDeplacementValide(rowValue, colValue) + " - " + pionPeutManger(tablePieces[row][col], rowValue, colValue) + " - " + cheminEstDegage(tablePieces[row][col], rowValue, colValue));
+        return (tablePieces[row][col].estDeplacementValide(rowDest, colDest)
+                || pionPeutManger(tablePieces[row][col], rowDest, colDest))
+                && cheminEstDegage(tablePieces[row][col], rowDest, colDest);
+    }
 }

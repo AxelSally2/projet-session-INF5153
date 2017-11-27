@@ -119,23 +119,22 @@ public class PartieControleur implements Initializable {
         }
     }
 
-    private void deplacerPiece(int rowValue, int colValue) {
+    private void deplacerPiece(int rowDest, int colDest) {
         cpt++;
         if (cpt == 1) {
-            if (partie.getTable().getPiece(rowValue, colValue) == null) {
+            if (partie.getTable().getPiece(rowDest, colDest) == null) {
                 cpt = 0;
             } else {
-                row = rowValue;
-                col = colValue;
+                row = rowDest;
+                col = colDest;
             }
         } else if (cpt == 2) {
-            if (partie.getTable().getPiece(row, col).estDeplacementValide(rowValue, colValue)
-                    || partie.getTable().pionPeutMangerADroite(partie.getTable().getPiece(row, col), rowValue, colValue)) {
-                partie.getTable().setPiece(rowValue, colValue, partie.getTable().getPiece(row, col));
-                partie.getTable().getPiece(rowValue, colValue).setRow(rowValue);
-                partie.getTable().getPiece(rowValue, colValue).setCol(colValue);
+            if (partie.getTable().estValide(row, col, rowDest, colDest)) {
+                partie.getTable().setPiece(rowDest, colDest, partie.getTable().getPiece(row, col));
+                partie.getTable().getPiece(rowDest, colDest).setRow(rowDest);
+                partie.getTable().getPiece(rowDest, colDest).setCol(colDest);
                 partie.getTable().setPiece(row, col, null);
-                remplacerPionParDame(partie.getTable().getPiece(rowValue, colValue));
+                remplacerPionParDame(partie.getTable().getPiece(rowDest, colDest));
             }
             afficherPieces();
             cpt = 0;
