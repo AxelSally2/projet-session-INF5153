@@ -204,7 +204,7 @@ public class Table {
         boolean resultat;
         int dirX = col > piece.getCol() ? 1 : -1;
         int dirY = row > piece.getRow() ? 1 : -1;
-        resultat = estObstrueDiagonalement(piece, row, col, dirY, dirX);
+        resultat = estPasObstrueDiagonalement(piece, row, col, dirY, dirX);
         return resultat;
     }
 
@@ -216,9 +216,9 @@ public class Table {
         int dirX = col > piece.getCol() ? 1 : -1;
         int dirY = row > piece.getRow() ? 1 : -1;
         if (row == piece.getRow()) {
-            resultat = estObstrueHorizontalement(piece, col, dirX);
+            resultat = estPasObstrueHorizontalement(piece, col, dirX);
         } else if (col == piece.getCol()) {
-            resultat = estObstrueVerticalement(piece, row, dirY);
+            resultat = estPasObstrueVerticalement(piece, row, dirY);
         }
         return resultat;
     }
@@ -231,16 +231,16 @@ public class Table {
         int dirX = col > piece.getCol() ? 1 : -1;
         int dirY = row > piece.getRow() ? 1 : -1;
         if (row == piece.getRow()) {
-            resultat = estObstrueHorizontalement(piece, col, dirX);
+            resultat = estPasObstrueHorizontalement(piece, col, dirX);
         } else if (col == piece.getCol()) {
-            resultat = estObstrueVerticalement(piece, row, dirY);
+            resultat = estPasObstrueVerticalement(piece, row, dirY);
         } else {
-            resultat = estObstrueDiagonalement(piece, row, col, dirY, dirX);
+            resultat = estPasObstrueDiagonalement(piece, row, col, dirY, dirX);
         }
         return resultat;
     }
 
-    private boolean estObstrueHorizontalement(Piece piece, int col, int dirX) {
+    private boolean estPasObstrueHorizontalement(Piece piece, int col, int dirX) {
         for (int i = 1; i < Math.abs(col - piece.getCol()); i++) {
             if (tablePieces[piece.getRow()][piece.getCol() + i * dirX] != null) {
                 return false;
@@ -249,7 +249,7 @@ public class Table {
         return true;
     }
 
-    private boolean estObstrueVerticalement(Piece piece, int row, int dirY) {
+    private boolean estPasObstrueVerticalement(Piece piece, int row, int dirY) {
         for (int i = 1; i < Math.abs(row - piece.getRow()); i++) {
             if (tablePieces[piece.getRow() + i * dirY][piece.getCol()] != null) {
                 return false;
@@ -258,7 +258,7 @@ public class Table {
         return true;
     }
 
-    private boolean estObstrueDiagonalement(Piece piece, int row, int col, int dirY, int dirX) {
+    private boolean estPasObstrueDiagonalement(Piece piece, int row, int col, int dirY, int dirX) {
         for (int i = 1; i < Math.abs(row - piece.getRow()); i++) {
             if (tablePieces[piece.getRow() + i * dirY][piece.getCol() + i * dirX] != null) {
                 return false;
@@ -277,6 +277,11 @@ public class Table {
         //System.out.println(tablePieces[row][col].estDeplacementValide(rowValue, colValue) + " - " + pionPeutManger(tablePieces[row][col], rowValue, colValue) + " - " + cheminEstDegage(tablePieces[row][col], rowValue, colValue));
         return (tablePieces[row][col].estDeplacementValide(rowDest, colDest)
                 || pionPeutManger(tablePieces[row][col], rowDest, colDest))
-                && cheminEstDegage(tablePieces[row][col], rowDest, colDest);
+                && cheminEstDegage(tablePieces[row][col], rowDest, colDest) 
+                && piecePeutManger(tablePieces[row][col], rowDest, colDest);
+    }
+    
+    private boolean piecePeutManger(Piece piece, int row, int col) {
+        return tablePieces[row][col] == null || !(piece.getCouleur().equals(tablePieces[row][col].getCouleur()));
     }
 }
