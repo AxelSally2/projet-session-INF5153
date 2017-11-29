@@ -16,6 +16,7 @@
 package joueur;
 
 import java.util.Map;
+import jeu.Mouvement;
 import jeu.Table;
 import piece.Piece;
 
@@ -30,5 +31,5 @@ public abstract class IA extends Ennemi {
     }
 
     @Override
-    public abstract void effectueMouvement(Table table);
+    public abstract void effectueMouvement(Table table, Mouvement mouvHist);
 }

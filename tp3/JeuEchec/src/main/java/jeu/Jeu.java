@@ -22,27 +22,39 @@ import joueur.Joueur;
  *
  * @author jmppr
  */
-public class Jeu<T> {
+public class Jeu {
 
     private Table table;
     private Joueur joueur1;
     private Ennemi joueur2;
+    private Mouvement mouv;
 
-    public Jeu (Table table, Joueur joueur1, Ennemi joueur2) {
+    public Jeu(Table table, Joueur joueur1, Ennemi joueur2, Mouvement mouv) {
         this.table = table;
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
+        this.mouv = mouv;
     }
 
     public Table getTable() {
         return table;
     }
-    
+
     public Joueur getJoueur1() {
         return joueur1;
     }
-    
+
     public Ennemi getJoueur2() {
         return joueur2;
+    }
+
+    public Mouvement getMouvement() {
+        return mouv;
+    }
+
+    public void jouerUnTour(int row, int col, int rowDest, int colDest) {
+        if (joueur1.effectueMouvement(table, row, col, rowDest, colDest, mouv)) {
+            joueur2.effectueMouvement(table, mouv);
+        }
     }
 }

@@ -15,6 +15,7 @@
  */
 package joueur;
 
+import jeu.Mouvement;
 import jeu.Table;
 
 /**
@@ -36,13 +37,10 @@ public class Joueur {
         this.nom = nom;
     }
 
-    public boolean effectueMouvement(Table table, int row, int col, int rowDest, int colDest) {
+    public boolean effectueMouvement(Table table, int row, int col, int rowDest, int colDest, Mouvement mouv) {
         if (table.estValide(row, col, rowDest, colDest)) {
-            table.setPiece(rowDest, colDest, table.getPiece(row, col));
-            table.getPiece(rowDest, colDest).setRow(rowDest);
-            table.getPiece(rowDest, colDest).setCol(colDest);
-            table.setPiece(row, col, null);
-            table.remplacerPionParDame(table.getPiece(rowDest, colDest));
+            mouv.mouvementPiece(table, row, col, rowDest, colDest);
+            mouv.enregistrerMouvement(row, col, rowDest, colDest);
             return true;
         }
         return false;

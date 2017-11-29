@@ -1,6 +1,7 @@
 joueur\Joueur.class
 joueur\IAAvance.class
 piece\Piece.class
+jeu\Mouvement.class
 tempscontroleur\MeilleursTempsControleur.class
 piece\Pion.class
 joueur\IA.class

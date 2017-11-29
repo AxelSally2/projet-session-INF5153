@@ -122,6 +122,11 @@ public class Table {
                 }
             }
         }
+        for (int i = 2; i < 6; i++) {
+            for (int j = 0; j < NB_COL; j++) {
+                tablePieces[i][j] = null;
+            }
+        }
     }
 
     /**

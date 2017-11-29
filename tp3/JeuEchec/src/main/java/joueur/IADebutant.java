@@ -18,6 +18,7 @@ package joueur;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
+import jeu.Mouvement;
 import jeu.Table;
 import piece.Piece;
 
@@ -65,15 +66,13 @@ public class IADebutant extends IA {
     }
 
     @Override
-    public void effectueMouvement(Table table) {
-        Map mouv = genereUnMouvement(table);
-        while (!(table.estValide((int) mouv.get("row"), (int) mouv.get("col"), (int) mouv.get("rowDest"), (int) mouv.get("colDest")))) {
-            mouv = genereUnMouvement(table);
+    public void effectueMouvement(Table table, Mouvement mouv) {
+        Map mouvGen = genereUnMouvement(table);
+        while (!(table.estValide((int) mouvGen.get("row"), (int) mouvGen.get("col"),
+                (int) mouvGen.get("rowDest"), (int) mouvGen.get("colDest")))) {
+            mouvGen = genereUnMouvement(table);
         }
-        table.setPiece((int) mouv.get("rowDest"), (int) mouv.get("colDest"), table.getPiece((int) mouv.get("row"), (int) mouv.get("col")));
-        table.getPiece((int) mouv.get("rowDest"), (int) mouv.get("colDest")).setRow((int) mouv.get("rowDest"));
-        table.getPiece((int) mouv.get("rowDest"), (int) mouv.get("colDest")).setCol((int) mouv.get("colDest"));
-        table.setPiece((int) mouv.get("row"), (int) mouv.get("col"), null);
-        table.remplacerPionParDame(table.getPiece((int) mouv.get("rowDest"), (int) mouv.get("colDest")));
+        mouv.mouvementPiece(table, (int) mouvGen.get("row"), (int) mouvGen.get("col"),
+                (int) mouvGen.get("rowDest"), (int) mouvGen.get("colDest"));
     }
 }

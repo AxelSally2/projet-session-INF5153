@@ -36,6 +36,7 @@ import fichier.EnregistrerFichier;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jeu.Mouvement;
 import jeu.Table;
 import joueur.Humain;
 import joueur.IAAvance;
@@ -65,22 +66,22 @@ public class PartieControleur implements Initializable {
     @FXML
     AnchorPane panePartie;
 
-    private Jeu partie;
+    public static Jeu partie;
 
     private Jeu creerPartie() {
         if (ChoisirAdversaireControleur.joueurChoisie == 1) {
-            partie = new Jeu(new Table(), new Joueur(), new Humain());
+            partie = new Jeu(new Table(), new Joueur(), new Humain(), new Mouvement());
         } else if (ChoisirAdversaireControleur.joueurChoisie == 2) {
-            partie = new Jeu(new Table(), new Joueur(), new IADebutant());
+            partie = new Jeu(new Table(), new Joueur(), new IADebutant(), new Mouvement());
         } else if (ChoisirAdversaireControleur.joueurChoisie == 3) {
-            partie = new Jeu(new Table(), new Joueur(), new IAAvance());
+            partie = new Jeu(new Table(), new Joueur(), new IAAvance(), new Mouvement());
         } else {
-            partie = new Jeu(new Table(), new Joueur(), new IADebutant());
+            partie = new Jeu(new Table(), new Joueur(), new IADebutant(), new Mouvement());
         }
         return partie;
     }
 
-    private Jeu initialiserPartie() throws FileNotFoundException {
+    public Jeu initialiserPartie() throws FileNotFoundException {
         if (MenuPrincipalControleur.partieChoisie == 1) {
             partie.getTable().initialiserNouvelleTable();
         } else if (MenuPrincipalControleur.partieChoisie == 2) {
@@ -101,7 +102,7 @@ public class PartieControleur implements Initializable {
         return table;
     }
 
-    private void afficherPieces() {
+    public void afficherPieces() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 if (partie.getTable().getPiece(row, col) instanceof Roi && partie.getTable().getPiece(row, col).getCouleur().equals("Blanc")) {
@@ -145,10 +146,7 @@ public class PartieControleur implements Initializable {
                 col = colDest;
             }
         } else if (cpt == 2) {
-            if (partie.getJoueur1().effectueMouvement(partie.getTable(), row, col, rowDest, colDest)) {
-                afficherPieces();
-                partie.getJoueur2().effectueMouvement(partie.getTable());
-            }
+            partie.jouerUnTour(row, col, rowDest, colDest);
             afficherPieces();
             cpt = 0;
         }

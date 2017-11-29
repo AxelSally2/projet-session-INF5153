@@ -6,9 +6,74 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" fx:id="paneVisualiserPartie" prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="partiecontroleur.VisualiserPartieControleur">
+<AnchorPane id="AnchorPane" fx:id="paneVisualiserPartie" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="partiecontroleur.VisualiserPartieControleur">
     <children>
-        <Button layoutX="226.0" layoutY="355.0" mnemonicParsing="false" onAction="#buttonRetourMenu" text="Retourner au Menu" />
+        <Button layoutX="1068.0" layoutY="640.0" mnemonicParsing="false" onAction="#buttonRetourMenu" text="Retourner au Menu" />
+        <Button fx:id="btnNext" layoutX="1104.0" layoutY="560.0" mnemonicParsing="false" onAction="#buttonNextMouv" text="&gt;&gt;" />
+        <Button fx:id="btnPrev" layoutX="990.0" layoutY="560.0" mnemonicParsing="false" onAction="#buttonPreviousMouv" text="&lt;&lt;" />
+        <Button fx:id="case00" layoutX="14.0" layoutY="14.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case10" layoutX="14.0" layoutY="100.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case20" layoutX="14.0" layoutY="186.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case30" layoutX="14.0" layoutY="272.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case40" layoutX="14.0" layoutY="358.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case50" layoutX="14.0" layoutY="444.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case60" layoutX="14.0" layoutY="530.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case70" layoutX="14.0" layoutY="616.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case01" layoutX="100.0" layoutY="14.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case11" layoutX="100.0" layoutY="100.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case21" layoutX="100.0" layoutY="186.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case31" layoutX="100.0" layoutY="272.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case41" layoutX="100.0" layoutY="358.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case51" layoutX="100.0" layoutY="444.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case61" layoutX="100.0" layoutY="530.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case71" layoutX="100.0" layoutY="616.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case02" layoutX="186.0" layoutY="14.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case12" layoutX="186.0" layoutY="100.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case22" layoutX="186.0" layoutY="186.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case32" layoutX="186.0" layoutY="272.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case42" layoutX="186.0" layoutY="358.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case52" layoutX="186.0" layoutY="444.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case62" layoutX="186.0" layoutY="530.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case72" layoutX="186.0" layoutY="616.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case03" layoutX="272.0" layoutY="14.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case13" layoutX="272.0" layoutY="100.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case23" layoutX="272.0" layoutY="186.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case33" layoutX="272.0" layoutY="272.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case43" layoutX="272.0" layoutY="358.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case53" layoutX="272.0" layoutY="444.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case63" layoutX="272.0" layoutY="530.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case73" layoutX="272.0" layoutY="616.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case04" layoutX="358.0" layoutY="14.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case14" layoutX="358.0" layoutY="100.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case24" layoutX="358.0" layoutY="186.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case34" layoutX="358.0" layoutY="272.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case44" layoutX="358.0" layoutY="358.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case54" layoutX="358.0" layoutY="444.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case64" layoutX="358.0" layoutY="530.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case74" layoutX="358.0" layoutY="616.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case05" layoutX="444.0" layoutY="14.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case15" layoutX="444.0" layoutY="100.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case25" layoutX="444.0" layoutY="186.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case35" layoutX="444.0" layoutY="272.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case45" layoutX="444.0" layoutY="358.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case55" layoutX="444.0" layoutY="444.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case65" layoutX="444.0" layoutY="530.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case75" layoutX="444.0" layoutY="616.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case06" layoutX="530.0" layoutY="14.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case16" layoutX="530.0" layoutY="100.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case26" layoutX="530.0" layoutY="186.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case36" layoutX="530.0" layoutY="272.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case46" layoutX="530.0" layoutY="358.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case56" layoutX="530.0" layoutY="444.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case66" layoutX="530.0" layoutY="530.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case76" layoutX="530.0" layoutY="616.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case07" layoutX="616.0" layoutY="14.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case17" layoutX="616.0" layoutY="100.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case27" layoutX="616.0" layoutY="186.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case37" layoutX="616.0" layoutY="272.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case47" layoutX="616.0" layoutY="358.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case57" layoutX="616.0" layoutY="444.0" mnemonicParsing="false" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case67" layoutX="616.0" layoutY="530.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
+        <Button fx:id="case77" layoutX="616.0" layoutY="616.0" mnemonicParsing="false"  prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
     </children>
 </AnchorPane>

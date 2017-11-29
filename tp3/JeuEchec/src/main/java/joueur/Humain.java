@@ -15,6 +15,7 @@
  */
 package joueur;
 
+import jeu.Mouvement;
 import jeu.Table;
 
 /**
@@ -28,5 +29,5 @@ public class Humain extends Ennemi {
     }
     
     @Override
-    public void effectueMouvement(Table table){}
+    public void effectueMouvement(Table table, Mouvement mouvHist){}
 }
