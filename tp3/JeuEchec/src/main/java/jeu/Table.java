@@ -303,8 +303,8 @@ public class Table {
     }
 
     public boolean estValide(int row, int col, int rowDest, int colDest) {
-        System.out.println(tablePieces[row][col].getRow() + "---" + tablePieces[row][col].getCol());
-        System.out.println(rowDest + "-" + colDest);
+        //System.out.println(tablePieces[row][col].getRow() + "---" + tablePieces[row][col].getCol());
+        //System.out.println(rowDest + "-" + colDest);
         //System.out.println(tablePieces[row][col].estDeplacementValide(rowDest, colDest));
         //System.out.println(cheminEstDegage(tablePieces[row][col], rowDest, colDest));
         //System.out.println(piecePeutManger(tablePieces[row][col], rowDest, colDest));

@@ -27,20 +27,21 @@ public class Pion extends Piece {
 
     @Override
     public boolean estDeplacementValide(int row, int col) {
-        boolean resultat = false;
-        if (super.getCouleur().equals("Noir")) {
-            if (super.getRow() == 1) {
-                resultat = (super.getCol() == col && (super.getRow() + 1 == row || super.getRow() + 2 == row))  || super.getCol() + 1 == col && super.getRow() + 1 == row || super.getCol() - 1 == col && super.getRow() + 1 == row;
-            } else {
-                resultat = (super.getCol() == col && super.getRow() + 1 == row) || super.getCol() + 1 == col && super.getRow() + 1 == row || super.getCol() - 1 == col && super.getRow() + 1 == row;
-            }
-        } else if (super.getCouleur().equals("Blanc")) {
-            if (super.getRow() == 6) {
-                resultat = (super.getCol() == col && (super.getRow() - 1 == row || super.getRow() - 2 == row)) || super.getCol() + 1 == col && super.getRow() - 1 == row || super.getCol() - 1 == col && super.getRow() - 1 == row;
-            } else {
-                resultat = (super.getCol() == col && super.getRow() - 1 == row) || super.getCol() + 1 == col && super.getRow() - 1 == row || super.getCol() - 1 == col && super.getRow() - 1 == row;
-            }
+        boolean resultat;
+        int dirR = (super.getCouleur().equals("Noir")) ? 1 : -1;
+        int dirRStart = (super.getCouleur().equals("Noir")) ? 2 : -2;
+        int startRow = (super.getCouleur().equals("Noir")) ? 1 : 6;
+        if (super.getRow() == startRow) {
+            resultat = (super.getCol() == col && (super.getRow() + dirR == row || super.getRow() + dirRStart == row))
+                    || deplacementDiagoValide(row, col, dirR);
+        } else {
+            resultat = (super.getCol() == col && super.getRow() + dirR == row)
+                    || deplacementDiagoValide(row, col, dirR);
         }
         return resultat;
+    }
+
+    private boolean deplacementDiagoValide(int row, int col, int dirR) {
+        return super.getCol() + 1 == col && super.getRow() + dirR == row || super.getCol() - 1 == col && super.getRow() + dirR == row;
     }
 }
