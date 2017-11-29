@@ -27,10 +27,10 @@ public class Dame extends Piece {
 
     @Override
     public boolean estDeplacementValide(int row, int col) {
-        return (Math.abs(this.row - row) == Math.abs(this.col - col)
-                || this.row == row
-                || this.col == col)
-                && !(this.row == row && this.col == col)
-                && estDansLaTable(row, col);
+        return (Math.abs(super.getRow() - row) == Math.abs(super.getCol() - col)
+                || super.getRow() == row
+                || super.getCol() == col)
+                && !(super.getRow() == row && super.getCol() == col)
+                && super.estDansLaTable(row, col);
     }
 }

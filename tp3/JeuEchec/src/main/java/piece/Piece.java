@@ -21,9 +21,9 @@ package piece;
  */
 public abstract class Piece {
 
-    protected String couleur;
-    protected int row;
-    protected int col;
+    private String couleur;
+    private int row;
+    private int col;
 
     public Piece(String couleur, int row, int col) {
         this.couleur = couleur;

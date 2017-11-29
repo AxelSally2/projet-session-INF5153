@@ -27,14 +27,14 @@ public class Cavalier extends Piece {
 
     @Override
     public boolean estDeplacementValide(int row, int col) {
-        return (this.row + 2 == row && this.col + 1 == col)
-                || (this.row + 1 == row && this.col + 2 == col)
-                || (this.row - 2 == row && this.col - 1 == col)
-                || (this.row - 1 == row && this.col - 2 == col)
-                || (this.row + 1 == row && this.col - 2 == col)
-                || (this.row - 1 == row && this.col + 2 == col)
-                || (this.row + 2 == row && this.col - 1 == col)
-                || (this.row - 2 == row && this.col + 1 == col)
-                && estDansLaTable(row, col);
+        return (super.getRow() + 2 == row && super.getCol() + 1 == col)
+                || (super.getRow() + 1 == row && super.getCol() + 2 == col)
+                || (super.getRow() - 2 == row && super.getCol() - 1 == col)
+                || (super.getRow() - 1 == row && super.getCol() - 2 == col)
+                || (super.getRow() + 1 == row && super.getCol() - 2 == col)
+                || (super.getRow() - 1 == row && super.getCol() + 2 == col)
+                || (super.getRow() + 2 == row && super.getCol() - 1 == col)
+                || (super.getRow() - 2 == row && super.getCol() + 1 == col)
+                && super.estDansLaTable(row, col);
     }
 }

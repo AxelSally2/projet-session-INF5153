@@ -13,36 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package jeu;
+package joueur;
 
-import joueur.Ennemi;
-import joueur.Joueur;
+import jeu.Table;
+import piece.Piece;
 
 /**
  *
  * @author jmppr
  */
-public class Jeu<T> {
-
-    private Table table;
-    private Joueur joueur1;
-    private Ennemi joueur2;
-
-    public Jeu (Table table, Joueur joueur1, Ennemi joueur2) {
-        this.table = table;
-        this.joueur1 = joueur1;
-        this.joueur2 = joueur2;
-    }
-
-    public Table getTable() {
-        return table;
-    }
+public abstract class Ennemi {
     
-    public Joueur getJoueur1() {
-        return joueur1;
+    public Ennemi() {
+        super();
     }
+
+    public abstract void effectueMouvement(Table table);
     
-    public Ennemi getJoueur2() {
-        return joueur2;
-    }
 }

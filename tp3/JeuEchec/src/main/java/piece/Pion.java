@@ -28,23 +28,23 @@ public class Pion extends Piece {
     @Override
     public boolean estDeplacementValide(int row, int col) {
         boolean resultat = false;
-        if (couleur.equals("Noir")) {
-            if (this.row == 1) {
-                if (this.col == col && (this.row + 1 == row || this.row + 2 == row)) {
+        if (super.getCouleur().equals("Noir")) {
+            if (super.getRow() == 1) {
+                if (super.getCol() == col && (super.getRow() + 1 == row || super.getRow() + 2 == row)) {
                     resultat = true;
                 }
             } else {
-                if (this.col == col && this.row + 1 == row) {
+                if (super.getCol() == col && super.getRow() + 1 == row) {
                     resultat = true;
                 }
             }
-        } else if (couleur.equals("Blanc")) {
-            if (this.row == 6) {
-                if (this.col == col && (this.row - 1 == row || this.row - 2 == row)) {
+        } else if (super.getCouleur().equals("Blanc")) {
+            if (super.getRow() == 6) {
+                if (super.getCol() == col && (super.getRow() - 1 == row || super.getRow() - 2 == row)) {
                     resultat = true;
                 }
             } else {
-                if (this.col == col && this.row - 1 == row) {
+                if (super.getCol() == col && super.getRow() - 1 == row) {
                     resultat = true;
                 }
             }

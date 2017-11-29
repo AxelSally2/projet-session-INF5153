@@ -27,9 +27,9 @@ public class Tour extends Piece {
 
     @Override
     public boolean estDeplacementValide(int row, int col) {
-        return (this.row == row
-                || this.col == col)
-                && !(this.row == row && this.col == col)
-                && estDansLaTable(row, col);
+        return (super.getRow() == row
+                || super.getCol() == col)
+                && !(super.getRow() == row && super.getCol() == col)
+                && super.estDansLaTable(row, col);
     }
 }

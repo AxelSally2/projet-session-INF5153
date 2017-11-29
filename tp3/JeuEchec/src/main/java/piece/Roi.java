@@ -27,14 +27,14 @@ public class Roi extends Piece {
     
     @Override
     public boolean estDeplacementValide(int row, int col) {
-        return ((this.row - row == 1 && this.col - col == 0)
-                || (this.row - row == 0 && this.col - col == 1)
-                || (this.row - row == -1 && this.col - col == 0)
-                || (this.row - row == 0 && this.col - col == -1)
-                || (this.row - row == -1 && this.col - col == 1)
-                || (this.row - row == 1 && this.col - col == -1)
-                || (this.row - row == 1 && this.col - col == 1)
-                || (this.row - row == -1 && this.col - col == -1))
-                && estDansLaTable(row, col);
+        return ((super.getRow() - row == 1 && super.getCol() - col == 0)
+                || (super.getRow() - row == 0 && super.getCol() - col == 1)
+                || (super.getRow() - row == -1 && super.getCol() - col == 0)
+                || (super.getRow() - row == 0 && super.getCol() - col == -1)
+                || (super.getRow() - row == -1 && super.getCol() - col == 1)
+                || (super.getRow() - row == 1 && super.getCol() - col == -1)
+                || (super.getRow() - row == 1 && super.getCol() - col == 1)
+                || (super.getRow() - row == -1 && super.getCol() - col == -1))
+                && super.estDansLaTable(row, col);
     }
 }

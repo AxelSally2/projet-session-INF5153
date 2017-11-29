@@ -29,7 +29,6 @@ import menucontroleur.MenuPrincipalControleur;
 import piece.Cavalier;
 import piece.Dame;
 import piece.Fou;
-import piece.Piece;
 import piece.Pion;
 import piece.Roi;
 import piece.Tour;
@@ -37,6 +36,11 @@ import fichier.EnregistrerFichier;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jeu.Table;
+import joueur.Humain;
+import joueur.IAAvance;
+import joueur.IADebutant;
+import joueur.Joueur;
 import menucontroleur.ChoisirAdversaireControleur;
 
 /**
@@ -63,8 +67,20 @@ public class PartieControleur implements Initializable {
 
     private Jeu partie;
 
+    private Jeu creerPartie() {
+        if (ChoisirAdversaireControleur.joueurChoisie == 1) {
+            partie = new Jeu(new Table(), new Joueur(), new Humain());
+        } else if (ChoisirAdversaireControleur.joueurChoisie == 2) {
+            partie = new Jeu(new Table(), new Joueur(), new IADebutant());
+        } else if (ChoisirAdversaireControleur.joueurChoisie == 3) {
+            partie = new Jeu(new Table(), new Joueur(), new IAAvance());
+        } else {
+            partie = new Jeu(new Table(), new Joueur(), new IADebutant());
+        }
+        return partie;
+    }
+
     private Jeu initialiserPartie() throws FileNotFoundException {
-        partie = new Jeu();
         if (MenuPrincipalControleur.partieChoisie == 1) {
             partie.getTable().initialiserNouvelleTable();
         } else if (MenuPrincipalControleur.partieChoisie == 2) {
@@ -129,25 +145,11 @@ public class PartieControleur implements Initializable {
                 col = colDest;
             }
         } else if (cpt == 2) {
-            if (partie.getTable().estValide(row, col, rowDest, colDest)) {
-                partie.getTable().setPiece(rowDest, colDest, partie.getTable().getPiece(row, col));
-                partie.getTable().getPiece(rowDest, colDest).setRow(rowDest);
-                partie.getTable().getPiece(rowDest, colDest).setCol(colDest);
-                partie.getTable().setPiece(row, col, null);
-                remplacerPionParDame(partie.getTable().getPiece(rowDest, colDest));
-            }
+            partie.getJoueur1().effectueMouvement(partie.getTable(), row, col, rowDest, colDest);
+            afficherPieces();
+            partie.getJoueur2().effectueMouvement(partie.getTable());
             afficherPieces();
             cpt = 0;
-        }
-    }
-
-    private void remplacerPionParDame(Piece piece) {
-        if (piece instanceof Pion) {
-            if (piece.getCouleur().equals("Blanc") && piece.getRow() == 0) {
-                partie.getTable().setPiece(piece.getRow(), piece.getCol(), new Dame(piece.getCouleur(), piece.getRow(), piece.getCol()));
-            } else if (piece.getCouleur().equals("Noir") && piece.getRow() == 7) {
-                partie.getTable().setPiece(piece.getRow(), piece.getCol(), new Dame(piece.getCouleur(), piece.getRow(), piece.getCol()));
-            }
         }
     }
 
@@ -497,6 +499,7 @@ public class PartieControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        creerPartie();
         try {
             initialiserPartie();
         } catch (FileNotFoundException ex) {
