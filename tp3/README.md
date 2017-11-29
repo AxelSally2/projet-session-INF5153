@@ -19,10 +19,10 @@ Puis, effectuer un clean and build et rouler le projet.
 
 ## License
 
-Le contenu de ce projet est sous [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+Le contenu de ce projet est sous [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).  
 
-Les images des pièces d'échec ont été créé par : [Yuri Mazursky](https://www.iconfinder.com/iconsets/chess-7).
-Licenses des images : [Yuri Mazursky](https://creativecommons.org/licenses/by/2.5/).
+Les images des pièces d'échec ont été créé par : [Yuri Mazursky](https://www.iconfinder.com/iconsets/chess-7).  
+Licenses des images : [Creative Commons (Attribution 2.5 Generic)](https://creativecommons.org/licenses/by/2.5/).  
 
 ## À faire.
 
