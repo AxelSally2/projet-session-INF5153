@@ -30,30 +30,15 @@ public class Pion extends Piece {
         boolean resultat = false;
         if (super.getCouleur().equals("Noir")) {
             if (super.getRow() == 1) {
-                if (super.getCol() == col && (super.getRow() + 1 == row || super.getRow() + 2 == row)) {
-                    resultat = true;
-                }
+                resultat = (super.getCol() == col && (super.getRow() + 1 == row || super.getRow() + 2 == row))  || super.getCol() + 1 == col && super.getRow() + 1 == row || super.getCol() - 1 == col && super.getRow() + 1 == row;
             } else {
-                if (super.getCol() == col && super.getRow() + 1 == row) {
-                    resultat = true;
-                }
-                if (super.getCol() + 1 == col && super.getRow() + 1 == row || super.getCol() - 1 == col && super.getRow() + 1 == row) {
-                    resultat = true;
-                }
+                resultat = (super.getCol() == col && super.getRow() + 1 == row) || super.getCol() + 1 == col && super.getRow() + 1 == row || super.getCol() - 1 == col && super.getRow() + 1 == row;
             }
-
         } else if (super.getCouleur().equals("Blanc")) {
             if (super.getRow() == 6) {
-                if (super.getCol() == col && (super.getRow() - 1 == row || super.getRow() - 2 == row)) {
-                    resultat = true;
-                }
+                resultat = (super.getCol() == col && (super.getRow() - 1 == row || super.getRow() - 2 == row)) || super.getCol() + 1 == col && super.getRow() - 1 == row || super.getCol() - 1 == col && super.getRow() - 1 == row;
             } else {
-                if (super.getCol() == col && super.getRow() - 1 == row) {
-                    resultat = true;
-                }
-                if (super.getCol() + 1 == col && super.getRow() - 1 == row || super.getCol() - 1 == col && super.getRow() - 1 == row) {
-                    resultat = true;
-                }
+                resultat = (super.getCol() == col && super.getRow() - 1 == row) || super.getCol() + 1 == col && super.getRow() - 1 == row || super.getCol() - 1 == col && super.getRow() - 1 == row;
             }
         }
         return resultat;

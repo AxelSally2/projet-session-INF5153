@@ -175,7 +175,8 @@ public class Table {
         return pionPeutMangerUneDirection(piece, row, col, 1, 1) // Droite
                 || pionPeutMangerUneDirection(piece, row, col, 1, -1) // Gauhce
                 || pionPeutMangerUneDirection(piece, row, col, -1, 1) // Droite
-                || pionPeutMangerUneDirection(piece, row, col, -1, -1); // Gauhce
+                || pionPeutMangerUneDirection(piece, row, col, -1, -1) // Gauhce
+                || (tablePieces[row][col] == null) && piece.getCol() == col; 
     }
 
     /**
@@ -198,6 +199,7 @@ public class Table {
     private boolean pionPeutMangerUneDirection(Piece piece, int row, int col, int dirR, int dirY) {
         String couleurPieceEnnemi = (piece.getCouleur().equals("Blanc")) ? "Noir" : "Blanc";
         return piece instanceof Pion
+                //&& col != piece.getCol()
                 && row == piece.getRow() + dirR && col == piece.getCol() + dirY
                 && (tablePieces[piece.getRow() + dirR][piece.getCol() + dirY] != null
                 && tablePieces[piece.getRow() + dirR][piece.getCol() + dirY].getCouleur().equals(couleurPieceEnnemi));
@@ -212,6 +214,7 @@ public class Table {
         int pos = (piece.getCouleur().equals("Blanc")) ? 6 : 1;
         return tablePieces[piece.getRow() + mouv][piece.getCol()] == null
                 || (pos == piece.getRow() && tablePieces[piece.getRow() + mouvStart][piece.getCol()] == null);
+
     }
 
     private boolean fouACheminDegage(Piece piece, int row, int col) {
@@ -292,12 +295,19 @@ public class Table {
     }
 
     private boolean piecePeutManger(Piece piece, int row, int col) {
-        return tablePieces[row][col] == null || (!(piece instanceof Pion) && !(piece.getCouleur().equals(tablePieces[row][col].getCouleur()))) || pionPeutManger(tablePieces[piece.getRow()][piece.getCol()], row, col);
+        if (piece instanceof Pion) {
+            return pionPeutManger(tablePieces[piece.getRow()][piece.getCol()], row, col);
+        }
+        return (tablePieces[row][col] == null
+                || !(piece.getCouleur().equals(tablePieces[row][col].getCouleur())));
     }
 
     public boolean estValide(int row, int col, int rowDest, int colDest) {
         System.out.println(tablePieces[row][col].getRow() + "---" + tablePieces[row][col].getCol());
         System.out.println(rowDest + "-" + colDest);
+        //System.out.println(tablePieces[row][col].estDeplacementValide(rowDest, colDest));
+        //System.out.println(cheminEstDegage(tablePieces[row][col], rowDest, colDest));
+        //System.out.println(piecePeutManger(tablePieces[row][col], rowDest, colDest));
         return tablePieces[row][col].estDeplacementValide(rowDest, colDest)
                 && cheminEstDegage(tablePieces[row][col], rowDest, colDest)
                 && piecePeutManger(tablePieces[row][col], rowDest, colDest);
