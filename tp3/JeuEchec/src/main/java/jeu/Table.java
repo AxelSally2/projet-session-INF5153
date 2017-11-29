@@ -172,10 +172,10 @@ public class Table {
      * l'adversaire.
      */
     private boolean pionPeutManger(Piece piece, int row, int col) {
-        return pionPeutMangerUneDirection(piece, row, col, "Noir", 1, 1) // Droite
-                || pionPeutMangerUneDirection(piece, row, col, "Noir", 1, -1) // Gauhce
-                || pionPeutMangerUneDirection(piece, row, col, "Blanc", -1, 1) // Droite
-                || pionPeutMangerUneDirection(piece, row, col, "Blanc", -1, -1); // Gauhce
+        return pionPeutMangerUneDirection(piece, row, col, 1, 1) // Droite
+                || pionPeutMangerUneDirection(piece, row, col, 1, -1) // Gauhce
+                || pionPeutMangerUneDirection(piece, row, col, -1, 1) // Droite
+                || pionPeutMangerUneDirection(piece, row, col, -1, -1); // Gauhce
     }
 
     /**
@@ -187,20 +187,31 @@ public class Table {
      * @param row La ligne où le pion va se déplacer
      * @param col La colonne où le pion va se déplacer
      * @param pionCouleur La couleur du pion
-     * @param dirX Le nombre de case en X pour faire le déplacement (1 ou -1)
+     * @param dirR Le nombre de case en Y pour faire le déplacement (1 ou -1)
      * (Si de couleur blanc -1, si de couleur noir +1)
-     * @param dirY Le nombre de case en Y pour faire le déplacement (1 à droite
+     * @param dirC Le nombre de case en X pour faire le déplacement (1 à droite
      * ou -1 à gauche)
      * @return vrai si un pion de la couleur passer en parametre peut faire un
      * mouvement diagonal (dans une seul direction) pour manger une piece de
      * l'adversaire.
      */
-    private boolean pionPeutMangerUneDirection(Piece piece, int row, int col, String pionCouleur, int dirX, int dirY) {
-        String couleurPieceEnnemi = (pionCouleur.equals("Blanc")) ? "Noir" : "Blanc";
-        return piece instanceof Pion && piece.getCouleur().equals(pionCouleur)
-                && row == piece.getRow() + dirX && col == piece.getCol() + dirY
-                && (tablePieces[piece.getRow() + dirX][piece.getCol() + dirY] != null
-                && tablePieces[piece.getRow() + dirX][piece.getCol() + dirY].getCouleur().equals(couleurPieceEnnemi));
+    private boolean pionPeutMangerUneDirection(Piece piece, int row, int col, int dirR, int dirY) {
+        String couleurPieceEnnemi = (piece.getCouleur().equals("Blanc")) ? "Noir" : "Blanc";
+        return piece instanceof Pion
+                && row == piece.getRow() + dirR && col == piece.getCol() + dirY
+                && (tablePieces[piece.getRow() + dirR][piece.getCol() + dirY] != null
+                && tablePieces[piece.getRow() + dirR][piece.getCol() + dirY].getCouleur().equals(couleurPieceEnnemi));
+    }
+
+    private boolean pionCheminDegage(Piece piece, int row, int col) {
+        if (!(piece instanceof Pion) || col != piece.getCol()) {
+            return true;
+        }
+        int mouv = (piece.getCouleur().equals("Blanc")) ? -1 : 1;
+        int mouvStart = (piece.getCouleur().equals("Blanc")) ? -2 : 2;
+        int pos = (piece.getCouleur().equals("Blanc")) ? 6 : 1;
+        return tablePieces[piece.getRow() + mouv][piece.getCol()] == null
+                || (pos == piece.getRow() && tablePieces[piece.getRow() + mouvStart][piece.getCol()] == null);
     }
 
     private boolean fouACheminDegage(Piece piece, int row, int col) {
@@ -210,7 +221,7 @@ public class Table {
         boolean resultat;
         int dirX = col > piece.getCol() ? 1 : -1;
         int dirY = row > piece.getRow() ? 1 : -1;
-        resultat = estPasObstrueDiagonalement(piece, row, col, dirY, dirX);
+        resultat = estPasObstrueDiagonalement(piece, row, dirY, dirX);
         return resultat;
     }
 
@@ -241,7 +252,7 @@ public class Table {
         } else if (col == piece.getCol()) {
             resultat = estPasObstrueVerticalement(piece, row, dirY);
         } else {
-            resultat = estPasObstrueDiagonalement(piece, row, col, dirY, dirX);
+            resultat = estPasObstrueDiagonalement(piece, row, dirY, dirX);
         }
         return resultat;
     }
@@ -264,7 +275,7 @@ public class Table {
         return true;
     }
 
-    private boolean estPasObstrueDiagonalement(Piece piece, int row, int col, int dirY, int dirX) {
+    private boolean estPasObstrueDiagonalement(Piece piece, int row, int dirY, int dirX) {
         for (int i = 1; i < Math.abs(row - piece.getRow()); i++) {
             if (tablePieces[piece.getRow() + i * dirY][piece.getCol() + i * dirX] != null) {
                 return false;
@@ -276,21 +287,22 @@ public class Table {
     private boolean cheminEstDegage(Piece piece, int row, int col) {
         return dameACheminDegage(piece, row, col)
                 && tourACheminDegage(piece, row, col)
-                && fouACheminDegage(piece, row, col);
+                && fouACheminDegage(piece, row, col)
+                && pionCheminDegage(piece, row, col);
     }
 
     private boolean piecePeutManger(Piece piece, int row, int col) {
-        return tablePieces[row][col] == null || !(piece.getCouleur().equals(tablePieces[row][col].getCouleur()));
+        return tablePieces[row][col] == null || (!(piece instanceof Pion) && !(piece.getCouleur().equals(tablePieces[row][col].getCouleur()))) || pionPeutManger(tablePieces[piece.getRow()][piece.getCol()], row, col);
     }
 
     public boolean estValide(int row, int col, int rowDest, int colDest) {
-        //System.out.println(tablePieces[row][col].estDeplacementValide(rowValue, colValue) + " - " + pionPeutManger(tablePieces[row][col], rowValue, colValue) + " - " + cheminEstDegage(tablePieces[row][col], rowValue, colValue));
-        return (tablePieces[row][col].estDeplacementValide(rowDest, colDest)
-                || pionPeutManger(tablePieces[row][col], rowDest, colDest))
+        System.out.println(tablePieces[row][col].getRow() + "---" + tablePieces[row][col].getCol());
+        System.out.println(rowDest + "-" + colDest);
+        return tablePieces[row][col].estDeplacementValide(rowDest, colDest)
                 && cheminEstDegage(tablePieces[row][col], rowDest, colDest)
                 && piecePeutManger(tablePieces[row][col], rowDest, colDest);
     }
-    
+
     public void remplacerPionParDame(Piece piece) {
         if (piece instanceof Pion) {
             if (piece.getCouleur().equals("Blanc") && piece.getRow() == 0) {

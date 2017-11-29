@@ -37,7 +37,11 @@ public class Pion extends Piece {
                 if (super.getCol() == col && super.getRow() + 1 == row) {
                     resultat = true;
                 }
+                if (super.getCol() + 1 == col && super.getRow() + 1 == row || super.getCol() - 1 == col && super.getRow() + 1 == row) {
+                    resultat = true;
+                }
             }
+
         } else if (super.getCouleur().equals("Blanc")) {
             if (super.getRow() == 6) {
                 if (super.getCol() == col && (super.getRow() - 1 == row || super.getRow() - 2 == row)) {
@@ -45,6 +49,9 @@ public class Pion extends Piece {
                 }
             } else {
                 if (super.getCol() == col && super.getRow() - 1 == row) {
+                    resultat = true;
+                }
+                if (super.getCol() + 1 == col && super.getRow() - 1 == row || super.getCol() - 1 == col && super.getRow() - 1 == row) {
                     resultat = true;
                 }
             }

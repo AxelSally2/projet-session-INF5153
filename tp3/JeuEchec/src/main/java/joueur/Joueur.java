@@ -36,14 +36,16 @@ public class Joueur {
         this.nom = nom;
     }
 
-    public void effectueMouvement(Table table, int row, int col, int rowDest, int colDest) {
+    public boolean effectueMouvement(Table table, int row, int col, int rowDest, int colDest) {
         if (table.estValide(row, col, rowDest, colDest)) {
             table.setPiece(rowDest, colDest, table.getPiece(row, col));
             table.getPiece(rowDest, colDest).setRow(rowDest);
             table.getPiece(rowDest, colDest).setCol(colDest);
             table.setPiece(row, col, null);
             table.remplacerPionParDame(table.getPiece(rowDest, colDest));
+            return true;
         }
+        return false;
     }
 
 }

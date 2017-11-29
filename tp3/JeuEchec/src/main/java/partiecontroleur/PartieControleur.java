@@ -145,9 +145,10 @@ public class PartieControleur implements Initializable {
                 col = colDest;
             }
         } else if (cpt == 2) {
-            partie.getJoueur1().effectueMouvement(partie.getTable(), row, col, rowDest, colDest);
-            afficherPieces();
-            partie.getJoueur2().effectueMouvement(partie.getTable());
+            if (partie.getJoueur1().effectueMouvement(partie.getTable(), row, col, rowDest, colDest)) {
+                afficherPieces();
+                partie.getJoueur2().effectueMouvement(partie.getTable());
+            }
             afficherPieces();
             cpt = 0;
         }
