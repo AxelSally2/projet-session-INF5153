@@ -1,4 +1,4 @@
-# Travail pratique  3- Jeu d'échec
+# Travail pratique 3 - Jeu d'échec
 
 ## Description
 
@@ -9,8 +9,8 @@ INF5153 - Génie logiciel : conception à l'Université du Québec à Montréal.
 
 ## Auteur
 
-Jean-Michel Poirier (POIJ26089200)
-Audrey​ ​Eugene​ ​(EUGA21589707)
+Jean-Michel Poirier (POIJ26089200)  
+Audrey​ ​Eugene​ ​(EUGA21589707)  
 
 ## Fonctionnement
 
@@ -24,7 +24,7 @@ Le contenu de ce projet est sous [Apache License 2.0](https://www.apache.org/lic
 Les images des pièces d'échec ont été créé par : [Yuri Mazursky](https://www.iconfinder.com/iconsets/chess-7).  
 Licenses des images : [Creative Commons (Attribution 2.5 Generic)](https://creativecommons.org/licenses/by/2.5/).  
 
-## À faire.
+## À faire
 
 - Validation un roi est échec et math ou la partie est une égalité
 - Partie contre un humain en ligne
