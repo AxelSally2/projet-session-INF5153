@@ -74,5 +74,6 @@ public class IADebutant extends IA {
         }
         mouv.mouvementPiece(table, (int) mouvGen.get("row"), (int) mouvGen.get("col"),
                 (int) mouvGen.get("rowDest"), (int) mouvGen.get("colDest"));
+        
     }
 }

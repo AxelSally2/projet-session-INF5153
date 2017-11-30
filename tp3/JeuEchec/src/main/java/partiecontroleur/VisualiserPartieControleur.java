@@ -102,13 +102,15 @@ public class VisualiserPartieControleur implements Initializable {
 
     @FXML
     private void buttonNextMouv(ActionEvent event) throws IOException {
-        pos = partie.getMouvement().mouvementSuivant(partie.getTable(), pos);
+        pos = partie.getMouvement().mouvementSuivant(pos);
+        partie.setTable(partie.getMouvement().getTable());
         afficherPieces();
     }
 
     @FXML
     private void buttonPreviousMouv(ActionEvent event) throws IOException {
-        pos = partie.getMouvement().mouvementPrecedent(partie.getTable(), pos);
+        pos = partie.getMouvement().mouvementPrecedent(pos);
+        partie.setTable(partie.getMouvement().getTable());
         afficherPieces();
     }
 

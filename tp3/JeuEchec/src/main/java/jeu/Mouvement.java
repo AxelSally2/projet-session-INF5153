@@ -16,52 +16,43 @@
 package jeu;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
-import partiecontroleur.PartieControleur;
-
 /**
  *
  * @author jmppr
  */
 public class Mouvement {
 
-    private ArrayList<Map> mouvHistorique;
+    private ArrayList<Table> mouvHistorique;
+    private Table table = null;
 
     public Mouvement() {
         mouvHistorique = new ArrayList<>();
     }
 
-    public ArrayList<Map> getMouvHistorique() {
-        return mouvHistorique;
+    public Table getTable() {
+        return table;
     }
 
-    public int mouvementSuivant(Table table, int pos) {
+    public int mouvementSuivant(int pos) {
         if (-1 == pos) {
             pos++;
         }
         if (mouvHistorique.size() > pos) {
-            Map mouv = mouvHistorique.get(pos);
-            mouvementPiece(table,
-                    (int) mouv.get("row"), (int) mouv.get("col"),
-                    (int) mouv.get("rowDest"), (int) mouv.get("colDest"));
+            this.table = mouvHistorique.get(pos);
             pos++;
         }
         return pos;
     }
 
-    public int mouvementPrecedent(Table table, int pos) {
+    public int mouvementPrecedent(int pos) {
         if (mouvHistorique.size() == pos) {
             pos--;
         }
         if (0 <= pos) {
-            Map mouv = mouvHistorique.get(pos);
-            mouvementPiece(table,
-                    (int) mouv.get("rowDest"), (int) mouv.get("colDest"),
-                    (int) mouv.get("row"), (int) mouv.get("col"));
+            this.table = mouvHistorique.get(pos);
             pos--;
         } else {
-            table.initialiserNouvelleTable();
+            this.table.initialiserNouvelleTable();
         }
         return pos;
     }
@@ -71,16 +62,18 @@ public class Mouvement {
         table.getPiece(rowDest, colDest).setRow(rowDest);
         table.getPiece(rowDest, colDest).setCol(colDest);
         table.setPiece(row, col, null);
-        table.remplacerPionParDame(PartieControleur.partie.getTable().getPiece(rowDest, colDest));
+        table.remplacerPionParDame(table.getPiece(rowDest, colDest));
+        enregistrerMouvement(table);
     }
 
-    public void enregistrerMouvement(int row, int col, int rowDest, int colDest) {
-        Map mouv = new Hashtable();
-        mouv.put("row", row);
-        mouv.put("col", col);
-        mouv.put("rowDest", rowDest);
-        mouv.put("colDest", colDest);
-        mouvHistorique.add(mouv);
+    public void enregistrerMouvement(Table table) {
+        Table tableCpy = new Table();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                tableCpy.setPiece(i, j, table.getPiece(i, j));
+            }
+        }
+        mouvHistorique.add(tableCpy);
     }
 
 }

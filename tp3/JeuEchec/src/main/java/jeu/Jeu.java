@@ -40,6 +40,10 @@ public class Jeu {
         return table;
     }
 
+    public Table setTable(Table table) {
+        return this.table = table;
+    }
+
     public Joueur getJoueur1() {
         return joueur1;
     }

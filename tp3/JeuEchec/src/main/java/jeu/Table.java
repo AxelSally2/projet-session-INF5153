@@ -31,13 +31,18 @@ import piece.Tour;
  *
  * @author jmppr
  */
-public class Table {
+public class Table   implements Cloneable {
 
     final String COULEUR1 = "Noir";
     final String COULEUR2 = "Blanc";
     final int NB_COL = 8;
     final int NB_ROW = 8;
 
+    
+        @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
     private Piece tablePieces[][];
 
     public Table() {

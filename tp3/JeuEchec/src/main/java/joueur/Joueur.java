@@ -40,7 +40,6 @@ public class Joueur {
     public boolean effectueMouvement(Table table, int row, int col, int rowDest, int colDest, Mouvement mouv) {
         if (table.estValide(row, col, rowDest, colDest)) {
             mouv.mouvementPiece(table, row, col, rowDest, colDest);
-            mouv.enregistrerMouvement(row, col, rowDest, colDest);
             return true;
         }
         return false;
