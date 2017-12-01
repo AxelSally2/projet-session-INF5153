@@ -27,6 +27,9 @@ public class Mouvement {
 
     public Mouvement() {
         mouvHistorique = new ArrayList<>();
+        Table tableDepart = new Table();
+        tableDepart.initialiserNouvelleTable();
+        mouvHistorique.add(tableDepart);
     }
 
     public Table getTable() {
@@ -35,7 +38,7 @@ public class Mouvement {
 
     public int mouvementSuivant(int pos) {
         if (-1 == pos) {
-            pos++;
+            pos +=2;
         }
         if (mouvHistorique.size() > pos) {
             this.table = mouvHistorique.get(pos);
@@ -46,14 +49,12 @@ public class Mouvement {
 
     public int mouvementPrecedent(int pos) {
         if (mouvHistorique.size() == pos) {
-            pos--;
+            pos -= 2;
         }
         if (0 <= pos) {
             this.table = mouvHistorique.get(pos);
             pos--;
-        } else {
-            this.table.initialiserNouvelleTable();
-        }
+        } 
         return pos;
     }
 
@@ -68,9 +69,9 @@ public class Mouvement {
 
     public void enregistrerMouvement(Table table) {
         Table tableCpy = new Table();
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                tableCpy.setPiece(i, j, table.getPiece(i, j));
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                tableCpy.setPiece(row, col, table.getPiece(row, col));
             }
         }
         mouvHistorique.add(tableCpy);

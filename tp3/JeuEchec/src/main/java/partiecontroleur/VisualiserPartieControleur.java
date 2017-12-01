@@ -37,7 +37,7 @@ import piece.Tour;
  */
 public class VisualiserPartieControleur implements Initializable {
 
-    private int pos = 0;
+    private int pos = 1;
 
     @FXML
     AnchorPane paneVisualiserPartie;
