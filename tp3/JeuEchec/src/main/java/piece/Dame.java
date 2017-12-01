@@ -23,6 +23,7 @@ public class Dame extends Piece {
 
     public Dame(String couleur, int row, int col) {
         super(couleur, row, col);
+        super.setPoid(5);
     }
 
     @Override

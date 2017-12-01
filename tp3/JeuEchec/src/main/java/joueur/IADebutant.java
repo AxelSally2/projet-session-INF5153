@@ -15,12 +15,8 @@
  */
 package joueur;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
 import jeu.Mouvement;
 import jeu.Table;
-import piece.Piece;
 
 /**
  *
@@ -32,48 +28,8 @@ public class IADebutant extends IA {
         super();
     }
 
-    private Piece generePiece(Table table) {
-        ArrayList<Piece> list = new ArrayList<>();
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                if (table.getPiece(row, col) != null && table.getPiece(row, col).getCouleur().equals("Noir")) {
-                    list.add(table.getPiece(row, col));
-                }
-            }
-        }
-        int random = (int) (Math.random() * list.size() + 1);
-        return list.get(random - 1);
-    }
-
-    private int genereRow() {
-        int random = (int) (Math.random() * 8 + 1);
-        return random - 1;
-    }
-
-    private int genereCol() {
-        int random = (int) (Math.random() * 8 + 1);
-        return random - 1;
-    }
-
-    private Map genereUnMouvement(Table table) {
-        Piece piece = generePiece(table);
-        Map mouv = new Hashtable();
-        mouv.put("row", piece.getRow());
-        mouv.put("col", piece.getCol());
-        mouv.put("rowDest", genereRow());
-        mouv.put("colDest", genereCol());
-        return mouv;
-    }
-
     @Override
     public void effectueMouvement(Table table, Mouvement mouv) {
-        Map mouvGen = genereUnMouvement(table);
-        while (!(table.estValide((int) mouvGen.get("row"), (int) mouvGen.get("col"),
-                (int) mouvGen.get("rowDest"), (int) mouvGen.get("colDest")))) {
-            mouvGen = genereUnMouvement(table);
-        }
-        mouv.mouvementPiece(table, (int) mouvGen.get("row"), (int) mouvGen.get("col"),
-                (int) mouvGen.get("rowDest"), (int) mouvGen.get("colDest"));
-        
+        effectueMouvementAleatoire(table, mouv);
     }
 }

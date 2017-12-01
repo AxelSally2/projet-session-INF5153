@@ -17,7 +17,6 @@ package joueur;
 
 import jeu.Mouvement;
 import jeu.Table;
-import piece.Piece;
 
 /**
  *

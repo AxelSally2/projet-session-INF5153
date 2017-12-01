@@ -24,6 +24,7 @@ public abstract class Piece {
     private String couleur;
     private int row;
     private int col;
+    private int poid;
 
     public Piece(String couleur, int row, int col) {
         this.couleur = couleur;
@@ -38,6 +39,12 @@ public abstract class Piece {
     public int getCol() {
         return col;
     }
+    
+        
+    public int getPoid() {
+        return poid;
+    }
+        
 
     public String getCouleur() {
         return couleur;
@@ -49,6 +56,10 @@ public abstract class Piece {
 
     public void setCol(int col) {
         this.col = col;
+    }
+    
+    public void setPoid(int poid) {
+        this.poid = poid;
     }
 
     /**

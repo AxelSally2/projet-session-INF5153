@@ -23,6 +23,7 @@ public class Pion extends Piece {
 
     public Pion(String couleur, int row, int col) {
         super(couleur, row, col);
+        super.setPoid(1);
     }
 
     @Override

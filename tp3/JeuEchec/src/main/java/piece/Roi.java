@@ -23,6 +23,7 @@ public class Roi extends Piece {
     
     public Roi(String couleur, int row, int col) {
         super(couleur, row, col);
+        super.setPoid(6);
     }
     
     @Override

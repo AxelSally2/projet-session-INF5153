@@ -15,6 +15,8 @@
  */
 package joueur;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Map;
 import jeu.Mouvement;
 import jeu.Table;
@@ -28,6 +30,54 @@ public abstract class IA extends Ennemi {
 
     public IA() {
         super();
+    }
+
+    protected Piece generePiece(Table table) {
+        ArrayList<Piece> listePieces = toutesLesPiecesDeIA(table);
+        int random = (int) (Math.random() * listePieces.size() + 1);
+        return listePieces.get(random - 1);
+    }
+
+    protected int genereRow() {
+        int random = (int) (Math.random() * 8 + 1);
+        return random - 1;
+    }
+
+    protected int genereCol() {
+        int random = (int) (Math.random() * 8 + 1);
+        return random - 1;
+    }
+
+    protected ArrayList<Piece> toutesLesPiecesDeIA(Table table) {
+        ArrayList<Piece> listePieces = new ArrayList<>();
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                if (table.getPiece(row, col) != null && table.getPiece(row, col).getCouleur().equals("Noir")) {
+                    listePieces.add(table.getPiece(row, col));
+                }
+            }
+        }
+        return listePieces;
+    }
+
+    protected Map genereUnMouvement(Table table) {
+        Piece piece = generePiece(table);
+        Map mouv = new Hashtable();
+        mouv.put("row", piece.getRow());
+        mouv.put("col", piece.getCol());
+        mouv.put("rowDest", genereRow());
+        mouv.put("colDest", genereCol());
+        return mouv;
+    }
+    
+    protected void effectueMouvementAleatoire(Table table, Mouvement mouv) {
+        Map mouvGen = genereUnMouvement(table);
+        while (!(table.estValide((int) mouvGen.get("row"), (int) mouvGen.get("col"),
+                (int) mouvGen.get("rowDest"), (int) mouvGen.get("colDest")))) {
+            mouvGen = genereUnMouvement(table);
+        }
+        mouv.mouvementPiece(table, (int) mouvGen.get("row"), (int) mouvGen.get("col"),
+                (int) mouvGen.get("rowDest"), (int) mouvGen.get("colDest"));
     }
 
     @Override

@@ -31,18 +31,13 @@ import piece.Tour;
  *
  * @author jmppr
  */
-public class Table   implements Cloneable {
+public class Table {
 
     final String COULEUR1 = "Noir";
     final String COULEUR2 = "Blanc";
     final int NB_COL = 8;
     final int NB_ROW = 8;
 
-    
-        @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
     private Piece tablePieces[][];
 
     public Table() {
@@ -223,7 +218,8 @@ public class Table   implements Cloneable {
         int mouvStart = (piece.getCouleur().equals("Blanc")) ? -2 : 2;
         int pos = (piece.getCouleur().equals("Blanc")) ? 6 : 1;
         return tablePieces[piece.getRow() + mouv][piece.getCol()] == null
-                || (pos == piece.getRow() && tablePieces[piece.getRow() + mouvStart][piece.getCol()] == null);
+                || (pos == piece.getRow() && tablePieces[piece.getRow() + mouvStart][piece.getCol()] == null 
+                && tablePieces[piece.getRow() + mouv][piece.getCol()] == null);
 
     }
 
@@ -237,7 +233,7 @@ public class Table   implements Cloneable {
         resultat = estPasObstrueDiagonalement(piece, row, dirY, dirX);
         return resultat;
     }
-
+    
     private boolean tourACheminDegage(Piece piece, int row, int col) {
         if (!(piece instanceof Tour)) {
             return true;

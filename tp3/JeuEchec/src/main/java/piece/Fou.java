@@ -23,6 +23,7 @@ public class Fou extends Piece {
 
     public Fou(String couleur, int row, int col) {
         super(couleur, row, col);
+        super.setPoid(4);
     }
 
     @Override

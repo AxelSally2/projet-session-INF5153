@@ -20,10 +20,14 @@ package piece;
  * @author jmppr
  */
 public class Cavalier extends Piece {
+    
+
 
     public Cavalier(String couleur, int row, int col) {
         super(couleur, row, col);
+        super.setPoid(3);
     }
+
 
     @Override
     public boolean estDeplacementValide(int row, int col) {

@@ -23,6 +23,7 @@ public class Tour extends Piece {
 
     public Tour(String couleur, int row, int col) {
         super(couleur, row, col);
+        super.setPoid(2);
     }
 
     @Override
