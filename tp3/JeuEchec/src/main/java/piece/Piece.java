@@ -15,18 +15,19 @@
  */
 package piece;
 
+import jeu.Couleur;
+
 /**
  *
  * @author jmppr
  */
 public abstract class Piece {
 
-    private String couleur;
+    private Couleur couleur;
     private int row;
     private int col;
-    private int poid;
 
-    public Piece(String couleur, int row, int col) {
+    public Piece(Couleur couleur, int row, int col) {
         this.couleur = couleur;
         this.row = row;
         this.col = col;
@@ -38,15 +39,9 @@ public abstract class Piece {
 
     public int getCol() {
         return col;
-    }
-    
-        
-    public int getPoid() {
-        return poid;
-    }
-        
+    } 
 
-    public String getCouleur() {
+    public Couleur getCouleur() {
         return couleur;
     }
 
@@ -58,10 +53,6 @@ public abstract class Piece {
         this.col = col;
     }
     
-    public void setPoid(int poid) {
-        this.poid = poid;
-    }
-
     /**
      * Retourne vrai si la colonne et la ligne de la piece sélection et la
      * destination de la colonne et la ligne de cette piece se situe bien dans

@@ -26,23 +26,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
 import jeu.Jeu;
 import menucontroleur.MenuPrincipalControleur;
-import piece.Cavalier;
-import piece.Dame;
-import piece.Fou;
-import piece.Pion;
-import piece.Roi;
-import piece.Tour;
+import menucontroleur.ChoisirAdversaireControleur;
+import piece.*;
 import fichier.EnregistrerFichier;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jeu.Couleur;
 import jeu.Mouvement;
 import jeu.Table;
-import joueur.Humain;
-import joueur.IAAvance;
-import joueur.IADebutant;
-import joueur.Joueur;
-import menucontroleur.ChoisirAdversaireControleur;
+import joueur.*;
+
 
 /**
  * FXML Controller class
@@ -105,29 +99,29 @@ public class PartieControleur implements Initializable {
     public void afficherPieces() {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if (partie.getTable().getPiece(row, col) instanceof Roi && partie.getTable().getPiece(row, col).getCouleur().equals("Blanc")) {
+                if (partie.getTable().getPiece(row, col) instanceof Roi && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/roi_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Dame && partie.getTable().getPiece(row, col).getCouleur().equals("Blanc")) {
+                } else if (partie.getTable().getPiece(row, col) instanceof Dame && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/dame_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Fou && partie.getTable().getPiece(row, col).getCouleur().equals("Blanc")) {
+                } else if (partie.getTable().getPiece(row, col) instanceof Fou && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/fou_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Cavalier && partie.getTable().getPiece(row, col).getCouleur().equals("Blanc")) {
+                } else if (partie.getTable().getPiece(row, col) instanceof Cavalier && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/cavalier_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Tour && partie.getTable().getPiece(row, col).getCouleur().equals("Blanc")) {
+                } else if (partie.getTable().getPiece(row, col) instanceof Tour && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/tour_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Pion && partie.getTable().getPiece(row, col).getCouleur().equals("Blanc")) {
+                } else if (partie.getTable().getPiece(row, col) instanceof Pion && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/pion_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Roi && partie.getTable().getPiece(row, col).getCouleur().equals("Noir")) {
+                } else if (partie.getTable().getPiece(row, col) instanceof Roi && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/roi_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Dame && partie.getTable().getPiece(row, col).getCouleur().equals("Noir")) {
+                } else if (partie.getTable().getPiece(row, col) instanceof Dame && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/dame_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Fou && partie.getTable().getPiece(row, col).getCouleur().equals("Noir")) {
+                } else if (partie.getTable().getPiece(row, col) instanceof Fou && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/fou_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Cavalier && partie.getTable().getPiece(row, col).getCouleur().equals("Noir")) {
+                } else if (partie.getTable().getPiece(row, col) instanceof Cavalier && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/cavalier_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Tour && partie.getTable().getPiece(row, col).getCouleur().equals("Noir")) {
+                } else if (partie.getTable().getPiece(row, col) instanceof Tour && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/tour_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Pion && partie.getTable().getPiece(row, col).getCouleur().equals("Noir")) {
+                } else if (partie.getTable().getPiece(row, col) instanceof Pion && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
                     table()[row][col].setStyle("-fx-background-image: url('/images/pion_noir.png');");
                 } else {
                     table()[row][col].setStyle("");

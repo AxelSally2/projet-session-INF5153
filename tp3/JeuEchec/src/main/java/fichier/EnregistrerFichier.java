@@ -37,7 +37,9 @@ public class EnregistrerFichier {
     /**
      * Permet à l'utilisateur de choisir l'emplacement de l'enregistrement du
      * fichier.
-     *
+     * 
+     * @param nomExtension Le nom de l'extension du fichier
+     * @param extension l'extension du fichier
      * @return Le fichier
      */
     private void associerPathAuFichier(String nomExtension, String extension) {

@@ -16,9 +16,10 @@
 package joueur;
 
 import java.util.ArrayList;
+import jeu.Couleur;
 import jeu.Mouvement;
 import jeu.Table;
-import piece.Piece;
+import piece.*;
 
 /**
  *
@@ -51,13 +52,31 @@ public class IAAvance extends IA {
         ArrayList<Piece> list = new ArrayList<>();
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if (table.getPiece(row, col) != null && table.getPiece(row, col).getPoid() == poid
-                        && table.getPiece(row, col).getCouleur().equals("Blanc")) {
+                if (table.getPiece(row, col) != null && piecePoid(table.getPiece(row, col)) == poid
+                        && table.getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
                     list.add(table.getPiece(row, col));
                 }
             }
         }
         return list;
+    }
+    
+    private int piecePoid(Piece piece) {
+        int poid = 0;
+        if (piece instanceof Roi) {
+            poid = 6;
+        } else if (piece instanceof Dame) {
+            poid = 5;
+        } else if (piece instanceof Fou) {
+            poid = 4;
+        } else if (piece instanceof Cavalier) {
+            poid = 3;
+        } else if (piece instanceof Tour) {
+            poid = 2;
+        } else if (piece instanceof Pion) {
+            poid = 1;
+        }
+        return poid;
     }
 
     /**
@@ -106,7 +125,7 @@ public class IAAvance extends IA {
                 }
             }
         }
-        if (pieceKill == false) {
+        if (!pieceKill) {
             effectueMouvementAleatoire(table, mouv);
         }
     }

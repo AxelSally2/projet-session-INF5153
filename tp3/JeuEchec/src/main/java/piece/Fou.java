@@ -15,15 +15,16 @@
  */
 package piece;
 
+import jeu.Couleur;
+
 /**
  *
  * @author jmppr
  */
 public class Fou extends Piece {
 
-    public Fou(String couleur, int row, int col) {
+    public Fou(Couleur couleur, int row, int col) {
         super(couleur, row, col);
-        super.setPoid(4);
     }
 
     @Override

@@ -1,4 +1,5 @@
 joueur\Joueur.class
+jeu\Couleur.class
 joueur\IAAvance.class
 piece\Piece.class
 jeu\Mouvement.class

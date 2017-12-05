@@ -19,13 +19,8 @@ import com.thoughtworks.xstream.XStream;
 import fichier.ChargerFichier;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import piece.Cavalier;
-import piece.Dame;
-import piece.Fou;
-import piece.Piece;
-import piece.Pion;
-import piece.Roi;
-import piece.Tour;
+import piece.*;
+import jeu.Couleur;
 
 /**
  *
@@ -33,15 +28,10 @@ import piece.Tour;
  */
 public class Table {
 
-    final String COULEUR1 = "Noir";
-    final String COULEUR2 = "Blanc";
-    final int NB_COL = 8;
-    final int NB_ROW = 8;
-
     private Piece tablePieces[][];
 
     public Table() {
-        this.tablePieces = new Piece[NB_ROW][NB_COL];
+        this.tablePieces = new Piece[8][8];
     }
 
     public Piece[][] tablePieces() {
@@ -64,8 +54,8 @@ public class Table {
     private ArrayList<Piece> listeTousLesPieces() {
         ArrayList<Piece> piecesListe = new ArrayList<>();
 
-        piecesListe.addAll(listePiecesCouleur(COULEUR1));
-        piecesListe.addAll(listePiecesCouleur(COULEUR2));
+        piecesListe.addAll(listePiecesCouleur(Couleur.NOIR));
+        piecesListe.addAll(listePiecesCouleur(Couleur.BLANC));
         return piecesListe;
     }
 
@@ -76,10 +66,10 @@ public class Table {
      * @param couleur La couleur Blanc ou Noir
      * @return Une liste de tous les pieces pour une couleur
      */
-    private ArrayList<Piece> listePiecesCouleur(String couleur) {
+    private ArrayList<Piece> listePiecesCouleur(Couleur couleur) {
         ArrayList<Piece> piecesListe = new ArrayList<>();
-        int row = (COULEUR1.equals(couleur)) ? 0 : 7;
-        int rowPion = (COULEUR2.equals(couleur)) ? 1 : 6;
+        int row = (Couleur.NOIR.equals(couleur)) ? 0 : 7;
+        int rowPion = (Couleur.BLANC.equals(couleur)) ? 1 : 6;
 
         piecesListe.add(new Tour(couleur, row, 0));
         piecesListe.add(new Cavalier(couleur, row, 1));
@@ -102,8 +92,8 @@ public class Table {
      */
     private ArrayList<Piece> listePiecesPion(int row) {
         ArrayList<Piece> pionsListe = new ArrayList<>();
-        for (int i = 0; i < NB_COL; i++) {
-            pionsListe.add(new Pion((row == 1) ? COULEUR1 : COULEUR2, row, i));
+        for (int i = 0; i < 8; i++) {
+            pionsListe.add(new Pion((row == 1) ? Couleur.NOIR : Couleur.BLANC, row, i));
         }
         return pionsListe;
     }
@@ -113,8 +103,8 @@ public class Table {
      * une nouvelle partie
      */
     public void initialiserNouvelleTable() {
-        for (int i = 0; i < NB_ROW; i++) {
-            for (int j = 0; j < NB_COL; j++) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
                 for (int k = 0; k < listeTousLesPieces().size(); k++) {
                     if (i == listeTousLesPieces().get(k).getRow() && j == listeTousLesPieces().get(k).getCol()) {
                         tablePieces[i][j] = listeTousLesPieces().get(k);
@@ -123,7 +113,7 @@ public class Table {
             }
         }
         for (int i = 2; i < 6; i++) {
-            for (int j = 0; j < NB_COL; j++) {
+            for (int j = 0; j < 8; j++) {
                 tablePieces[i][j] = null;
             }
         }
@@ -202,9 +192,8 @@ public class Table {
      * l'adversaire.
      */
     private boolean pionPeutMangerUneDirection(Piece piece, int row, int col, int dirR, int dirY) {
-        String couleurPieceEnnemi = (piece.getCouleur().equals("Blanc")) ? "Noir" : "Blanc";
+        Couleur couleurPieceEnnemi = (piece.getCouleur().equals(Couleur.BLANC)) ? Couleur.NOIR : Couleur.BLANC;
         return piece instanceof Pion
-                //&& col != piece.getCol()
                 && row == piece.getRow() + dirR && col == piece.getCol() + dirY
                 && (tablePieces[piece.getRow() + dirR][piece.getCol() + dirY] != null
                 && tablePieces[piece.getRow() + dirR][piece.getCol() + dirY].getCouleur().equals(couleurPieceEnnemi));
@@ -214,9 +203,9 @@ public class Table {
         if (!(piece instanceof Pion) || col != piece.getCol()) {
             return true;
         }
-        int mouv = (piece.getCouleur().equals("Blanc")) ? -1 : 1;
-        int mouvStart = (piece.getCouleur().equals("Blanc")) ? -2 : 2;
-        int pos = (piece.getCouleur().equals("Blanc")) ? 6 : 1;
+        int mouv = (piece.getCouleur().equals(Couleur.BLANC)) ? -1 : 1;
+        int mouvStart = (piece.getCouleur().equals(Couleur.BLANC)) ? -2 : 2;
+        int pos = (piece.getCouleur().equals(Couleur.BLANC)) ? 6 : 1;
         return tablePieces[piece.getRow() + mouv][piece.getCol()] == null
                 || (pos == piece.getRow() && tablePieces[piece.getRow() + mouvStart][piece.getCol()] == null 
                 && tablePieces[piece.getRow() + mouv][piece.getCol()] == null);
@@ -321,9 +310,9 @@ public class Table {
 
     public void remplacerPionParDame(Piece piece) {
         if (piece instanceof Pion) {
-            if (piece.getCouleur().equals("Blanc") && piece.getRow() == 0) {
+            if (piece.getCouleur().equals(Couleur.BLANC) && piece.getRow() == 0) {
                 tablePieces[piece.getRow()][piece.getCol()] = new Dame(piece.getCouleur(), piece.getRow(), piece.getCol());
-            } else if (piece.getCouleur().equals("Noir") && piece.getRow() == 7) {
+            } else if (piece.getCouleur().equals(Couleur.NOIR) && piece.getRow() == 7) {
                 tablePieces[piece.getRow()][piece.getCol()] = new Dame(piece.getCouleur(), piece.getRow(), piece.getCol());
             }
         }

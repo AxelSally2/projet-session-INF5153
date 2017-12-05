@@ -15,15 +15,16 @@
  */
 package piece;
 
+import jeu.Couleur;
+
 /**
  *
  * @author jmppr
  */
 public class Tour extends Piece {
 
-    public Tour(String couleur, int row, int col) {
+    public Tour(Couleur couleur, int row, int col) {
         super(couleur, row, col);
-        super.setPoid(2);
     }
 
     @Override

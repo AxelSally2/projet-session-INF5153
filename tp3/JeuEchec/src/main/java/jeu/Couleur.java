@@ -13,26 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package piece;
-
-import jeu.Couleur;
+package jeu;
 
 /**
  *
  * @author jmppr
  */
-public class Dame extends Piece {
-
-    public Dame(Couleur couleur, int row, int col) {
-        super(couleur, row, col);
-    }
-
-    @Override
-    public boolean estDeplacementValide(int row, int col) {
-        return (Math.abs(super.getRow() - row) == Math.abs(super.getCol() - col)
-                || super.getRow() == row
-                || super.getCol() == col)
-                && !(super.getRow() == row && super.getCol() == col)
-                && super.estDansLaTable(row, col);
-    }
+public enum Couleur {
+    BLANC, NOIR
 }

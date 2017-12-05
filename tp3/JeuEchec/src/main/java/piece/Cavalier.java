@@ -15,6 +15,8 @@
  */
 package piece;
 
+import jeu.Couleur;
+
 /**
  *
  * @author jmppr
@@ -23,9 +25,8 @@ public class Cavalier extends Piece {
     
 
 
-    public Cavalier(String couleur, int row, int col) {
+    public Cavalier(Couleur couleur, int row, int col) {
         super(couleur, row, col);
-        super.setPoid(3);
     }
 
 

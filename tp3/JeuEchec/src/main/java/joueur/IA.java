@@ -18,6 +18,7 @@ package joueur;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
+import jeu.Couleur;
 import jeu.Mouvement;
 import jeu.Table;
 import piece.Piece;
@@ -52,7 +53,7 @@ public abstract class IA extends Ennemi {
         ArrayList<Piece> listePieces = new ArrayList<>();
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if (table.getPiece(row, col) != null && table.getPiece(row, col).getCouleur().equals("Noir")) {
+                if (table.getPiece(row, col) != null && table.getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
                     listePieces.add(table.getPiece(row, col));
                 }
             }

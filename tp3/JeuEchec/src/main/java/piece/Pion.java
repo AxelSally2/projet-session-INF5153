@@ -15,23 +15,24 @@
  */
 package piece;
 
+import jeu.Couleur;
+
 /**
  *
  * @author jmppr
  */
 public class Pion extends Piece {
 
-    public Pion(String couleur, int row, int col) {
+    public Pion(Couleur couleur, int row, int col) {
         super(couleur, row, col);
-        super.setPoid(1);
     }
 
     @Override
     public boolean estDeplacementValide(int row, int col) {
         boolean resultat;
-        int dirR = (super.getCouleur().equals("Noir")) ? 1 : -1;
-        int dirRStart = (super.getCouleur().equals("Noir")) ? 2 : -2;
-        int startRow = (super.getCouleur().equals("Noir")) ? 1 : 6;
+        int dirR = (super.getCouleur().equals(Couleur.NOIR)) ? 1 : -1;
+        int dirRStart = (super.getCouleur().equals(Couleur.NOIR)) ? 2 : -2;
+        int startRow = (super.getCouleur().equals(Couleur.NOIR)) ? 1 : 6;
         if (super.getRow() == startRow) {
             resultat = (super.getCol() == col && (super.getRow() + dirR == row || super.getRow() + dirRStart == row))
                     || deplacementDiagoValide(row, col, dirR);
