@@ -2,8 +2,10 @@ joueur\Joueur.class
 jeu\Couleur.class
 joueur\IAAvance.class
 piece\Piece.class
+partiecontroleur\Singleton.class
 jeu\Mouvement.class
 tempscontroleur\MeilleursTempsControleur.class
+partiecontroleur\ModelPartieControleur.class
 piece\Pion.class
 joueur\IA.class
 piece\Roi.class

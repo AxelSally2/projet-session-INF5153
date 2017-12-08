@@ -24,9 +24,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import jeu.Jeu;
-import piece.*;
-import jeu.Couleur;
 
 /**
  * FXML Controller class
@@ -38,7 +35,8 @@ public class VisualiserPartieControleur implements Initializable {
     @FXML
     AnchorPane paneVisualiserPartie;
 
-    private final Jeu partie = PartieControleur.partie;
+    //private final ModelPartieControleur mod = PartieControleur.mod;
+    private final Singleton partie = Singleton.getInstance();
 
     @FXML
     private Button case00, case01, case02, case03, case04, case05, case06, case07,
@@ -62,52 +60,18 @@ public class VisualiserPartieControleur implements Initializable {
         return table;
     }
 
-    public void afficherPieces() {
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                if (partie.getTable().getPiece(row, col) instanceof Roi && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/roi_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Dame && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/dame_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Fou && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/fou_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Cavalier && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/cavalier_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Tour && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/tour_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Pion && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/pion_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Roi && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/roi_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Dame && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/dame_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Fou && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/fou_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Cavalier && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/cavalier_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Tour && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/tour_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Pion && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/pion_noir.png');");
-                } else {
-                    table()[row][col].setStyle("");
-                }
-            }
-        }
-    }
-
     @FXML
     private void buttonNextMouv(ActionEvent event) throws IOException {
-        pos = partie.getMouvement().mouvementSuivant(pos);
-        partie.setTable(partie.getMouvement().getTable());
-        afficherPieces();
+        pos = partie.getModel().getPartie().getMouvement().mouvementSuivant(pos);
+        partie.getModel().getPartie().setTable(partie.getModel().getPartie().getMouvement().getTable());
+        partie.getModel().afficherPieces(table());
     }
 
     @FXML
     private void buttonPreviousMouv(ActionEvent event) throws IOException {
-        pos = partie.getMouvement().mouvementPrecedent(pos);
-        partie.setTable(partie.getMouvement().getTable());
-        afficherPieces();
+        pos = partie.getModel().getPartie().getMouvement().mouvementPrecedent(pos);
+        partie.getModel().getPartie().setTable(partie.getModel().getPartie().getMouvement().getTable());
+        partie.getModel().afficherPieces(table());
     }
 
     @FXML
@@ -121,8 +85,8 @@ public class VisualiserPartieControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        partie.getTable().initialiserNouvelleTable();
-        afficherPieces();
+        partie.getModel().getPartie().getTable().initialiserNouvelleTable();
+        partie.getModel().afficherPieces(table());
     }
 
 }

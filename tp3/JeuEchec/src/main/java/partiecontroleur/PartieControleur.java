@@ -24,28 +24,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
-import jeu.Jeu;
 import menucontroleur.MenuPrincipalControleur;
 import menucontroleur.ChoisirAdversaireControleur;
-import piece.*;
 import fichier.EnregistrerFichier;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jeu.Couleur;
-import jeu.Mouvement;
-import jeu.Table;
-import joueur.*;
-
 
 /**
  * FXML Controller class
  */
 public class PartieControleur implements Initializable {
 
-    private int row;
-    private int col;
-    private int cpt = 0;
+    private final Singleton partie = Singleton.getInstance();
 
     @FXML
     private Button case00, case01, case02, case03, case04, case05, case06, case07,
@@ -60,30 +51,6 @@ public class PartieControleur implements Initializable {
     @FXML
     AnchorPane panePartie;
 
-    public static Jeu partie;
-
-    private Jeu creerPartie() {
-        if (ChoisirAdversaireControleur.joueurChoisie == 1) {
-            partie = new Jeu(new Table(), new Joueur(), new Humain(), new Mouvement());
-        } else if (ChoisirAdversaireControleur.joueurChoisie == 2) {
-            partie = new Jeu(new Table(), new Joueur(), new IADebutant(), new Mouvement());
-        } else if (ChoisirAdversaireControleur.joueurChoisie == 3) {
-            partie = new Jeu(new Table(), new Joueur(), new IAAvance(), new Mouvement());
-        } else {
-            partie = new Jeu(new Table(), new Joueur(), new IADebutant(), new Mouvement());
-        }
-        return partie;
-    }
-
-    public Jeu initialiserPartie() throws FileNotFoundException {
-        if (MenuPrincipalControleur.partieChoisie == 1) {
-            partie.getTable().initialiserNouvelleTable();
-        } else if (MenuPrincipalControleur.partieChoisie == 2) {
-            partie.getTable().initialiserTableSauvegarder();
-        }
-        return partie;
-    }
-
     private Button[][] table() {
         Button table[][] = {{case00, case01, case02, case03, case04, case05, case06, case07},
         {case10, case11, case12, case13, case14, case15, case16, case17},
@@ -96,380 +63,330 @@ public class PartieControleur implements Initializable {
         return table;
     }
 
-    public void afficherPieces() {
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                if (partie.getTable().getPiece(row, col) instanceof Roi && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/roi_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Dame && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/dame_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Fou && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/fou_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Cavalier && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/cavalier_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Tour && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/tour_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Pion && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.BLANC)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/pion_blanc.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Roi && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/roi_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Dame && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/dame_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Fou && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/fou_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Cavalier && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/cavalier_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Tour && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/tour_noir.png');");
-                } else if (partie.getTable().getPiece(row, col) instanceof Pion && partie.getTable().getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
-                    table()[row][col].setStyle("-fx-background-image: url('/images/pion_noir.png');");
-                } else {
-                    table()[row][col].setStyle("");
-                }
-            }
-        }
-    }
-
-    private void deplacerPiece(int rowDest, int colDest) {
-        cpt++;
-        if (cpt == 1) {
-            if (partie.getTable().getPiece(rowDest, colDest) == null) {
-                cpt = 0;
-            } else {
-                row = rowDest;
-                col = colDest;
-            }
-        } else if (cpt == 2) {
-            partie.jouerUnTour(row, col, rowDest, colDest);
-            afficherPieces();
-            cpt = 0;
-        }
-    }
-
     @FXML
     private void case00Action(ActionEvent event) throws IOException {
-        deplacerPiece(0, 0);
+        partie.getModel().deplacerPiece(0, 0, table());
     }
 
     @FXML
     private void case01Action(ActionEvent event) throws IOException {
-        deplacerPiece(0, 1);
+        partie.getModel().deplacerPiece(0, 1, table());
     }
 
     @FXML
     private void case02Action(ActionEvent event) throws IOException {
-        deplacerPiece(0, 2);
+        partie.getModel().deplacerPiece(0, 2, table());
     }
 
     @FXML
     private void case03Action(ActionEvent event) throws IOException {
-        deplacerPiece(0, 3);
+        partie.getModel().deplacerPiece(0, 3, table());
     }
 
     @FXML
     private void case04Action(ActionEvent event) throws IOException {
-        deplacerPiece(0, 4);
+        partie.getModel().deplacerPiece(0, 4, table());
     }
 
     @FXML
     private void case05Action(ActionEvent event) throws IOException {
-        deplacerPiece(0, 5);
+        partie.getModel().deplacerPiece(0, 5, table());
     }
 
     @FXML
     private void case06Action(ActionEvent event) throws IOException {
-        deplacerPiece(0, 6);
+        partie.getModel().deplacerPiece(0, 6, table());
     }
 
     @FXML
     private void case07Action(ActionEvent event) throws IOException {
-        deplacerPiece(0, 7);
+        partie.getModel().deplacerPiece(0, 7, table());
     }
 
     @FXML
     private void case10Action(ActionEvent event) throws IOException {
-        deplacerPiece(1, 0);
+        partie.getModel().deplacerPiece(1, 0, table());
     }
 
     @FXML
     private void case11Action(ActionEvent event) throws IOException {
-        deplacerPiece(1, 1);
+        partie.getModel().deplacerPiece(1, 1, table());
     }
 
     @FXML
     private void case12Action(ActionEvent event) throws IOException {
-        deplacerPiece(1, 2);
+        partie.getModel().deplacerPiece(1, 2, table());
     }
 
     @FXML
     private void case13Action(ActionEvent event) throws IOException {
-        deplacerPiece(1, 3);
+        partie.getModel().deplacerPiece(1, 3, table());
     }
 
     @FXML
     private void case14Action(ActionEvent event) throws IOException {
-        deplacerPiece(1, 4);
+        partie.getModel().deplacerPiece(1, 4, table());
     }
 
     @FXML
     private void case15Action(ActionEvent event) throws IOException {
-        deplacerPiece(1, 5);
+        partie.getModel().deplacerPiece(1, 5, table());
     }
 
     @FXML
     private void case16Action(ActionEvent event) throws IOException {
-        deplacerPiece(1, 6);
+        partie.getModel().deplacerPiece(1, 6, table());
     }
 
     @FXML
     private void case17Action(ActionEvent event) throws IOException {
-        deplacerPiece(1, 7);
+        partie.getModel().deplacerPiece(1, 7, table());
     }
 
     @FXML
     private void case20Action(ActionEvent event) throws IOException {
-        deplacerPiece(2, 0);
+        partie.getModel().deplacerPiece(2, 0, table());
     }
 
     @FXML
     private void case21Action(ActionEvent event) throws IOException {
-        deplacerPiece(2, 1);
+        partie.getModel().deplacerPiece(2, 1, table());
     }
 
     @FXML
     private void case22Action(ActionEvent event) throws IOException {
-        deplacerPiece(2, 2);
+        partie.getModel().deplacerPiece(2, 2, table());
     }
 
     @FXML
     private void case23Action(ActionEvent event) throws IOException {
-        deplacerPiece(2, 3);
+        partie.getModel().deplacerPiece(2, 3, table());
     }
 
     @FXML
     private void case24Action(ActionEvent event) throws IOException {
-        deplacerPiece(2, 4);
+        partie.getModel().deplacerPiece(2, 4, table());
     }
 
     @FXML
     private void case25Action(ActionEvent event) throws IOException {
-        deplacerPiece(2, 5);
+        partie.getModel().deplacerPiece(2, 5, table());
     }
 
     @FXML
     private void case26Action(ActionEvent event) throws IOException {
-        deplacerPiece(2, 6);
+        partie.getModel().deplacerPiece(2, 6, table());
     }
 
     @FXML
     private void case27Action(ActionEvent event) throws IOException {
-        deplacerPiece(2, 7);
+        partie.getModel().deplacerPiece(2, 7, table());
     }
 
     @FXML
     private void case30Action(ActionEvent event) throws IOException {
-        deplacerPiece(3, 0);
+        partie.getModel().deplacerPiece(3, 0, table());
     }
 
     @FXML
     private void case31Action(ActionEvent event) throws IOException {
-        deplacerPiece(3, 1);
+        partie.getModel().deplacerPiece(3, 1, table());
     }
 
     @FXML
     private void case32Action(ActionEvent event) throws IOException {
-        deplacerPiece(3, 2);
+        partie.getModel().deplacerPiece(3, 2, table());
     }
 
     @FXML
     private void case33Action(ActionEvent event) throws IOException {
-        deplacerPiece(3, 3);
+        partie.getModel().deplacerPiece(3, 3, table());
     }
 
     @FXML
     private void case34Action(ActionEvent event) throws IOException {
-        deplacerPiece(3, 4);
+        partie.getModel().deplacerPiece(3, 4, table());
     }
 
     @FXML
     private void case35Action(ActionEvent event) throws IOException {
-        deplacerPiece(3, 5);
+        partie.getModel().deplacerPiece(3, 5, table());
     }
 
     @FXML
     private void case36Action(ActionEvent event) throws IOException {
-        deplacerPiece(3, 6);
+        partie.getModel().deplacerPiece(3, 6, table());
     }
 
     @FXML
     private void case37Action(ActionEvent event) throws IOException {
-        deplacerPiece(3, 7);
+        partie.getModel().deplacerPiece(3, 7, table());
     }
 
     @FXML
     private void case40Action(ActionEvent event) throws IOException {
-        deplacerPiece(4, 0);
+        partie.getModel().deplacerPiece(4, 0, table());
     }
 
     @FXML
     private void case41Action(ActionEvent event) throws IOException {
-        deplacerPiece(4, 1);
+        partie.getModel().deplacerPiece(4, 1, table());
     }
 
     @FXML
     private void case42Action(ActionEvent event) throws IOException {
-        deplacerPiece(4, 2);
+        partie.getModel().deplacerPiece(4, 2, table());
     }
 
     @FXML
     private void case43Action(ActionEvent event) throws IOException {
-        deplacerPiece(4, 3);
+        partie.getModel().deplacerPiece(4, 3, table());
     }
 
     @FXML
     private void case44Action(ActionEvent event) throws IOException {
-        deplacerPiece(4, 4);
+        partie.getModel().deplacerPiece(4, 4, table());
     }
 
     @FXML
     private void case45Action(ActionEvent event) throws IOException {
-        deplacerPiece(4, 5);
+        partie.getModel().deplacerPiece(4, 5, table());
     }
 
     @FXML
     private void case46Action(ActionEvent event) throws IOException {
-        deplacerPiece(4, 6);
+        partie.getModel().deplacerPiece(4, 6, table());
     }
 
     @FXML
     private void case47Action(ActionEvent event) throws IOException {
-        deplacerPiece(4, 7);
+        partie.getModel().deplacerPiece(4, 7, table());
     }
 
     @FXML
     private void case50Action(ActionEvent event) throws IOException {
-        deplacerPiece(5, 0);
+        partie.getModel().deplacerPiece(5, 0, table());
     }
 
     @FXML
     private void case51Action(ActionEvent event) throws IOException {
-        deplacerPiece(5, 1);
+        partie.getModel().deplacerPiece(5, 1, table());
     }
 
     @FXML
     private void case52Action(ActionEvent event) throws IOException {
-        deplacerPiece(5, 2);
+        partie.getModel().deplacerPiece(5, 2, table());
     }
 
     @FXML
     private void case53Action(ActionEvent event) throws IOException {
-        deplacerPiece(5, 3);
+        partie.getModel().deplacerPiece(5, 3, table());
     }
 
     @FXML
     private void case54Action(ActionEvent event) throws IOException {
-        deplacerPiece(5, 4);
+        partie.getModel().deplacerPiece(5, 4, table());
     }
 
     @FXML
     private void case55Action(ActionEvent event) throws IOException {
-        deplacerPiece(5, 5);
+        partie.getModel().deplacerPiece(5, 5, table());
     }
 
     @FXML
     private void case56Action(ActionEvent event) throws IOException {
-        deplacerPiece(5, 6);
+        partie.getModel().deplacerPiece(5, 6, table());
     }
 
     @FXML
     private void case57Action(ActionEvent event) throws IOException {
-        deplacerPiece(5, 7);
+        partie.getModel().deplacerPiece(5, 7, table());
     }
 
     @FXML
     private void case60Action(ActionEvent event) throws IOException {
-        deplacerPiece(6, 0);
+        partie.getModel().deplacerPiece(6, 0, table());
     }
 
     @FXML
     private void case61Action(ActionEvent event) throws IOException {
-        deplacerPiece(6, 1);
+        partie.getModel().deplacerPiece(6, 1, table());
     }
 
     @FXML
     private void case62Action(ActionEvent event) throws IOException {
-        deplacerPiece(6, 2);
+        partie.getModel().deplacerPiece(6, 2, table());
     }
 
     @FXML
     private void case63Action(ActionEvent event) throws IOException {
-        deplacerPiece(6, 3);
+        partie.getModel().deplacerPiece(6, 3, table());
     }
 
     @FXML
     private void case64Action(ActionEvent event) throws IOException {
-        deplacerPiece(6, 4);
+        partie.getModel().deplacerPiece(6, 4, table());
     }
 
     @FXML
     private void case65Action(ActionEvent event) throws IOException {
-        deplacerPiece(6, 5);
+        partie.getModel().deplacerPiece(6, 5, table());
     }
 
     @FXML
     private void case66Action(ActionEvent event) throws IOException {
-        deplacerPiece(6, 6);
+        partie.getModel().deplacerPiece(6, 6, table());
     }
 
     @FXML
     private void case67Action(ActionEvent event) throws IOException {
-        deplacerPiece(6, 7);
+        partie.getModel().deplacerPiece(6, 7, table());
     }
 
     @FXML
     private void case70Action(ActionEvent event) throws IOException {
-        deplacerPiece(7, 0);
+        partie.getModel().deplacerPiece(7, 0, table());
     }
 
     @FXML
     private void case71Action(ActionEvent event) throws IOException {
-        deplacerPiece(7, 1);
+        partie.getModel().deplacerPiece(7, 1, table());
     }
 
     @FXML
     private void case72Action(ActionEvent event) throws IOException {
-        deplacerPiece(7, 2);
+        partie.getModel().deplacerPiece(7, 2, table());
     }
 
     @FXML
     private void case73Action(ActionEvent event) throws IOException {
-        deplacerPiece(7, 3);
+        partie.getModel().deplacerPiece(7, 3, table());
     }
 
     @FXML
     private void case74Action(ActionEvent event) throws IOException {
-        deplacerPiece(7, 4);
+        partie.getModel().deplacerPiece(7, 4, table());
     }
 
     @FXML
     private void case75Action(ActionEvent event) throws IOException {
-        deplacerPiece(7, 5);
+        partie.getModel().deplacerPiece(7, 5, table());
     }
 
     @FXML
     private void case76Action(ActionEvent event) throws IOException {
-        deplacerPiece(7, 6);
+        partie.getModel().deplacerPiece(7, 6, table());
     }
 
     @FXML
     private void case77Action(ActionEvent event) throws IOException {
-        deplacerPiece(7, 7);
+        partie.getModel().deplacerPiece(7, 7, table());
     }
 
     @FXML
     private void buttonEnregistrerPartie(ActionEvent event) throws IOException {
         EnregistrerFichier fichier = new EnregistrerFichier();
-        fichier.sauvegarderDansFichier(partie.getTable().tableToXML(), "XML files (*.xml)", "*.xml");
+        fichier.sauvegarderDansFichier(partie.getModel().getPartie().getTable().tableToXML(), "XML files (*.xml)", "*.xml");
 
     }
 
@@ -492,13 +409,13 @@ public class PartieControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        creerPartie();
+        partie.getModel().creerPartie();
         try {
-            initialiserPartie();
+            partie.getModel().initialiserPartie();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(PartieControleur.class.getName()).log(Level.SEVERE, null, ex);
         }
-        afficherPieces();
+        partie.getModel().afficherPieces(table());
     }
 
 }

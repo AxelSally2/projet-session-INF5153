@@ -6,6 +6,7 @@ C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\Couleur.jav
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Pion.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\joueur\Joueur.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\tempscontroleur\MeilleursTempsControleur.java
+C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\partiecontroleur\ModelPartieControleur.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\partiecontroleur\VisualiserPartieControleur.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Cavalier.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\fichier\EnregistrerFichier.java
@@ -14,6 +15,7 @@ C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\fichier\Charger
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Roi.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\joueur\IAAvance.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\partiecontroleur\PartieControleur.java
+C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\partiecontroleur\Singleton.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Dame.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Piece.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\Table.java

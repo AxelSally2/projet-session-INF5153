@@ -25,8 +25,9 @@ Les images des pièces d'échec ont été créé par : [Yuri Mazursky](https://w
 Licenses des images : [Creative Commons (Attribution 2.5 Generic)](https://creativecommons.org/licenses/by/2.5/).  
 
 ## À faire
-- 2 Patrons GoF
-- Validation un roi est échec et math ou la partie est une égalité
-- Partie contre un humain en ligne
-- ~~Partie contre une IA avancé~~
-- Les meilleurs temps
+- 1 Patron GoF  
+- ~~Le patron singleton avec l'instance d'une partie~~  
+- Validation un roi est échec et math ou la partie est une égalité  
+- Partie contre un humain en ligne  
+- ~~Partie contre une IA avancé~~  
+- Les meilleurs temps  
