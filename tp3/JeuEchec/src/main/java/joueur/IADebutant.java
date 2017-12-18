@@ -15,6 +15,7 @@
  */
 package joueur;
 
+import jeu.Couleur;
 import jeu.Mouvement;
 import jeu.Table;
 
@@ -29,7 +30,8 @@ public class IADebutant extends IA {
     }
 
     @Override
-    public void effectueMouvement(Table table, Mouvement mouv) {
-        effectueMouvementAleatoire(table, mouv);
+    public boolean effectueMouvement(Table table, Mouvement mouv, Couleur couleur) {
+        effectueMouvementAleatoire(table, mouv, couleur);
+        return false;
     }
 }

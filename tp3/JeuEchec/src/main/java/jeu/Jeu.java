@@ -15,7 +15,8 @@
  */
 package jeu;
 
-import joueur.Ennemi;
+import java.util.Hashtable;
+import java.util.Map;
 import joueur.Joueur;
 
 /**
@@ -26,10 +27,10 @@ public class Jeu {
 
     private Table table;
     private Joueur joueur1;
-    private Ennemi joueur2;
+    private Joueur joueur2;
     private Mouvement mouv;
 
-    public Jeu(Table table, Joueur joueur1, Ennemi joueur2, Mouvement mouv) {
+    public Jeu(Table table, Joueur joueur1, Joueur joueur2, Mouvement mouv) {
         this.table = table;
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
@@ -48,7 +49,7 @@ public class Jeu {
         return joueur1;
     }
 
-    public Ennemi getJoueur2() {
+    public Joueur getJoueur2() {
         return joueur2;
     }
 
@@ -56,9 +57,34 @@ public class Jeu {
         return mouv;
     }
 
-    public void jouerUnTour(int row, int col, int rowDest, int colDest) {
-        if (joueur1.effectueMouvement(table, row, col, rowDest, colDest, mouv)) {
-            joueur2.effectueMouvement(table, mouv);
+    public void jouerUnTourContreIA() {
+        if (joueur1.effectueMouvement(table, mouv, Couleur.BLANC)) {
+            joueur2.effectueMouvement(table, mouv, Couleur.NOIR);
         }
+    }
+
+    public void jouerMouvementContreHumain(boolean idJoueur) {
+        RpcClient client = new RpcClient();
+        int idJoueurAjouer = (idJoueur) ? 1 : 2;
+        Couleur couleur = (idJoueur) ? Couleur.BLANC : Couleur.NOIR;
+        if (client.getTourAJouer() == idJoueurAjouer) {
+            if (joueur1.effectueMouvement(table, mouv, couleur)) {
+                client.postCoord(mouv, idJoueur);
+                client.setTourAJouer();
+            }
+        }
+    }
+
+    public boolean getMouvementAdversaireHumain(boolean test) {
+        Couleur couleur = (!test) ? Couleur.BLANC : Couleur.NOIR;
+        RpcClient client = new RpcClient();
+        Map coord = new Hashtable();
+        coord = client.getCoord(!test, mouv);
+        if (!coord.isEmpty()) {
+            joueur2.effectueMouvement(table, mouv, couleur);
+            client.clearMap(!test);
+            return true;
+        }
+        return false;
     }
 }

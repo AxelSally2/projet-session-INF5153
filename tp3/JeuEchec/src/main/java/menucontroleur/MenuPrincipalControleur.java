@@ -63,13 +63,7 @@ public class MenuPrincipalControleur implements Initializable {
         System.exit(0);
     }
 
-//    @FXML
-//    private void buttonConsulterTemps(ActionEvent event) {
-//        System.out.println("You clicked me!");
-//        label.setText("Hello World!");
-//    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }
 }

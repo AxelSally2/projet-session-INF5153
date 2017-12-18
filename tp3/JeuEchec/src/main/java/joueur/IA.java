@@ -16,8 +16,6 @@
 package joueur;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
 import jeu.Couleur;
 import jeu.Mouvement;
 import jeu.Table;
@@ -27,33 +25,33 @@ import piece.Piece;
  *
  * @author jmppr
  */
-public abstract class IA extends Ennemi {
+public abstract class IA implements Joueur {
 
     public IA() {
         super();
     }
 
-    protected Piece generePiece(Table table) {
-        ArrayList<Piece> listePieces = toutesLesPiecesDeIA(table);
+    private Piece generePiece(Table table, Couleur couleur) {
+        ArrayList<Piece> listePieces = toutesLesPiecesDeIA(table, couleur);
         int random = (int) (Math.random() * listePieces.size() + 1);
         return listePieces.get(random - 1);
     }
 
-    protected int genereRow() {
+    private int genereRow() {
         int random = (int) (Math.random() * 8 + 1);
         return random - 1;
     }
 
-    protected int genereCol() {
+    private int genereCol() {
         int random = (int) (Math.random() * 8 + 1);
         return random - 1;
     }
 
-    protected ArrayList<Piece> toutesLesPiecesDeIA(Table table) {
+    protected ArrayList<Piece> toutesLesPiecesDeIA(Table table, Couleur couleur) {
         ArrayList<Piece> listePieces = new ArrayList<>();
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if (table.getPiece(row, col) != null && table.getPiece(row, col).getCouleur().equals(Couleur.NOIR)) {
+                if (table.getPiece(row, col) != null && table.getPiece(row, col).getCouleur().equals(couleur)) {
                     listePieces.add(table.getPiece(row, col));
                 }
             }
@@ -61,26 +59,26 @@ public abstract class IA extends Ennemi {
         return listePieces;
     }
 
-    protected Map genereUnMouvement(Table table) {
-        Piece piece = generePiece(table);
-        Map mouv = new Hashtable();
-        mouv.put("row", piece.getRow());
-        mouv.put("col", piece.getCol());
-        mouv.put("rowDest", genereRow());
-        mouv.put("colDest", genereCol());
-        return mouv;
+    private void genereUnMouvement(Table table, Mouvement mouv, Couleur couleur) {
+        Piece piece = generePiece(table, couleur);
+        mouv.setMouvement(piece.getRow(), piece.getCol(), genereRow(), genereCol());
     }
-    
-    protected void effectueMouvementAleatoire(Table table, Mouvement mouv) {
-        Map mouvGen = genereUnMouvement(table);
-        while (!(table.estValide((int) mouvGen.get("row"), (int) mouvGen.get("col"),
-                (int) mouvGen.get("rowDest"), (int) mouvGen.get("colDest")))) {
-            mouvGen = genereUnMouvement(table);
+
+    protected void effectueMouvementAleatoire(Table table, Mouvement mouv, Couleur couleur) {
+        genereUnMouvement(table, mouv, couleur);
+        while (!(table.estValide(mouv, couleur))) {
+            genereUnMouvement(table, mouv, couleur);
         }
-        mouv.mouvementPiece(table, (int) mouvGen.get("row"), (int) mouvGen.get("col"),
-                (int) mouvGen.get("rowDest"), (int) mouvGen.get("colDest"));
+        mouv.mouvementPiece(table);
     }
 
     @Override
-    public abstract void effectueMouvement(Table table, Mouvement mouvHist);
+    public abstract boolean effectueMouvement(Table table, Mouvement mouv, Couleur color);
+
+//    @Override
+//    public boolean effectueMouvement(Table table, int row, int col, int rowDest, int colDest, Mouvement mouv) {
+//        return false;
+//    }
+//    @Override
+//    public void effectueMouvement(Table table, int row, int col, int rowDest, int colDest, Mouvement mouv, Couleur couleur){}
 }

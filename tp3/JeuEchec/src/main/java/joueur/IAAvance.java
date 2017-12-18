@@ -109,16 +109,15 @@ public class IAAvance extends IA {
      * @param mouv Pour effectuer un mouvement sur la table
      */
     @Override
-    public void effectueMouvement(Table table, Mouvement mouv) {
+    public boolean effectueMouvement(Table table, Mouvement mouv, Couleur couleur) {
         ArrayList<Piece> piecesJoueur = toutesLesPiecesDuJoueurTrie(table);
-        ArrayList<Piece> piecesIA = toutesLesPiecesDeIA(table);
+        ArrayList<Piece> piecesIA = toutesLesPiecesDeIA(table, couleur);
         boolean pieceKill = false;
         for (int i = 0; i < piecesJoueur.size(); i++) {
             for (int j = 0; j < piecesIA.size(); j++) {
-                if (table.estValide(piecesIA.get(j).getRow(), piecesIA.get(j).getCol(),
-                        piecesJoueur.get(i).getRow(), piecesJoueur.get(i).getCol())) {
-                    mouv.mouvementPiece(table, piecesIA.get(j).getRow(), piecesIA.get(j).getCol(),
-                            piecesJoueur.get(i).getRow(), piecesJoueur.get(i).getCol());
+                mouv.setMouvement(piecesIA.get(j).getRow(), piecesIA.get(j).getCol(), piecesJoueur.get(i).getRow(), piecesJoueur.get(i).getCol());
+                if (table.estValide(mouv, couleur)) {
+                    mouv.mouvementPiece(table);
                     i = piecesJoueur.size();
                     j = piecesIA.size();
                     pieceKill = true;
@@ -126,8 +125,9 @@ public class IAAvance extends IA {
             }
         }
         if (!pieceKill) {
-            effectueMouvementAleatoire(table, mouv);
+            effectueMouvementAleatoire(table, mouv, couleur);
         }
+        return false;
     }
 
 }

@@ -20,7 +20,6 @@ import fichier.ChargerFichier;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import piece.*;
-import jeu.Couleur;
 
 /**
  *
@@ -297,15 +296,20 @@ public class Table {
                 || !(piece.getCouleur().equals(tablePieces[row][col].getCouleur())));
     }
 
-    public boolean estValide(int row, int col, int rowDest, int colDest) {
+    public boolean estValide(Mouvement mouv, Couleur couleur) {
         //System.out.println(tablePieces[row][col].getRow() + "---" + tablePieces[row][col].getCol());
         //System.out.println(rowDest + "-" + colDest);
         //System.out.println(tablePieces[row][col].estDeplacementValide(rowDest, colDest));
         //System.out.println(cheminEstDegage(tablePieces[row][col], rowDest, colDest));
         //System.out.println(piecePeutManger(tablePieces[row][col], rowDest, colDest));
+        int row = mouv.getRow();
+        int col = mouv.getCol();
+        int rowDest = mouv.getRowDest();
+        int colDest = mouv.getColDest();
         return tablePieces[row][col].estDeplacementValide(rowDest, colDest)
                 && cheminEstDegage(tablePieces[row][col], rowDest, colDest)
-                && piecePeutManger(tablePieces[row][col], rowDest, colDest);
+                && piecePeutManger(tablePieces[row][col], rowDest, colDest)
+                && tablePieces[row][col].getCouleur().equals(couleur);
     }
 
     public void remplacerPionParDame(Piece piece) {

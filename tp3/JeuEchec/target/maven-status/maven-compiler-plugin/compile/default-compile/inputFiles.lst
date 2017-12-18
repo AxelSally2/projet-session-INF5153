@@ -1,12 +1,10 @@
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\joueur\IADebutant.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\Jeu.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\menucontroleur\MainApp.java
-C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\joueur\Ennemi.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\Couleur.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Pion.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\joueur\Joueur.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\tempscontroleur\MeilleursTempsControleur.java
-C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\partiecontroleur\ModelPartieControleur.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\partiecontroleur\VisualiserPartieControleur.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Cavalier.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\fichier\EnregistrerFichier.java
@@ -20,6 +18,7 @@ C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Dame.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Piece.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\Table.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\Mouvement.java
+C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\RpcClient.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\joueur\IA.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Tour.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Fou.java

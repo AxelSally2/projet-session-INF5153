@@ -15,6 +15,7 @@
  */
 package joueur;
 
+import jeu.Couleur;
 import jeu.Mouvement;
 import jeu.Table;
 
@@ -22,12 +23,28 @@ import jeu.Table;
  *
  * @author jmppr
  */
-public class Humain extends Ennemi {
+public class Humain implements Joueur {
+
+    private String nom;
 
     public Humain() {
-        super();
     }
-    
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
     @Override
-    public void effectueMouvement(Table table, Mouvement mouvHist){}
+    public boolean effectueMouvement(Table table, Mouvement mouv, Couleur couleur) {
+        if (table.estValide(mouv, couleur)) {
+            mouv.mouvementPiece(table);
+            return true;
+            
+        }
+        return false;
+    }
 }

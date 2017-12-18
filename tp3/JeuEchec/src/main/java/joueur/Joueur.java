@@ -15,6 +15,7 @@
  */
 package joueur;
 
+import jeu.Couleur;
 import jeu.Mouvement;
 import jeu.Table;
 
@@ -22,27 +23,6 @@ import jeu.Table;
  *
  * @author jmppr
  */
-public class Joueur {
-
-    private String nom;
-
-    public Joueur() {
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public boolean effectueMouvement(Table table, int row, int col, int rowDest, int colDest, Mouvement mouv) {
-        if (table.estValide(row, col, rowDest, colDest)) {
-            mouv.mouvementPiece(table, row, col, rowDest, colDest);
-            return true;
-        }
-        return false;
-    }
-
+public interface Joueur {
+    boolean effectueMouvement(Table table, Mouvement mouv, Couleur couleur);
 }

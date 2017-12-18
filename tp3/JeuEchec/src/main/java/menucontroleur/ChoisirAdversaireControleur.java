@@ -23,6 +23,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import jeu.RpcClient;
 
 /**
  * FXML Controller class
@@ -32,14 +35,34 @@ public class ChoisirAdversaireControleur implements Initializable {
     @FXML
     AnchorPane paneChoisirAdversaire;
 
+    @FXML
+    public Button btnJoueur;
+
+    @FXML
+    public Label labelServeur;
+
     public static int joueurChoisie;
+    RpcClient client = new RpcClient();
 
     @FXML
     private void buttonJoueurHumain(ActionEvent event) throws IOException {
         joueurChoisie = 1;
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
         paneChoisirAdversaire.getChildren().setAll(pane);
+
+    }
+
+    @FXML
+    private void buttonRafraichir(ActionEvent event) throws IOException {
         
+        int loll = client.getTourAJouer();
+        if (loll == 0) {
+            labelServeur.setText("Le serveur est hors ligne!");
+            btnJoueur.setDisable(true);
+        } else {
+            labelServeur.setText("");
+            btnJoueur.setDisable(false);
+        }
     }
 
     @FXML
@@ -47,7 +70,7 @@ public class ChoisirAdversaireControleur implements Initializable {
         joueurChoisie = 2;
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
         paneChoisirAdversaire.getChildren().setAll(pane);
-        
+
     }
 
     @FXML
@@ -55,7 +78,13 @@ public class ChoisirAdversaireControleur implements Initializable {
         joueurChoisie = 3;
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
         paneChoisirAdversaire.getChildren().setAll(pane);
-        
+
+    }
+
+    @FXML
+    private void buttonRetourMenu(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/MenuPrincipal.fxml"));
+        paneChoisirAdversaire.getChildren().setAll(pane);
     }
 
     /**
@@ -63,7 +92,13 @@ public class ChoisirAdversaireControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        int loll = client.getTourAJouer();
+        if (loll == 0) {
+            labelServeur.setText("Le serveur est hors ligne!");
+            btnJoueur.setDisable(true);
+        } else {
+            labelServeur.setText("");
+            btnJoueur.setDisable(false);
+        }
     }
-
 }
