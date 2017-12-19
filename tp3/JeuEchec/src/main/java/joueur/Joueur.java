@@ -24,5 +24,6 @@ import jeu.Table;
  * @author jmppr
  */
 public interface Joueur {
+
     boolean effectueMouvement(Table table, Mouvement mouv, Couleur couleur);
 }

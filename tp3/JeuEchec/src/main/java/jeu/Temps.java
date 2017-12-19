@@ -32,7 +32,7 @@ public class Temps {
     public Temps() {
         chargerTemps();
     }
-   
+
     public long getTempsDepart() {
         return tempsDepart;
     }

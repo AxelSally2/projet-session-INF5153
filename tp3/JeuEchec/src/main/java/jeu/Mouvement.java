@@ -15,26 +15,20 @@
  */
 package jeu;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author jmppr
  */
 public class Mouvement {
 
-    private ArrayList<Table> mouvHistorique;
-    private Table table = null;
     private int row;
     private int col;
     private int rowDest;
     private int colDest;
+    final private MouvementHistorique mouvHist;
 
     public Mouvement() {
-        mouvHistorique = new ArrayList<>();
-        Table tableDepart = new Table();
-        tableDepart.initialiserNouvelleTable();
-        mouvHistorique.add(tableDepart);
+        mouvHist = new MouvementHistorique();
     }
 
     public void setMouvement(int row, int col, int rowDest, int colDest) {
@@ -59,31 +53,9 @@ public class Mouvement {
     public int getColDest() {
         return colDest;
     }
-
-    public Table getTable() {
-        return table;
-    }
-
-    public int mouvementSuivant(int pos) {
-        if (-1 == pos) {
-            pos += 2;
-        }
-        if (mouvHistorique.size() > pos) {
-            this.table = mouvHistorique.get(pos);
-            pos++;
-        }
-        return pos;
-    }
-
-    public int mouvementPrecedent(int pos) {
-        if (mouvHistorique.size() == pos) {
-            pos -= 2;
-        }
-        if (0 <= pos) {
-            this.table = mouvHistorique.get(pos);
-            pos--;
-        }
-        return pos;
+    
+    public MouvementHistorique getMouvHist() {
+        return mouvHist;
     }
 
     /**
@@ -91,10 +63,6 @@ public class Mouvement {
      * null est setter à l'ancienne position.
      *
      * @param table Echechier contenant les pieces des 2 adversaires
-     * @param row La position original de la ligne
-     * @param col La position original de la colonne
-     * @param rowDest La position de destination de la ligne
-     * @param colDest La position de destination de la colonne
      */
     public void mouvementPiece(Table table) {
         table.setPiece(rowDest, colDest, table.getPiece(row, col));
@@ -102,22 +70,7 @@ public class Mouvement {
         table.getPiece(rowDest, colDest).setCol(colDest);
         table.setPiece(row, col, null);
         table.remplacerPionParDame(table.getPiece(rowDest, colDest));
-        enregistrerMouvement(table);
-    }
-
-    /**
-     * Chaque table d'echec passé en parametre est enregistrer.
-     *
-     * @param table Echechier contenant les pieces des 2 adversaires
-     */
-    public void enregistrerMouvement(Table table) {
-        Table tableCpy = new Table();
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                tableCpy.setPiece(row, col, table.getPiece(row, col));
-            }
-        }
-        mouvHistorique.add(tableCpy);
+        mouvHist.enregistrerMouvement(table);
     }
 
 }

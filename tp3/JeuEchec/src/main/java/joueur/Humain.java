@@ -43,7 +43,6 @@ public class Humain implements Joueur {
         if (table.estValide(mouv, couleur) && !table.estEchecEtMath(Couleur.BLANC) && !table.estEchecEtMath(Couleur.NOIR)) {
             mouv.mouvementPiece(table);
             return true;
-            
         }
         return false;
     }

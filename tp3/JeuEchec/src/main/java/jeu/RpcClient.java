@@ -93,7 +93,7 @@ public class RpcClient {
             System.err.println(exception);
         }
     }
-    
+
     public int getJoueurAJouer() {
         int joueurAjouer = 0;
         try {
@@ -106,7 +106,7 @@ public class RpcClient {
         }
         return joueurAjouer;
     }
-    
+
     public boolean serveurEnLigne() {
         boolean enLigne = false;
         try {

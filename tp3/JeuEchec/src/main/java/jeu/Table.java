@@ -15,7 +15,6 @@
  */
 package jeu;
 
-import com.thoughtworks.xstream.XStream;
 import fichier.ChargerFichier;
 import fichier.ConvertirDonnees;
 import java.io.FileNotFoundException;

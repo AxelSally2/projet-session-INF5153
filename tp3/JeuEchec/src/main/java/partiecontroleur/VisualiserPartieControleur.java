@@ -15,7 +15,6 @@
  */
 package partiecontroleur;
 
-import jeu.FacadePartie;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -63,15 +62,15 @@ public class VisualiserPartieControleur implements Initializable {
 
     @FXML
     private void buttonNextMouv(ActionEvent event) throws IOException {
-        pos = partie.getFacade().getPartie().getMouvement().mouvementSuivant(pos);
-        partie.getFacade().getPartie().setTable(partie.getFacade().getPartie().getMouvement().getTable());
+        pos = partie.getFacade().getPartie().getMouvement().getMouvHist().mouvementSuivant(pos);
+        partie.getFacade().getPartie().setTable(partie.getFacade().getPartie().getMouvement().getMouvHist().getTable());
         partie.getFacade().afficherPieces(table());
     }
 
     @FXML
     private void buttonPreviousMouv(ActionEvent event) throws IOException {
-        pos = partie.getFacade().getPartie().getMouvement().mouvementPrecedent(pos);
-        partie.getFacade().getPartie().setTable(partie.getFacade().getPartie().getMouvement().getTable());
+        pos = partie.getFacade().getPartie().getMouvement().getMouvHist().mouvementPrecedent(pos);
+        partie.getFacade().getPartie().setTable(partie.getFacade().getPartie().getMouvement().getMouvHist().getTable());
         partie.getFacade().afficherPieces(table());
     }
 

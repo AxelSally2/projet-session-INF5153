@@ -25,7 +25,6 @@ import joueur.Humain;
 import joueur.IAAvance;
 import joueur.IADebutant;
 import menucontroleur.ChoisirAdversaireControleur;
-import partiecontroleur.PartieControleur;
 import piece.*;
 
 /**
@@ -168,7 +167,7 @@ public class FacadePartie {
         try {
             partie.initialiserPartie();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(PartieControleur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FacadePartie.class.getName()).log(Level.SEVERE, null, ex);
         }
         afficherPieces(table);
     }

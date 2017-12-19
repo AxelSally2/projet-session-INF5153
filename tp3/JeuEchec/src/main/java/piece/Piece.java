@@ -39,7 +39,7 @@ public abstract class Piece {
 
     public int getCol() {
         return col;
-    } 
+    }
 
     public Couleur getCouleur() {
         return couleur;
@@ -52,7 +52,7 @@ public abstract class Piece {
     public void setCol(int col) {
         this.col = col;
     }
-    
+
     /**
      * Retourne vrai si la colonne et la ligne de la piece sélection et la
      * destination de la colonne et la ligne de cette piece se situe bien dans
