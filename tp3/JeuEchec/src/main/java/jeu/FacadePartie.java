@@ -13,70 +13,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package partiecontroleur;
+package jeu;
 
+import fichier.ConvertirDonnees;
+import fichier.EnregistrerFichier;
 import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Button;
-import jeu.Couleur;
-import jeu.Jeu;
-import jeu.Mouvement;
-import jeu.Table;
 import joueur.Humain;
 import joueur.IAAvance;
 import joueur.IADebutant;
 import menucontroleur.ChoisirAdversaireControleur;
-import menucontroleur.MenuPrincipalControleur;
+import partiecontroleur.PartieControleur;
 import piece.*;
 
 /**
  *
  * @author jmppr
  */
-public class Singleton {
+public class FacadePartie {
 
-    static private Singleton instance = null;
-
-    private Jeu partie;
+    private Partie partie;
     private int row;
     private int col;
     private int cpt;
+    private Temps temps;
 
-    private Singleton() {
+    public FacadePartie() {
         cpt = 0;
+        temps = new Temps();
     }
 
-    static public Singleton getInstance() {
-        if (instance == null) {
-            instance = new Singleton();
-        }
-        return instance;
-    }
-
-    public Jeu getModel() {
+    public Partie getPartie() {
         return partie;
     }
 
-    public Jeu getPartie() {
-        return partie;
-    }
-
-    public void creerPartie() {
+    private void creerPartie() {
         if (ChoisirAdversaireControleur.joueurChoisie == 1) {
-            partie = new Jeu(new Table(), new Humain(), new Humain(), new Mouvement());
+            partie = new Partie(new Table(), new Humain(), new Humain(), new Mouvement());
         } else if (ChoisirAdversaireControleur.joueurChoisie == 2) {
-            partie = new Jeu(new Table(), new Humain(), new IADebutant(), new Mouvement());
+            partie = new Partie(new Table(), new Humain(), new IADebutant(), new Mouvement());
         } else if (ChoisirAdversaireControleur.joueurChoisie == 3) {
-            partie = new Jeu(new Table(), new Humain(), new IAAvance(), new Mouvement());
+            partie = new Partie(new Table(), new Humain(), new IAAvance(), new Mouvement());
         } else {
-            partie = new Jeu(new Table(), new Humain(), new IADebutant(), new Mouvement());
-        }
-    }
-
-    public void initialiserPartie() throws FileNotFoundException {
-        if (MenuPrincipalControleur.partieChoisie == 1) {
-            partie.getTable().initialiserNouvelleTable();
-        } else if (MenuPrincipalControleur.partieChoisie == 2) {
-            partie.getTable().initialiserTableSauvegarder();
+            partie = new Partie(new Table(), new Humain(), new IADebutant(), new Mouvement());
         }
     }
 
@@ -125,13 +106,13 @@ public class Singleton {
             }
         } else if (cpt == 2) {
             partie.getMouvement().setMouvement(row, col, rowDest, colDest);
-            jouerUneTour(idJoueur);
+            jouerUnTour(idJoueur);
             afficherPieces(table);
             cpt = 0;
         }
     }
 
-    private void jouerUneTour(boolean idJoueur) {
+    private void jouerUnTour(boolean idJoueur) {
         if (ChoisirAdversaireControleur.joueurChoisie == 1) {
             partie.jouerMouvementContreHumain(idJoueur);
         } else {
@@ -143,5 +124,52 @@ public class Singleton {
         if (partie.getMouvementAdversaireHumain(idJoueur)) {
             afficherPieces(table);
         }
+    }
+
+    public String msgVainceur(boolean idJoueur) {
+        Couleur couleur = (idJoueur) ? Couleur.BLANC : Couleur.NOIR;
+        Couleur couleurEnn = (!idJoueur) ? Couleur.BLANC : Couleur.NOIR;
+        if (partie.getTable().estEchecEtMath(couleurEnn)) {
+            return "Vous avez gagné!";
+        } else if (partie.getTable().estEchecEtMath(couleur)) {
+            return "Vous avez perdu!";
+        }
+        return "";
+    }
+
+    public boolean estEchecEtMath() {
+        return partie.getTable().estEchecEtMath(Couleur.NOIR)
+                || partie.getTable().estEchecEtMath(Couleur.BLANC);
+    }
+
+    public String msgJoueurAJouer(boolean idJoueur) {
+        RpcClient client = new RpcClient();
+        int idJoueurAjouer = (idJoueur) ? 1 : 2;
+        if (client.getJoueurAJouer() == idJoueurAjouer) {
+            return "C'est votre tour à jouer!";
+        } else {
+            return "Ce n'est pas votre tour à jouer!";
+        }
+    }
+
+    public void remplacerMeilleursTemps() {
+        if (partie.getTable().estEchecEtMath(Couleur.NOIR)) {
+            temps.setTempsFin();
+            temps.setMeilleurTemps(ChoisirAdversaireControleur.joueurChoisie);
+            ConvertirDonnees conv = new ConvertirDonnees();
+            EnregistrerFichier fichier = new EnregistrerFichier("temps.xml");
+            fichier.sauvegarderDansFichier(conv.objetToXML(temps));
+        }
+    }
+
+    public void creerInitAffichePartie(Button[][] table) {
+        temps.setTempsDepart();
+        creerPartie();
+        try {
+            partie.initialiserPartie();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(PartieControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        afficherPieces(table);
     }
 }

@@ -17,6 +17,7 @@ package jeu;
 
 import com.thoughtworks.xstream.XStream;
 import fichier.ChargerFichier;
+import fichier.ConvertirDonnees;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import piece.*;
@@ -125,32 +126,9 @@ public class Table {
      * @throws java.io.FileNotFoundException
      */
     public void initialiserTableSauvegarder() throws FileNotFoundException {
-        ChargerFichier fichier = new ChargerFichier();
-        tablePieces = XMLToTable(fichier.contenuFichier());
-    }
-
-    /**
-     * Transforme le tableau de pièces en une chaine de caractères en format XML
-     *
-     * @return Une chaine de caractère en format XML
-     */
-    public String tableToXML() {
-        XStream xstream = new XStream();
-        String xml = xstream.toXML(tablePieces);
-        return xml;
-    }
-
-    /**
-     * Transforme la chaine de caractère en format XML dans un tableau de pièces
-     *
-     * @param tableXML
-     * @return Un tableau de pièces
-     */
-    private Piece[][] XMLToTable(String tableXML) {
-        XStream xstream = new XStream();
-        Piece pieces[][];
-        pieces = (Piece[][]) xstream.fromXML(tableXML);
-        return pieces;
+        ChargerFichier fichier = new ChargerFichier("");
+        ConvertirDonnees conv = new ConvertirDonnees();
+        tablePieces = (Piece[][]) conv.XMLToObjet(fichier.contenuFichier());
     }
 
     /**
@@ -170,7 +148,7 @@ public class Table {
                 || pionPeutMangerUneDirection(piece, row, col, 1, -1) // Gauhce
                 || pionPeutMangerUneDirection(piece, row, col, -1, 1) // Droite
                 || pionPeutMangerUneDirection(piece, row, col, -1, -1) // Gauhce
-                || (tablePieces[row][col] == null) && piece.getCol() == col; 
+                || (tablePieces[row][col] == null) && piece.getCol() == col;
     }
 
     /**
@@ -198,7 +176,7 @@ public class Table {
                 && tablePieces[piece.getRow() + dirR][piece.getCol() + dirY].getCouleur().equals(couleurPieceEnnemi));
     }
 
-    private boolean pionCheminDegage(Piece piece, int row, int col) {
+    private boolean pionCheminDegage(Piece piece, int col) {
         if (!(piece instanceof Pion) || col != piece.getCol()) {
             return true;
         }
@@ -206,7 +184,7 @@ public class Table {
         int mouvStart = (piece.getCouleur().equals(Couleur.BLANC)) ? -2 : 2;
         int pos = (piece.getCouleur().equals(Couleur.BLANC)) ? 6 : 1;
         return tablePieces[piece.getRow() + mouv][piece.getCol()] == null
-                || (pos == piece.getRow() && tablePieces[piece.getRow() + mouvStart][piece.getCol()] == null 
+                || (pos == piece.getRow() && tablePieces[piece.getRow() + mouvStart][piece.getCol()] == null
                 && tablePieces[piece.getRow() + mouv][piece.getCol()] == null);
 
     }
@@ -221,7 +199,7 @@ public class Table {
         resultat = estPasObstrueDiagonalement(piece, row, dirY, dirX);
         return resultat;
     }
-    
+
     private boolean tourACheminDegage(Piece piece, int row, int col) {
         if (!(piece instanceof Tour)) {
             return true;
@@ -285,7 +263,7 @@ public class Table {
         return dameACheminDegage(piece, row, col)
                 && tourACheminDegage(piece, row, col)
                 && fouACheminDegage(piece, row, col)
-                && pionCheminDegage(piece, row, col);
+                && pionCheminDegage(piece, col);
     }
 
     private boolean piecePeutManger(Piece piece, int row, int col) {
@@ -302,14 +280,10 @@ public class Table {
         //System.out.println(tablePieces[row][col].estDeplacementValide(rowDest, colDest));
         //System.out.println(cheminEstDegage(tablePieces[row][col], rowDest, colDest));
         //System.out.println(piecePeutManger(tablePieces[row][col], rowDest, colDest));
-        int row = mouv.getRow();
-        int col = mouv.getCol();
-        int rowDest = mouv.getRowDest();
-        int colDest = mouv.getColDest();
-        return tablePieces[row][col].estDeplacementValide(rowDest, colDest)
-                && cheminEstDegage(tablePieces[row][col], rowDest, colDest)
-                && piecePeutManger(tablePieces[row][col], rowDest, colDest)
-                && tablePieces[row][col].getCouleur().equals(couleur);
+        return tablePieces[mouv.getRow()][mouv.getCol()].estDeplacementValide(mouv.getRowDest(), mouv.getColDest())
+                && cheminEstDegage(tablePieces[mouv.getRow()][mouv.getCol()], mouv.getRowDest(), mouv.getColDest())
+                && piecePeutManger(tablePieces[mouv.getRow()][mouv.getCol()], mouv.getRowDest(), mouv.getColDest())
+                && tablePieces[mouv.getRow()][mouv.getCol()].getCouleur().equals(couleur);
     }
 
     public void remplacerPionParDame(Piece piece) {
@@ -320,5 +294,16 @@ public class Table {
                 tablePieces[piece.getRow()][piece.getCol()] = new Dame(piece.getCouleur(), piece.getRow(), piece.getCol());
             }
         }
+    }
+
+    public boolean estEchecEtMath(Couleur couleur) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (tablePieces[i][j] instanceof Roi && tablePieces[i][j].getCouleur().equals(couleur)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

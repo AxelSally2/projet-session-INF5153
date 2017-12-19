@@ -18,6 +18,8 @@ package fichier;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -29,8 +31,8 @@ public class ChargerFichier {
 
     private File fichier;
 
-    public ChargerFichier() {
-        fichier = new File("");
+    public ChargerFichier(String nomFichier) {
+        fichier = new File(nomFichier);
 
     }
 
@@ -47,5 +49,17 @@ public class ChargerFichier {
         Scanner scan = new Scanner(fichier);
         scan.useDelimiter("\\Z");
         return scan.next();
+    }
+    
+    public String contenuFichierPredefinie() {
+        String resultat = "";
+        try {
+            Scanner scan = new Scanner(fichier);
+            scan.useDelimiter("\\Z");
+            resultat = scan.next();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ChargerFichier.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return resultat;
     }
 }

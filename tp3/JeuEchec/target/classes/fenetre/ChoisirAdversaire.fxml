@@ -14,6 +14,5 @@
         <Button layoutX="203.0" layoutY="266.0" mnemonicParsing="false" onAction="#buttonJoueurIAAvance" text="Joueur Artificiel Avancé" />
         <Button layoutX="227.0" layoutY="329.0" mnemonicParsing="false" onAction="#buttonRetourMenu" text="Retour au menu" />
         <Label fx:id="labelServeur" layoutX="155.0" layoutY="164.0" prefHeight="21.0" prefWidth="290.0" />
-      <Button layoutX="416.0" layoutY="133.0" mnemonicParsing="false" onAction="#buttonRafraichir" text="Rafraichir" />
     </children>
 </AnchorPane>

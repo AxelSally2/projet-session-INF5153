@@ -69,16 +69,11 @@ public abstract class IA implements Joueur {
         while (!(table.estValide(mouv, couleur))) {
             genereUnMouvement(table, mouv, couleur);
         }
-        mouv.mouvementPiece(table);
+        if (!table.estEchecEtMath(Couleur.BLANC) && !table.estEchecEtMath(Couleur.NOIR)) {
+            mouv.mouvementPiece(table);
+        }
     }
 
     @Override
     public abstract boolean effectueMouvement(Table table, Mouvement mouv, Couleur color);
-
-//    @Override
-//    public boolean effectueMouvement(Table table, int row, int col, int rowDest, int colDest, Mouvement mouv) {
-//        return false;
-//    }
-//    @Override
-//    public void effectueMouvement(Table table, int row, int col, int rowDest, int colDest, Mouvement mouv, Couleur couleur){}
 }

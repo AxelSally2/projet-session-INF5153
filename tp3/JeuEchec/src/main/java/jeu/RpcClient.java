@@ -15,12 +15,10 @@
  */
 package jeu;
 
-import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
 import org.apache.xmlrpc.XmlRpcClient;
-import org.apache.xmlrpc.XmlRpcException;
 
 public class RpcClient {
 
@@ -86,27 +84,40 @@ public class RpcClient {
 
     }
 
-    public void setTourAJouer() {
+    public void setJoueurAJouer() {
         try {
             XmlRpcClient server = new XmlRpcClient("localhost", HTTP_PORT_NUMBER);
             Vector params = new Vector();
-            server.execute("services.setTourAJouer", params);
+            server.execute("services.setJoueurAJouer", params);
         } catch (Exception exception) {
             System.err.println(exception);
         }
     }
-
-    public int getTourAJouer() {
-        int count = 0;
+    
+    public int getJoueurAJouer() {
+        int joueurAjouer = 0;
         try {
             XmlRpcClient server = new XmlRpcClient("localhost", HTTP_PORT_NUMBER);
             Vector params = new Vector();
-            Object result = server.execute("services.getTourAJouer", params);
-            count = (int) result;
-        } catch (IOException | XmlRpcException exception) {
+            Object result = server.execute("services.getJoueurAJouer", params);
+            joueurAjouer = (int) result;
+        } catch (Exception exception) {
             System.err.println(exception);
-            return 0;
         }
-        return count;
+        return joueurAjouer;
+    }
+    
+    public boolean serveurEnLigne() {
+        boolean enLigne = false;
+        try {
+            XmlRpcClient server = new XmlRpcClient("localhost", HTTP_PORT_NUMBER);
+            Vector params = new Vector();
+            Object result = server.execute("services.serveurEnLigne", params);
+            enLigne = (boolean) result;
+        } catch (Exception exception) {
+            System.err.println(exception);
+            return enLigne;
+        }
+        return enLigne;
     }
 }

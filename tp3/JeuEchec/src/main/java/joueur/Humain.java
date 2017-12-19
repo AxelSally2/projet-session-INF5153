@@ -40,7 +40,7 @@ public class Humain implements Joueur {
 
     @Override
     public boolean effectueMouvement(Table table, Mouvement mouv, Couleur couleur) {
-        if (table.estValide(mouv, couleur)) {
+        if (table.estValide(mouv, couleur) && !table.estEchecEtMath(Couleur.BLANC) && !table.estEchecEtMath(Couleur.NOIR)) {
             mouv.mouvementPiece(table);
             return true;
             

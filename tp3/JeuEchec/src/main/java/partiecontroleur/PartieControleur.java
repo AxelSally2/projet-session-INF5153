@@ -15,6 +15,7 @@
  */
 package partiecontroleur;
 
+import fichier.ConvertirDonnees;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,14 +33,18 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.scene.control.Label;
 import jeu.RpcClient;
+import jeu.SingletonPartie;
 
 /**
  * FXML Controller class
  */
 public class PartieControleur implements Initializable {
 
-    private final Singleton partie = Singleton.getInstance();
+    private final SingletonPartie partie = SingletonPartie.getInstance();
+
 
     RpcClient client = new RpcClient();
 
@@ -51,8 +56,20 @@ public class PartieControleur implements Initializable {
         if (ChoisirAdversaireControleur.joueurChoisie == 1) {
             return client.getColor("noir");
         }
-        return false;
+        return true;
     }
+
+    @FXML
+    public Button buttonEnregistrer;
+
+    @FXML
+    public Label labelGagnant;
+
+    @FXML
+    public Button buttonVisualiser;
+
+    @FXML
+    public Label labelTour;
 
     @FXML
     private Button case00, case01, case02, case03, case04, case05, case06, case07,
@@ -79,331 +96,338 @@ public class PartieControleur implements Initializable {
         return table;
     }
 
+    private void caseAction(int row, int col) {
+        partie.getFacade().deplacerPiece(row, col, table(), idJoueur);
+        labelGagnant.setText(partie.getFacade().msgVainceur(idJoueur));
+        buttonVisualiser.setDisable(!partie.getFacade().estEchecEtMath());
+        partie.getFacade().remplacerMeilleursTemps();
+    }
+
     @FXML
     private void case00Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(0, 0, table(), idJoueur);
+        caseAction(0, 0);
     }
 
     @FXML
     private void case01Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(0, 1, table(), idJoueur);
+        caseAction(0, 1);
     }
 
     @FXML
     private void case02Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(0, 2, table(), idJoueur);
+        caseAction(0, 2);
     }
 
     @FXML
     private void case03Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(0, 3, table(), idJoueur);
+        caseAction(0, 3);
     }
 
     @FXML
     private void case04Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(0, 4, table(), idJoueur);
+        caseAction(0, 4);
     }
 
     @FXML
     private void case05Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(0, 5, table(), idJoueur);
+        caseAction(0, 5);
     }
 
     @FXML
     private void case06Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(0, 6, table(), idJoueur);
+        caseAction(0, 6);
     }
 
     @FXML
     private void case07Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(0, 7, table(), idJoueur);
+        caseAction(0, 7);
     }
 
     @FXML
     private void case10Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(1, 0, table(), idJoueur);
+        caseAction(1, 0);
     }
 
     @FXML
     private void case11Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(1, 1, table(), idJoueur);
+        caseAction(1, 1);
     }
 
     @FXML
     private void case12Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(1, 2, table(), idJoueur);
+        caseAction(1, 2);
     }
 
     @FXML
     private void case13Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(1, 3, table(), idJoueur);
+        caseAction(1, 3);
     }
 
     @FXML
     private void case14Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(1, 4, table(), idJoueur);
+        caseAction(1, 4);
     }
 
     @FXML
     private void case15Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(1, 5, table(), idJoueur);
+        caseAction(1, 5);
     }
 
     @FXML
     private void case16Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(1, 6, table(), idJoueur);
+        caseAction(1, 6);
     }
 
     @FXML
     private void case17Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(1, 7, table(), idJoueur);
+        caseAction(1, 7);
     }
 
     @FXML
     private void case20Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(2, 0, table(), idJoueur);
+        caseAction(2, 0);
     }
 
     @FXML
     private void case21Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(2, 1, table(), idJoueur);
+        caseAction(2, 1);
     }
 
     @FXML
     private void case22Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(2, 2, table(), idJoueur);
+        caseAction(2, 2);
     }
 
     @FXML
     private void case23Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(2, 3, table(), idJoueur);
+        caseAction(2, 3);
     }
 
     @FXML
     private void case24Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(2, 4, table(), idJoueur);
+        caseAction(2, 4);
     }
 
     @FXML
     private void case25Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(2, 5, table(), idJoueur);
+        caseAction(2, 5);
     }
 
     @FXML
     private void case26Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(2, 6, table(), idJoueur);
+        caseAction(2, 6);
     }
 
     @FXML
     private void case27Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(2, 7, table(), idJoueur);
+        caseAction(2, 7);
     }
 
     @FXML
     private void case30Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(3, 0, table(), idJoueur);
+        caseAction(3, 0);
     }
 
     @FXML
     private void case31Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(3, 1, table(), idJoueur);
+        caseAction(3, 1);
     }
 
     @FXML
     private void case32Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(3, 2, table(), idJoueur);
+        caseAction(3, 2);
     }
 
     @FXML
     private void case33Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(3, 3, table(), idJoueur);
+        caseAction(3, 3);
     }
 
     @FXML
     private void case34Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(3, 4, table(), idJoueur);
+        caseAction(3, 4);
     }
 
     @FXML
     private void case35Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(3, 5, table(), idJoueur);
+        caseAction(3, 5);
     }
 
     @FXML
     private void case36Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(3, 6, table(), idJoueur);
+        caseAction(3, 6);
     }
 
     @FXML
     private void case37Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(3, 7, table(), idJoueur);
+        caseAction(3, 7);
     }
 
     @FXML
     private void case40Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(4, 0, table(), idJoueur);
+        caseAction(4, 0);
     }
 
     @FXML
     private void case41Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(4, 1, table(), idJoueur);
+        caseAction(4, 1);
     }
 
     @FXML
     private void case42Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(4, 2, table(), idJoueur);
+        caseAction(4, 2);
     }
 
     @FXML
     private void case43Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(4, 3, table(), idJoueur);
+        caseAction(4, 3);
     }
 
     @FXML
     private void case44Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(4, 4, table(), idJoueur);
+        caseAction(4, 4);
     }
 
     @FXML
     private void case45Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(4, 5, table(), idJoueur);
+        caseAction(4, 5);
     }
 
     @FXML
     private void case46Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(4, 6, table(), idJoueur);
+        caseAction(4, 6);
     }
 
     @FXML
     private void case47Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(4, 7, table(), idJoueur);
+        caseAction(4, 7);
     }
 
     @FXML
     private void case50Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(5, 0, table(), idJoueur);
+        caseAction(5, 0);
     }
 
     @FXML
     private void case51Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(5, 1, table(), idJoueur);
+        caseAction(5, 1);
     }
 
     @FXML
     private void case52Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(5, 2, table(), idJoueur);
+        caseAction(5, 2);
     }
 
     @FXML
     private void case53Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(5, 3, table(), idJoueur);
+        caseAction(5, 3);
     }
 
     @FXML
     private void case54Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(5, 4, table(), idJoueur);
+        caseAction(5, 4);
     }
 
     @FXML
     private void case55Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(5, 5, table(), idJoueur);
+        caseAction(5, 5);
     }
 
     @FXML
     private void case56Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(5, 6, table(), idJoueur);
+        caseAction(5, 6);
     }
 
     @FXML
     private void case57Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(5, 7, table(), idJoueur);
+        caseAction(5, 7);
     }
 
     @FXML
     private void case60Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(6, 0, table(), idJoueur);
+        caseAction(6, 0);
     }
 
     @FXML
     private void case61Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(6, 1, table(), idJoueur);
+        caseAction(6, 1);
     }
 
     @FXML
     private void case62Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(6, 2, table(), idJoueur);
+        caseAction(6, 2);
     }
 
     @FXML
     private void case63Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(6, 3, table(), idJoueur);
+        caseAction(6, 3);
     }
 
     @FXML
     private void case64Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(6, 4, table(), idJoueur);
+        caseAction(6, 4);
     }
 
     @FXML
     private void case65Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(6, 5, table(), idJoueur);
+        caseAction(6, 5);
     }
 
     @FXML
     private void case66Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(6, 6, table(), idJoueur);
+        caseAction(6, 6);
     }
 
     @FXML
     private void case67Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(6, 7, table(), idJoueur);
+        caseAction(6, 7);
     }
 
     @FXML
     private void case70Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(7, 0, table(), idJoueur);
+        caseAction(7, 0);
     }
 
     @FXML
     private void case71Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(7, 1, table(), idJoueur);
+        caseAction(7, 1);
     }
 
     @FXML
     private void case72Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(7, 2, table(), idJoueur);
+        caseAction(7, 2);
     }
 
     @FXML
     private void case73Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(7, 3, table(), idJoueur);
+        caseAction(7, 3);
     }
 
     @FXML
     private void case74Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(7, 4, table(), idJoueur);
+        caseAction(7, 4);
     }
 
     @FXML
     private void case75Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(7, 5, table(), idJoueur);
+        caseAction(7, 5);
     }
 
     @FXML
     private void case76Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(7, 6, table(), idJoueur);
+        caseAction(7, 6);
     }
 
     @FXML
     private void case77Action(ActionEvent event) throws IOException {
-        partie.deplacerPiece(7, 7, table(), idJoueur);
+        caseAction(7, 7);
     }
 
     @FXML
     private void buttonEnregistrerPartie(ActionEvent event) throws IOException {
-        //System.out.println(test + "\n");
-        EnregistrerFichier fichier = new EnregistrerFichier();
-        fichier.sauvegarderDansFichier(partie.getPartie().getTable().tableToXML(), "XML files (*.xml)", "*.xml");
+        EnregistrerFichier fichier = new EnregistrerFichier("");
+        ConvertirDonnees conv = new ConvertirDonnees();
+        fichier.sauvegarderDansFichier(conv.objetToXML(partie.getFacade().getPartie().getTable().tablePieces()), "XML files (*.xml)", "*.xml");
 
     }
 
@@ -427,27 +451,28 @@ public class PartieControleur implements Initializable {
         panePartie.getChildren().setAll(pane);
     }
 
+    private void testt() {
+        labelTour.setText(partie.getFacade().msgJoueurAJouer(idJoueur));
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        partie.creerPartie();
-        try {
-            partie.initialiserPartie();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(PartieControleur.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        partie.afficherPieces(table());
-
+        buttonVisualiser.setDisable(true);
+        partie.getFacade().creerInitAffichePartie(table());
         if (ChoisirAdversaireControleur.joueurChoisie == 1) {
+            buttonEnregistrer.setVisible(false);
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
-                    partie.actualiserPartieContreHumain(table(), idJoueur);
+                    Platform.runLater(() -> {
+                        partie.getFacade().actualiserPartieContreHumain(table(), idJoueur);
+                        labelTour.setText(partie.getFacade().msgJoueurAJouer(idJoueur));
+                    });
                 }
-            }, 0, 2500);
+            }, 100, 1000);
         }
     }
-
 }

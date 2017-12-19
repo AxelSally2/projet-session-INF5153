@@ -29,15 +29,15 @@ public class EnregistrerFichier {
 
     private File fichier;
 
-    public EnregistrerFichier() {
-        fichier = new File("");
+    public EnregistrerFichier(String nomFichier) {
+        fichier = new File(nomFichier);
 
     }
 
     /**
      * Permet à l'utilisateur de choisir l'emplacement de l'enregistrement du
      * fichier.
-     * 
+     *
      * @param nomExtension Le nom de l'extension du fichier
      * @param extension l'extension du fichier
      * @return Le fichier
@@ -59,14 +59,22 @@ public class EnregistrerFichier {
     public void sauvegarderDansFichier(String contenu, String nomExtension, String extension) {
         associerPathAuFichier(nomExtension, extension);
         if (fichier != null) {
-            try {
-                FileWriter fileWriter;
-                fileWriter = new FileWriter(fichier);
-                fileWriter.write(contenu);
-                fileWriter.close();
-            } catch (IOException e) {
-                System.out.println(e);
-            }
+            ecrireDansFichier(contenu);
+        }
+    }
+
+    public void sauvegarderDansFichier(String contenu) {
+        ecrireDansFichier(contenu);
+    }
+
+    private void ecrireDansFichier(String contenu) {
+        try {
+            FileWriter fileWriter;
+            fileWriter = new FileWriter(fichier);
+            fileWriter.write(contenu);
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e);
         }
     }
 

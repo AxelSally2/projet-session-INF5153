@@ -6,11 +6,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" fx:id="paneMeilleursTemps" prefHeight="720.0" prefWidth="1280.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="tempscontroleur.MeilleursTempsControleur">
+<AnchorPane id="AnchorPane" fx:id="paneMeilleursTemps" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tempscontroleur.MeilleursTempsControleur">
     <children>
         <Button layoutX="236.0" layoutY="335.0" mnemonicParsing="false" onAction="#buttonRetourMenu" text="Retour au Menu" />
         <Label layoutX="43.0" layoutY="112.0" text="Meilleur temps d'un joueur artificiel débutant vaincu :" />
         <Label layoutX="43.0" layoutY="190.0" text="Meilleur temps d'un joueur artificiel avancé vaincu :" />
+      <Label fx:id="meilleurTempsDebutant" layoutX="406.0" layoutY="112.0" prefHeight="21.0" prefWidth="143.0" />
+      <Label fx:id="meilleurTempsAvance" layoutX="397.0" layoutY="190.0" prefHeight="21.0" prefWidth="143.0" />
     </children>
 </AnchorPane>

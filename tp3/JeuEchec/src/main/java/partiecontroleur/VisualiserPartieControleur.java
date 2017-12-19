@@ -15,6 +15,7 @@
  */
 package partiecontroleur;
 
+import jeu.FacadePartie;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +25,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import jeu.SingletonPartie;
 
 /**
  * FXML Controller class
@@ -34,9 +36,8 @@ public class VisualiserPartieControleur implements Initializable {
 
     @FXML
     AnchorPane paneVisualiserPartie;
-
-    //private final ModelPartieControleur mod = PartieControleur.mod;
-    private final Singleton partie = Singleton.getInstance();
+    
+    private final SingletonPartie partie = SingletonPartie.getInstance();
 
     @FXML
     private Button case00, case01, case02, case03, case04, case05, case06, case07,
@@ -62,16 +63,16 @@ public class VisualiserPartieControleur implements Initializable {
 
     @FXML
     private void buttonNextMouv(ActionEvent event) throws IOException {
-        pos = partie.getPartie().getMouvement().mouvementSuivant(pos);
-        partie.getPartie().setTable(partie.getPartie().getMouvement().getTable());
-        partie.afficherPieces(table());
+        pos = partie.getFacade().getPartie().getMouvement().mouvementSuivant(pos);
+        partie.getFacade().getPartie().setTable(partie.getFacade().getPartie().getMouvement().getTable());
+        partie.getFacade().afficherPieces(table());
     }
 
     @FXML
     private void buttonPreviousMouv(ActionEvent event) throws IOException {
-        pos = partie.getPartie().getMouvement().mouvementPrecedent(pos);
-        partie.getPartie().setTable(partie.getPartie().getMouvement().getTable());
-        partie.afficherPieces(table());
+        pos = partie.getFacade().getPartie().getMouvement().mouvementPrecedent(pos);
+        partie.getFacade().getPartie().setTable(partie.getFacade().getPartie().getMouvement().getTable());
+        partie.getFacade().afficherPieces(table());
     }
 
     @FXML
@@ -85,8 +86,8 @@ public class VisualiserPartieControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        partie.getPartie().getTable().initialiserNouvelleTable();
-        partie.afficherPieces(table());
+        partie.getFacade().getPartie().getTable().initialiserNouvelleTable();
+        partie.getFacade().afficherPieces(table());
     }
 
 }

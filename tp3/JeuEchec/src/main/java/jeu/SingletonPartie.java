@@ -13,25 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package joueur;
-
-import jeu.Couleur;
-import jeu.Mouvement;
-import jeu.Table;
+package jeu;
 
 /**
  *
  * @author jmppr
  */
-public class IADebutant extends IA {
+public class SingletonPartie {
 
-    public IADebutant() {
-        super();
+    static private SingletonPartie instance = null;
+
+    private final FacadePartie partie;
+
+    private SingletonPartie() {
+        partie = new FacadePartie();
     }
 
-    @Override
-    public boolean effectueMouvement(Table table, Mouvement mouv, Couleur couleur) {
-        effectueMouvementAleatoire(table, mouv, couleur);
-        return true;
+    static public SingletonPartie getInstance() {
+        if (instance == null) {
+            instance = new SingletonPartie();
+        }
+        return instance;
+    }
+
+    public FacadePartie getFacade() {
+        return partie;
     }
 }

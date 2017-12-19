@@ -15,6 +15,8 @@
  */
 package tempscontroleur;
 
+import fichier.ChargerFichier;
+import fichier.ConvertirDonnees;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,7 +24,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import jeu.Temps;
 
 /**
  * FXML Controller class
@@ -31,6 +35,22 @@ public class MeilleursTempsControleur implements Initializable {
 
     @FXML
     AnchorPane paneMeilleursTemps;
+
+    @FXML
+    Label meilleurTempsDebutant;
+
+    @FXML
+    Label meilleurTempsAvance;
+
+    private void chargerMeilleursTemps() {
+        ConvertirDonnees conv = new ConvertirDonnees();
+        ChargerFichier fichier = new ChargerFichier("temps.xml");
+        Temps meilleursTemps = (Temps) conv.XMLToObjet(fichier.contenuFichierPredefinie());
+        double tempsDebutant = meilleursTemps.getTempsIADebutant() / 1000.0;
+        double tempsAvance = meilleursTemps.getTempsIAAvance() / 1000.0;
+        meilleurTempsDebutant.setText(String.valueOf(String.format("%.2f", tempsDebutant) + " Secondes"));
+        meilleurTempsAvance.setText(String.valueOf(String.format("%.2f", tempsAvance) + " Secondes"));
+    }
 
     @FXML
     private void buttonRetourMenu(ActionEvent event) throws IOException {
@@ -43,7 +63,7 @@ public class MeilleursTempsControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        chargerMeilleursTemps();
     }
 
 }

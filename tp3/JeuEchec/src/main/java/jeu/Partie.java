@@ -15,22 +15,24 @@
  */
 package jeu;
 
+import java.io.FileNotFoundException;
 import java.util.Hashtable;
 import java.util.Map;
 import joueur.Joueur;
+import menucontroleur.MenuPrincipalControleur;
 
 /**
  *
  * @author jmppr
  */
-public class Jeu {
+public class Partie {
 
     private Table table;
     private Joueur joueur1;
     private Joueur joueur2;
     private Mouvement mouv;
 
-    public Jeu(Table table, Joueur joueur1, Joueur joueur2, Mouvement mouv) {
+    public Partie(Table table, Joueur joueur1, Joueur joueur2, Mouvement mouv) {
         this.table = table;
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
@@ -67,24 +69,32 @@ public class Jeu {
         RpcClient client = new RpcClient();
         int idJoueurAjouer = (idJoueur) ? 1 : 2;
         Couleur couleur = (idJoueur) ? Couleur.BLANC : Couleur.NOIR;
-        if (client.getTourAJouer() == idJoueurAjouer) {
+        if (client.getJoueurAJouer() == idJoueurAjouer) {
             if (joueur1.effectueMouvement(table, mouv, couleur)) {
                 client.postCoord(mouv, idJoueur);
-                client.setTourAJouer();
+                client.setJoueurAJouer();
             }
         }
     }
 
-    public boolean getMouvementAdversaireHumain(boolean test) {
-        Couleur couleur = (!test) ? Couleur.BLANC : Couleur.NOIR;
+    public boolean getMouvementAdversaireHumain(boolean idJoueur) {
+        Couleur couleur = (!idJoueur) ? Couleur.BLANC : Couleur.NOIR;
         RpcClient client = new RpcClient();
         Map coord = new Hashtable();
-        coord = client.getCoord(!test, mouv);
+        coord = client.getCoord(!idJoueur, mouv);
         if (!coord.isEmpty()) {
             joueur2.effectueMouvement(table, mouv, couleur);
-            client.clearMap(!test);
+            client.clearMap(!idJoueur);
             return true;
         }
         return false;
+    }
+
+    public void initialiserPartie() throws FileNotFoundException {
+        if (MenuPrincipalControleur.partieChoisie == 1) {
+            table.initialiserNouvelleTable();
+        } else if (MenuPrincipalControleur.partieChoisie == 2) {
+            table.initialiserTableSauvegarder();
+        }
     }
 }

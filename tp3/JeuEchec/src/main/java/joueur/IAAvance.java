@@ -116,7 +116,7 @@ public class IAAvance extends IA {
         for (int i = 0; i < piecesJoueur.size(); i++) {
             for (int j = 0; j < piecesIA.size(); j++) {
                 mouv.setMouvement(piecesIA.get(j).getRow(), piecesIA.get(j).getCol(), piecesJoueur.get(i).getRow(), piecesJoueur.get(i).getCol());
-                if (table.estValide(mouv, couleur)) {
+                if (table.estValide(mouv, couleur) && !table.estEchecEtMath(Couleur.BLANC) && !table.estEchecEtMath(Couleur.NOIR)) {
                     mouv.mouvementPiece(table);
                     i = piecesJoueur.size();
                     j = piecesIA.size();
@@ -127,7 +127,7 @@ public class IAAvance extends IA {
         if (!pieceKill) {
             effectueMouvementAleatoire(table, mouv, couleur);
         }
-        return false;
+        return true;
     }
 
 }
