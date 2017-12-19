@@ -28,7 +28,6 @@ import piece.Piece;
 public abstract class IA implements Joueur {
 
     public IA() {
-        super();
     }
 
     private Piece generePiece(Table table, Couleur couleur) {

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package partiecontroleur;
+package controleur;
 
-import fichier.ConvertirDonnees;
+import donnee.ConvertirDonnees;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,13 +25,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
-import menucontroleur.MenuPrincipalControleur;
-import menucontroleur.ChoisirAdversaireControleur;
 import fichier.EnregistrerFichier;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import jeu.RpcClient;
 import jeu.SingletonPartie;
 
@@ -41,7 +40,6 @@ import jeu.SingletonPartie;
 public class PartieControleur implements Initializable {
 
     private final SingletonPartie partie = SingletonPartie.getInstance();
-
 
     RpcClient client = new RpcClient();
 
@@ -57,7 +55,13 @@ public class PartieControleur implements Initializable {
     }
 
     @FXML
-    public Button buttonEnregistrer;
+    public TextField textNom;
+
+    @FXML
+    public Button buttonEnregistrerP;
+
+    @FXML
+    public Button buttonEnregistrerT;
 
     @FXML
     public Label labelGagnant;
@@ -67,6 +71,12 @@ public class PartieControleur implements Initializable {
 
     @FXML
     public Label labelTour;
+
+    @FXML
+    public Label msgFelicitation;
+
+    @FXML
+    public Label msgNom;
 
     @FXML
     private Button case00, case01, case02, case03, case04, case05, case06, case07,
@@ -94,10 +104,10 @@ public class PartieControleur implements Initializable {
     }
 
     private void caseAction(int row, int col) {
-        partie.getFacade().deplacerPiece(row, col, table(), idJoueur);
+        partie.getFacade().deplacerPiece(row, col, table(), idJoueur, ChoisirAdversaireControleur.joueurChoisie);
         labelGagnant.setText(partie.getFacade().msgVainceur(idJoueur));
         buttonVisualiser.setDisable(!partie.getFacade().estEchecEtMath());
-        partie.getFacade().remplacerMeilleursTemps();
+        partie.getFacade().remplacerMeilleurTemps(textNom, msgFelicitation, msgNom, buttonEnregistrerT, ChoisirAdversaireControleur.joueurChoisie);
     }
 
     @FXML
@@ -421,6 +431,15 @@ public class PartieControleur implements Initializable {
     }
 
     @FXML
+    private void buttonEnregistrerTemps(ActionEvent event) throws IOException {
+        partie.getFacade().sauvegarderMeilleurTemps(textNom.getText(), ChoisirAdversaireControleur.joueurChoisie);
+        msgFelicitation.setVisible(false);
+        msgNom.setVisible(false);
+        textNom.setVisible(false);
+        buttonEnregistrerT.setVisible(false);
+    }
+
+    @FXML
     private void buttonEnregistrerPartie(ActionEvent event) throws IOException {
         EnregistrerFichier fichier = new EnregistrerFichier("");
         ConvertirDonnees conv = new ConvertirDonnees();
@@ -448,8 +467,12 @@ public class PartieControleur implements Initializable {
         panePartie.getChildren().setAll(pane);
     }
 
-    private void testt() {
-        labelTour.setText(partie.getFacade().msgJoueurAJouer(idJoueur));
+    private void setControls() {
+        msgFelicitation.setVisible(false);
+        msgNom.setVisible(false);
+        textNom.setVisible(false);
+        buttonEnregistrerT.setVisible(false);
+        buttonVisualiser.setDisable(true);
     }
 
     /**
@@ -457,10 +480,11 @@ public class PartieControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        buttonVisualiser.setDisable(true);
-        partie.getFacade().creerInitAffichePartie(table());
+        setControls();
+        partie.getFacade().creerInitAffichePartie(table(),
+                MenuPrincipalControleur.partieChoisie, ChoisirAdversaireControleur.joueurChoisie);
         if (ChoisirAdversaireControleur.joueurChoisie == 1) {
-            buttonEnregistrer.setVisible(false);
+            buttonEnregistrerP.setVisible(false);
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {

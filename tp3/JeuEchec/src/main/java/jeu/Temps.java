@@ -16,7 +16,7 @@
 package jeu;
 
 import fichier.ChargerFichier;
-import fichier.ConvertirDonnees;
+import donnee.ConvertirDonnees;
 
 /**
  *
@@ -28,6 +28,8 @@ public class Temps {
     private long tempsFin;
     private long tempsIADebutant;
     private long tempsIAAvance;
+    private String nomIADebutant;
+    private String nomIAAvance;
 
     public Temps() {
         chargerTemps();
@@ -38,7 +40,7 @@ public class Temps {
     }
 
     public long getTempsFin() {
-        return tempsDepart;
+        return tempsFin;
     }
 
     public long getTempsIADebutant() {
@@ -47,6 +49,22 @@ public class Temps {
 
     public long getTempsIAAvance() {
         return tempsIAAvance;
+    }
+
+    public String getNomIADebutant() {
+        return nomIADebutant;
+    }
+
+    public String getNomIAAvance() {
+        return nomIAAvance;
+    }
+
+    public void setNom(int IADifficulte, String nom) {
+        if (IADifficulte == 2) {
+            nomIADebutant = nom;
+        } else if (IADifficulte == 3) {
+            nomIAAvance = nom;
+        }
     }
 
     public void setTempsDepart() {
@@ -65,6 +83,16 @@ public class Temps {
         }
     }
 
+    public boolean estUnMeilleurTemps(int IADifficulte) {
+        boolean resultat = false;
+        if (IADifficulte == 2) {
+            resultat = (tempsPartie() < tempsIADebutant);
+        } else if (IADifficulte == 3) {
+            resultat = (tempsPartie() < tempsIAAvance);
+        }
+        return resultat;
+    }
+
     private long tempsPartie() {
         return tempsFin - tempsDepart;
     }
@@ -75,5 +103,7 @@ public class Temps {
         Temps meilleursTemps = (Temps) conv.XMLToObjet(charger.contenuFichierPredefinie());
         tempsIADebutant = meilleursTemps.getTempsIADebutant();
         tempsIAAvance = meilleursTemps.getTempsIAAvance();
+        nomIADebutant = meilleursTemps.getNomIADebutant();
+        nomIAAvance = meilleursTemps.getNomIAAvance();
     }
 }

@@ -16,7 +16,7 @@
 package jeu;
 
 import fichier.ChargerFichier;
-import fichier.ConvertirDonnees;
+import donnee.ConvertirDonnees;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import piece.*;

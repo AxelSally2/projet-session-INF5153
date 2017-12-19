@@ -19,7 +19,6 @@ import java.io.FileNotFoundException;
 import java.util.Hashtable;
 import java.util.Map;
 import joueur.Joueur;
-import menucontroleur.MenuPrincipalControleur;
 
 /**
  *
@@ -90,10 +89,10 @@ public class Partie {
         return false;
     }
 
-    public void initialiserPartie() throws FileNotFoundException {
-        if (MenuPrincipalControleur.partieChoisie == 1) {
+    public void initialiserPartie(int menuChoisie) throws FileNotFoundException {
+        if (menuChoisie == 1) {
             table.initialiserNouvelleTable();
-        } else if (MenuPrincipalControleur.partieChoisie == 2) {
+        } else if (menuChoisie == 2) {
             table.initialiserTableSauvegarder();
         }
     }

@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package tempscontroleur;
+package controleur;
 
 import fichier.ChargerFichier;
-import fichier.ConvertirDonnees;
+import donnee.ConvertirDonnees;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,20 +37,16 @@ public class MeilleursTempsControleur implements Initializable {
     AnchorPane paneMeilleursTemps;
 
     @FXML
-    Label meilleurTempsDebutant;
+    private Label meilleurTempsDebutant;
 
     @FXML
-    Label meilleurTempsAvance;
+    private Label meilleurTempsAvance;
 
-    private void chargerMeilleursTemps() {
-        ConvertirDonnees conv = new ConvertirDonnees();
-        ChargerFichier fichier = new ChargerFichier("temps.xml");
-        Temps meilleursTemps = (Temps) conv.XMLToObjet(fichier.contenuFichierPredefinie());
-        double tempsDebutant = meilleursTemps.getTempsIADebutant() / 1000.0;
-        double tempsAvance = meilleursTemps.getTempsIAAvance() / 1000.0;
-        meilleurTempsDebutant.setText(String.valueOf(String.format("%.2f", tempsDebutant) + " Secondes"));
-        meilleurTempsAvance.setText(String.valueOf(String.format("%.2f", tempsAvance) + " Secondes"));
-    }
+    @FXML
+    private Label nomIADebutant;
+
+    @FXML
+    private Label nomIAAvance;
 
     @FXML
     private void buttonRetourMenu(ActionEvent event) throws IOException {
@@ -63,7 +59,15 @@ public class MeilleursTempsControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        chargerMeilleursTemps();
+        ConvertirDonnees conv = new ConvertirDonnees();
+        ChargerFichier fichier = new ChargerFichier("temps.xml");
+        Temps temps = (Temps) conv.XMLToObjet(fichier.contenuFichierPredefinie());
+        double tempsDebutant = temps.getTempsIADebutant() / 1000.0;
+        double tempsAvance = temps.getTempsIAAvance() / 1000.0;
+        meilleurTempsDebutant.setText(String.valueOf(String.format("%.2f", tempsDebutant) + " Secondes"));
+        meilleurTempsAvance.setText(String.valueOf(String.format("%.2f", tempsAvance) + " Secondes"));
+        nomIADebutant.setText(temps.getNomIADebutant());
+        nomIAAvance.setText(temps.getNomIAAvance());
     }
 
 }

@@ -107,6 +107,8 @@ public class IAAvance extends IA {
      *
      * @param table La table de jeu contenant tous les pieces
      * @param mouv Pour effectuer un mouvement sur la table
+     * @param couleur La couleur de l'ia
+     * @return Retourne si le mouvement a été effectué
      */
     @Override
     public boolean effectueMouvement(Table table, Mouvement mouv, Couleur couleur) {

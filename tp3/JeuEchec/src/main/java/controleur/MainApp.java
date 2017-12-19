@@ -1,4 +1,4 @@
-package menucontroleur;
+package controleur;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;

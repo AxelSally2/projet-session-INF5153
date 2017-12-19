@@ -15,7 +15,7 @@
  */
 package jeu;
 
-import fichier.ConvertirDonnees;
+import donnee.ConvertirDonnees;
 import fichier.EnregistrerFichier;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
@@ -24,7 +24,8 @@ import javafx.scene.control.Button;
 import joueur.Humain;
 import joueur.IAAvance;
 import joueur.IADebutant;
-import menucontroleur.ChoisirAdversaireControleur;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import piece.*;
 
 /**
@@ -48,12 +49,12 @@ public class FacadePartie {
         return partie;
     }
 
-    private void creerPartie() {
-        if (ChoisirAdversaireControleur.joueurChoisie == 1) {
+    private void creerPartie(int adversaireChoisie) {
+        if (adversaireChoisie == 1) {
             partie = new Partie(new Table(), new Humain(), new Humain(), new Mouvement());
-        } else if (ChoisirAdversaireControleur.joueurChoisie == 2) {
+        } else if (adversaireChoisie == 2) {
             partie = new Partie(new Table(), new Humain(), new IADebutant(), new Mouvement());
-        } else if (ChoisirAdversaireControleur.joueurChoisie == 3) {
+        } else if (adversaireChoisie == 3) {
             partie = new Partie(new Table(), new Humain(), new IAAvance(), new Mouvement());
         } else {
             partie = new Partie(new Table(), new Humain(), new IADebutant(), new Mouvement());
@@ -94,7 +95,7 @@ public class FacadePartie {
         }
     }
 
-    public void deplacerPiece(int rowDest, int colDest, Button[][] table, boolean idJoueur) {
+    public void deplacerPiece(int rowDest, int colDest, Button[][] table, boolean idJoueur, int adversaireChoisie) {
         cpt++;
         if (cpt == 1) {
             if (partie.getTable().getPiece(rowDest, colDest) == null) {
@@ -105,14 +106,14 @@ public class FacadePartie {
             }
         } else if (cpt == 2) {
             partie.getMouvement().setMouvement(row, col, rowDest, colDest);
-            jouerUnTour(idJoueur);
+            jouerUnTour(idJoueur, adversaireChoisie);
             afficherPieces(table);
             cpt = 0;
         }
     }
 
-    private void jouerUnTour(boolean idJoueur) {
-        if (ChoisirAdversaireControleur.joueurChoisie == 1) {
+    private void jouerUnTour(boolean idJoueur, int adversaireChoisie) {
+        if (adversaireChoisie == 1) {
             partie.jouerMouvementContreHumain(idJoueur);
         } else {
             partie.jouerUnTourContreIA();
@@ -151,21 +152,31 @@ public class FacadePartie {
         }
     }
 
-    public void remplacerMeilleursTemps() {
-        if (partie.getTable().estEchecEtMath(Couleur.NOIR)) {
-            temps.setTempsFin();
-            temps.setMeilleurTemps(ChoisirAdversaireControleur.joueurChoisie);
-            ConvertirDonnees conv = new ConvertirDonnees();
-            EnregistrerFichier fichier = new EnregistrerFichier("temps.xml");
-            fichier.sauvegarderDansFichier(conv.objetToXML(temps));
+    public void remplacerMeilleurTemps(TextField textNom, Label msgFelicitation, Label msgNom, Button saveTemps, int adversaireChoisie) {
+        temps.setTempsFin();
+        if (partie.getTable().estEchecEtMath(Couleur.NOIR)
+                && temps.estUnMeilleurTemps(adversaireChoisie)) {
+            msgFelicitation.setVisible(true);
+            msgNom.setVisible(true);
+            textNom.setVisible(true);
+            saveTemps.setVisible(true);
+            temps.setMeilleurTemps(adversaireChoisie);
         }
     }
 
-    public void creerInitAffichePartie(Button[][] table) {
+    public void sauvegarderMeilleurTemps(String textNom, int adversaireChoisie) {
+        temps.setNom(adversaireChoisie, (textNom.isEmpty()) ? "Anonyme" : textNom);
+        ConvertirDonnees conv = new ConvertirDonnees();
+        EnregistrerFichier fichier = new EnregistrerFichier("temps.xml");
+        fichier.sauvegarderDansFichier(conv.objetToXML(temps));
+    }
+
+    public void creerInitAffichePartie(Button[][] table, int menuChoisie, int adversaireChoisie) {
+        cpt = 0;
         temps.setTempsDepart();
-        creerPartie();
+        creerPartie(adversaireChoisie);
         try {
-            partie.initialiserPartie();
+            partie.initialiserPartie(menuChoisie);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FacadePartie.class.getName()).log(Level.SEVERE, null, ex);
         }

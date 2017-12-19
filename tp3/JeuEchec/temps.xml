@@ -1,6 +1,8 @@
 <jeu.Temps>
-  <tempsDepart>1513681593418</tempsDepart>
-  <tempsFin>1513681598510</tempsFin>
-  <tempsIADebutant>5092</tempsIADebutant>
-  <tempsIAAvance>171552</tempsIAAvance>
+  <tempsDepart>1513725886903</tempsDepart>
+  <tempsFin>1513725891449</tempsFin>
+  <tempsIADebutant>4546</tempsIADebutant>
+  <tempsIAAvance>182861</tempsIAAvance>
+  <nomIADebutant>Jean Privat</nomIADebutant>
+  <nomIAAvance>Jacques Berger</nomIAAvance>
 </jeu.Temps>

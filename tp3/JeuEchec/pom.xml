@@ -11,7 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>menucontroleur.MainApp</mainClass>
+        <mainClass>controleur.MainApp</mainClass>
     </properties>
 
     <organization>
