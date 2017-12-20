@@ -29,7 +29,6 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import jeu.RpcClient;
 import jeu.SingletonPartie;
 
 /**
