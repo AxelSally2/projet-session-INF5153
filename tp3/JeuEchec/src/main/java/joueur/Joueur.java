@@ -16,7 +16,7 @@
 package joueur;
 
 import jeu.Couleur;
-import jeu.Mouvement;
+import mouvement.Mouvement;
 import jeu.Table;
 
 /**

@@ -62,16 +62,12 @@ public class VisualiserPartieControleur implements Initializable {
 
     @FXML
     private void buttonNextMouv(ActionEvent event) throws IOException {
-        pos = partie.getFacade().getPartie().getMouvement().getMouvHist().mouvementSuivant(pos);
-        partie.getFacade().getPartie().setTable(partie.getFacade().getPartie().getMouvement().getMouvHist().getTable());
-        partie.getFacade().afficherPieces(table());
+        pos = partie.getFacade().mouvementSuivant(pos, table());
     }
 
     @FXML
     private void buttonPreviousMouv(ActionEvent event) throws IOException {
-        pos = partie.getFacade().getPartie().getMouvement().getMouvHist().mouvementPrecedent(pos);
-        partie.getFacade().getPartie().setTable(partie.getFacade().getPartie().getMouvement().getMouvHist().getTable());
-        partie.getFacade().afficherPieces(table());
+        pos = partie.getFacade().mouvementPrecedent(pos, table());
     }
 
     @FXML
@@ -85,8 +81,7 @@ public class VisualiserPartieControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        partie.getFacade().getPartie().getTable().initialiserNouvelleTable();
-        partie.getFacade().afficherPieces(table());
+        partie.getFacade().initialiserVisualiserPartie(table());
     }
 
 }

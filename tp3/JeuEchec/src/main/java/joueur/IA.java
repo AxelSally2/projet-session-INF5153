@@ -17,7 +17,7 @@ package joueur;
 
 import java.util.ArrayList;
 import jeu.Couleur;
-import jeu.Mouvement;
+import mouvement.Mouvement;
 import jeu.Table;
 import piece.Piece;
 
@@ -50,7 +50,8 @@ public abstract class IA implements Joueur {
         ArrayList<Piece> listePieces = new ArrayList<>();
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                if (table.getPiece(row, col) != null && table.getPiece(row, col).getCouleur().equals(couleur)) {
+                if (table.getPiece(row, col) != null 
+                        && table.getPiece(row, col).getCouleur().equals(couleur)) {
                     listePieces.add(table.getPiece(row, col));
                 }
             }
@@ -65,7 +66,7 @@ public abstract class IA implements Joueur {
 
     protected void effectueMouvementAleatoire(Table table, Mouvement mouv, Couleur couleur) {
         genereUnMouvement(table, mouv, couleur);
-        while (!(table.estValide(mouv, couleur))) {
+        while (!(mouv.estValide(table, couleur))) {
             genereUnMouvement(table, mouv, couleur);
         }
         if (!table.estEchecEtMath(Couleur.BLANC) && !table.estEchecEtMath(Couleur.NOIR)) {

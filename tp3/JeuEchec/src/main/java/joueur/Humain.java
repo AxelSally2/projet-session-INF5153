@@ -16,7 +16,7 @@
 package joueur;
 
 import jeu.Couleur;
-import jeu.Mouvement;
+import mouvement.Mouvement;
 import jeu.Table;
 
 /**
@@ -40,7 +40,7 @@ public class Humain implements Joueur {
 
     @Override
     public boolean effectueMouvement(Table table, Mouvement mouv, Couleur couleur) {
-        if (table.estValide(mouv, couleur) && !table.estEchecEtMath(Couleur.BLANC) && !table.estEchecEtMath(Couleur.NOIR)) {
+        if (mouv.estValide(table, couleur) && !table.estEchecEtMath(Couleur.BLANC) && !table.estEchecEtMath(Couleur.NOIR)) {
             mouv.mouvementPiece(table);
             return true;
         }

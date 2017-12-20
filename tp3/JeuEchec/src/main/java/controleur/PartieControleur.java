@@ -15,7 +15,6 @@
  */
 package controleur;
 
-import donnee.ConvertirDonnees;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,7 +24,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
-import fichier.EnregistrerFichier;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
@@ -43,16 +41,7 @@ public class PartieControleur implements Initializable {
 
     private final Timer timer = new Timer();
 
-    private final int idJoueur = setIdJoueur();
-
-    private int setIdJoueur() {
-        RpcClient client = new RpcClient();
-        if (ChoisirAdversaireControleur.joueurChoisie != 1) {
-            return 0;
-        } else {
-            return client.getJoueurID();
-        }
-    }
+    private final int idJoueur = partie.getFacade().setIdJoueur();
     
     @FXML
     private Label labelCouleur;
@@ -107,10 +96,10 @@ public class PartieControleur implements Initializable {
     }
 
     private void caseAction(int row, int col) {
-        partie.getFacade().deplacerPiece(row, col, table(), idJoueur, ChoisirAdversaireControleur.joueurChoisie);
+        partie.getFacade().deplacerPiece(row, col, table(), idJoueur, partie.getFacade().getJoueurChoisie());
         labelGagnant.setText(partie.getFacade().msgVainceur(idJoueur));
         buttonVisualiser.setDisable(!partie.getFacade().estEchecEtMath());
-        partie.getFacade().remplacerMeilleurTemps(textNom, msgFelicitation, msgNom, buttonEnregistrerT, ChoisirAdversaireControleur.joueurChoisie);
+        partie.getFacade().remplacerMeilleurTemps(textNom, msgFelicitation, msgNom, buttonEnregistrerT, partie.getFacade().getJoueurChoisie());
     }
 
     @FXML
@@ -435,7 +424,7 @@ public class PartieControleur implements Initializable {
 
     @FXML
     private void buttonEnregistrerTemps(ActionEvent event) throws IOException {
-        partie.getFacade().sauvegarderMeilleurTemps(textNom.getText(), ChoisirAdversaireControleur.joueurChoisie);
+        partie.getFacade().sauvegarderMeilleurTemps(textNom.getText(), partie.getFacade().getJoueurChoisie());
         msgFelicitation.setVisible(false);
         msgNom.setVisible(false);
         textNom.setVisible(false);
@@ -444,15 +433,12 @@ public class PartieControleur implements Initializable {
 
     @FXML
     private void buttonEnregistrerPartie(ActionEvent event) throws IOException {
-        EnregistrerFichier fichier = new EnregistrerFichier("");
-        ConvertirDonnees conv = new ConvertirDonnees();
-        fichier.sauvegarderDansFichier(conv.objetToXML(partie.getFacade().getPartie().getTable().tablePieces()), "XML files (*.xml)", "*.xml");
-
+        partie.getFacade().enregistrerPartie();
     }
 
     @FXML
     private void buttonVisualiserPartieTermine(ActionEvent event) throws IOException {
-        if (ChoisirAdversaireControleur.joueurChoisie == 1) {
+        if (partie.getFacade().getJoueurChoisie() == 1) {
             timer.cancel();
         }
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/VisualiserPartie.fxml"));
@@ -461,11 +447,9 @@ public class PartieControleur implements Initializable {
 
     @FXML
     private void buttonRetourMenu(ActionEvent event) throws IOException {
-        if (ChoisirAdversaireControleur.joueurChoisie == 1) {
+        if (partie.getFacade().getJoueurChoisie() == 1) {
             timer.cancel();
         }
-        MenuPrincipalControleur.partieChoisie = 0;
-        ChoisirAdversaireControleur.joueurChoisie = 0;
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/MenuPrincipal.fxml"));
         panePartie.getChildren().setAll(pane);
     }
@@ -487,8 +471,8 @@ public class PartieControleur implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         setControls();
         partie.getFacade().creerInitAffichePartie(table(),
-                MenuPrincipalControleur.partieChoisie, ChoisirAdversaireControleur.joueurChoisie);
-        if (ChoisirAdversaireControleur.joueurChoisie == 1) {
+                partie.getFacade().getPartieChoisie(), partie.getFacade().getJoueurChoisie());
+        if (partie.getFacade().getJoueurChoisie() == 1) {
             buttonEnregistrerP.setVisible(false);
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override

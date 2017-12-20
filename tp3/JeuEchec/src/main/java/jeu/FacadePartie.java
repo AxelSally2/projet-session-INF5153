@@ -15,6 +15,7 @@
  */
 package jeu;
 
+import mouvement.Mouvement;
 import donnee.ConvertirDonnees;
 import fichier.EnregistrerFichier;
 import java.io.FileNotFoundException;
@@ -35,18 +36,32 @@ import piece.*;
 public class FacadePartie {
 
     private Partie partie;
+    private Temps temps;
     private int row;
     private int col;
     private int cpt;
-    private Temps temps;
+    private int partieChoisie;
+    private int joueurChoisie;
 
     public FacadePartie() {
         cpt = 0;
         temps = new Temps();
     }
 
-    public Partie getPartie() {
-        return partie;
+    public void setPartieChoisie(int partieChoisie) {
+        this.partieChoisie = partieChoisie;
+    }
+
+    public void setJoueurChoisie(int joueurChoisie) {
+        this.joueurChoisie = joueurChoisie;
+    }
+
+    public int getPartieChoisie() {
+        return partieChoisie;
+    }
+
+    public int getJoueurChoisie() {
+        return joueurChoisie;
     }
 
     private void creerPartie(int adversaireChoisie) {
@@ -128,7 +143,7 @@ public class FacadePartie {
 
     public String msgVainceur(int idJoueur) {
         Couleur couleur = (idJoueur % 2 == 0) ? Couleur.BLANC : Couleur.NOIR;
-        Couleur couleurEnn = (idJoueur% 2 != 0) ? Couleur.BLANC : Couleur.NOIR;
+        Couleur couleurEnn = (idJoueur % 2 != 0) ? Couleur.BLANC : Couleur.NOIR;
         if (partie.getTable().estEchecEtMath(couleurEnn)) {
             return "Vous avez gagné!";
         } else if (partie.getTable().estEchecEtMath(couleur)) {
@@ -181,4 +196,41 @@ public class FacadePartie {
         }
         afficherPieces(table);
     }
+
+    public void enregistrerPartie() {
+        EnregistrerFichier fichier = new EnregistrerFichier("");
+        ConvertirDonnees conv = new ConvertirDonnees();
+        fichier.sauvegarderDansFichier(conv.objetToXML(partie.getTable().tablePieces()), "XML files (*.xml)", "*.xml");
+    }
+
+    public int mouvementPrecedent(int pos, Button[][] table) {
+        int newPos;
+        newPos = partie.getMouvement().getMouvHist().mouvementPrecedent(pos);
+        partie.setTable(partie.getMouvement().getMouvHist().getTable());
+        afficherPieces(table);
+        return newPos;
+    }
+
+    public int mouvementSuivant(int pos, Button[][] table) {
+        int newPos;
+        newPos = partie.getMouvement().getMouvHist().mouvementSuivant(pos);
+        partie.setTable(partie.getMouvement().getMouvHist().getTable());
+        afficherPieces(table);
+        return newPos;
+    }
+
+    public void initialiserVisualiserPartie(Button[][] table) {
+        partie.getTable().initialiserNouvelleTable();
+        afficherPieces(table);
+    }
+
+    public int setIdJoueur() {
+        RpcClient client = new RpcClient();
+        if (joueurChoisie != 1) {
+            return 0;
+        } else {
+            return client.getJoueurID();
+        }
+    }
+
 }

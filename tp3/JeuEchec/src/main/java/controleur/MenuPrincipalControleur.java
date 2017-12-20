@@ -22,32 +22,29 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import jeu.SingletonPartie;
 
 /**
  * FXML Controller class
  */
 public class MenuPrincipalControleur implements Initializable {
-
-    @FXML
-    private Label label;
-
+    
+    private final SingletonPartie partie = SingletonPartie.getInstance();
+    
     @FXML
     private AnchorPane paneMenu;
 
-    public static int partieChoisie;
-
     @FXML
     private void buttonNouvellePartie(ActionEvent event) throws IOException {
-        partieChoisie = 1;
+        partie.getFacade().setPartieChoisie(1);
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/ChoisirAdversaire.fxml"));
         paneMenu.getChildren().setAll(pane);
     }
 
     @FXML
     private void buttonChargerPartie(ActionEvent event) throws IOException {
-        partieChoisie = 2;
+        partie.getFacade().setPartieChoisie(2);
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
         paneMenu.getChildren().setAll(pane);
     }
@@ -65,5 +62,6 @@ public class MenuPrincipalControleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
     }
 }

@@ -6,11 +6,11 @@ C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\Couleur.jav
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Pion.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\controleur\MenuPrincipalControleur.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\joueur\Joueur.java
+C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\mouvement\Mouvement.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\SingletonPartie.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Cavalier.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\fichier\EnregistrerFichier.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\controleur\ChoisirAdversaireControleur.java
-C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\MouvementHistorique.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\fichier\ChargerFichier.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\Temps.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Roi.java
@@ -21,8 +21,8 @@ C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\donnee\Converti
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\FacadePartie.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\Table.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\Partie.java
+C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\mouvement\MouvementHistorique.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\controleur\PartieControleur.java
-C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\Mouvement.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\jeu\RpcClient.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\joueur\IA.java
 C:\Users\jmppr\Documents\NetBeansProjects\JeuEchec\src\main\java\piece\Tour.java

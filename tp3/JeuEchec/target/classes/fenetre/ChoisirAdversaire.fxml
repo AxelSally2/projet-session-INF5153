@@ -13,6 +13,6 @@
         <Button layoutX="196.0" layoutY="200.0" mnemonicParsing="false" onAction="#buttonJoueurIADebutant" text="Joueur Artificiel Débutant" />
         <Button layoutX="203.0" layoutY="266.0" mnemonicParsing="false" onAction="#buttonJoueurIAAvance" text="Joueur Artificiel Avancé" />
         <Button layoutX="227.0" layoutY="329.0" mnemonicParsing="false" onAction="#buttonRetourMenu" text="Retour au menu" />
-        <Label fx:id="labelServeur" layoutX="155.0" layoutY="164.0" prefHeight="21.0" prefWidth="290.0" />
+        <Label fx:id="labelServeur" alignment="CENTER" layoutX="146.0" layoutY="164.0" prefHeight="21.0" prefWidth="290.0" />
     </children>
 </AnchorPane>

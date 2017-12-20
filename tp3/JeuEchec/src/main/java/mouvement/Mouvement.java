@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package jeu;
+package mouvement;
+
+import jeu.Couleur;
+import jeu.Table;
 
 /**
  *
@@ -56,6 +59,13 @@ public class Mouvement {
     
     public MouvementHistorique getMouvHist() {
         return mouvHist;
+    }
+    
+    public boolean estValide(Table table, Couleur couleur) {
+        return table.getPiece(row, col).estDeplacementValide(rowDest, colDest)
+                && table.cheminEstDegage(table.getPiece(row, col), rowDest, colDest)
+                && table.piecePeutManger(table.getPiece(row, col), rowDest, colDest)
+                && table.getPiece(row, col).getCouleur().equals(couleur);
     }
 
     /**

@@ -17,7 +17,7 @@ package joueur;
 
 import java.util.ArrayList;
 import jeu.Couleur;
-import jeu.Mouvement;
+import mouvement.Mouvement;
 import jeu.Table;
 import piece.*;
 
@@ -118,7 +118,7 @@ public class IAAvance extends IA {
         for (int i = 0; i < piecesJoueur.size(); i++) {
             for (int j = 0; j < piecesIA.size(); j++) {
                 mouv.setMouvement(piecesIA.get(j).getRow(), piecesIA.get(j).getCol(), piecesJoueur.get(i).getRow(), piecesJoueur.get(i).getCol());
-                if (table.estValide(mouv, couleur) && !table.estEchecEtMath(Couleur.BLANC) && !table.estEchecEtMath(Couleur.NOIR)) {
+                if (mouv.estValide(table, couleur) && !table.estEchecEtMath(Couleur.BLANC) && !table.estEchecEtMath(Couleur.NOIR)) {
                     mouv.mouvementPiece(table);
                     i = piecesJoueur.size();
                     j = piecesIA.size();

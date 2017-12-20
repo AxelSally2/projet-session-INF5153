@@ -25,14 +25,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import jeu.RpcClient;
+import jeu.SingletonPartie;
 
 /**
  * FXML Controller class
  */
 public class ChoisirAdversaireControleur implements Initializable {
-
-    public static int joueurChoisie;
-
+    
+    private final SingletonPartie partie = SingletonPartie.getInstance();
+    
     @FXML
     private AnchorPane paneChoisirAdversaire;
 
@@ -43,8 +44,7 @@ public class ChoisirAdversaireControleur implements Initializable {
     private void buttonJoueurHumain(ActionEvent event) throws IOException {
         RpcClient client = new RpcClient();
         if (client.serveurEnLigne()) {
-            labelServeur.setText("");
-            joueurChoisie = 1;
+            partie.getFacade().setJoueurChoisie(1);
             AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
             paneChoisirAdversaire.getChildren().setAll(pane);
         } else {
@@ -54,7 +54,7 @@ public class ChoisirAdversaireControleur implements Initializable {
 
     @FXML
     private void buttonJoueurIADebutant(ActionEvent event) throws IOException {
-        joueurChoisie = 2;
+        partie.getFacade().setJoueurChoisie(2);
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
         paneChoisirAdversaire.getChildren().setAll(pane);
 
@@ -62,7 +62,7 @@ public class ChoisirAdversaireControleur implements Initializable {
 
     @FXML
     private void buttonJoueurIAAvance(ActionEvent event) throws IOException {
-        joueurChoisie = 3;
+        partie.getFacade().setJoueurChoisie(3);
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/fenetre/Partie.fxml"));
         paneChoisirAdversaire.getChildren().setAll(pane);
     }
@@ -78,5 +78,6 @@ public class ChoisirAdversaireControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
     }
 }

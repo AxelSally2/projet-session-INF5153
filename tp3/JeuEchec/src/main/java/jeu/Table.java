@@ -258,14 +258,14 @@ public class Table {
         return true;
     }
 
-    private boolean cheminEstDegage(Piece piece, int row, int col) {
+    public boolean cheminEstDegage(Piece piece, int row, int col) {
         return dameACheminDegage(piece, row, col)
                 && tourACheminDegage(piece, row, col)
                 && fouACheminDegage(piece, row, col)
                 && pionCheminDegage(piece, col);
     }
 
-    private boolean piecePeutManger(Piece piece, int row, int col) {
+    public boolean piecePeutManger(Piece piece, int row, int col) {
         if (piece instanceof Pion) {
             return pionPeutManger(tablePieces[piece.getRow()][piece.getCol()], row, col);
         }
@@ -284,13 +284,6 @@ public class Table {
         return false;
     }
 
-    public boolean estValide(Mouvement mouv, Couleur couleur) {
-        return tablePieces[mouv.getRow()][mouv.getCol()].estDeplacementValide(mouv.getRowDest(), mouv.getColDest())
-                && cheminEstDegage(tablePieces[mouv.getRow()][mouv.getCol()], mouv.getRowDest(), mouv.getColDest())
-                && piecePeutManger(tablePieces[mouv.getRow()][mouv.getCol()], mouv.getRowDest(), mouv.getColDest())
-                && tablePieces[mouv.getRow()][mouv.getCol()].getCouleur().equals(couleur);
-    }
-
     public void remplacerPionParDame(Piece piece) {
         if (piece instanceof Pion) {
             if (piece.getCouleur().equals(Couleur.BLANC) && piece.getRow() == 0 && !dameEstPresente(Couleur.BLANC)) {
@@ -300,9 +293,7 @@ public class Table {
             }
         }
     }
-    
-    
-
+   
     public boolean estEchecEtMath(Couleur couleur) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {

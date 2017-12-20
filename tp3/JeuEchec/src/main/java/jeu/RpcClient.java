@@ -15,6 +15,7 @@
  */
 package jeu;
 
+import mouvement.Mouvement;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
@@ -59,16 +60,16 @@ public class RpcClient {
     }
 
     public int getJoueurID() {
-        int count = 0;
+        int joueurId = 0;
         try {
             XmlRpcClient server = new XmlRpcClient("localhost", HTTP_PORT_NUMBER);
             Vector params = new Vector();
             Object result = server.execute("services.getJoueurID", params);
-            count = (int) result;
+            joueurId = (int) result;
         } catch (Exception exception) {
             System.err.println(exception);
         }
-        return count;
+        return joueurId;
     }
 
     public void clearMap(int idJoueur) {
