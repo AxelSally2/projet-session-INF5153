@@ -21,64 +21,71 @@ import java.util.Map;
 
 public class RpcServices {
 
-    ArrayList<String> couleur = new ArrayList<String>();
-    Map joueur1 = new Hashtable();
-    Map joueur2 = new Hashtable();
-    int joueur = 1;
+    ArrayList<Map> mouvementListe = new ArrayList<Map>();
+    ArrayList<Integer> tour = new ArrayList<Integer>();
+    int id = -1;
 
-    public boolean getColor(String couleur) {
-        if (!this.couleur.contains(couleur)) {
-            return this.couleur.add(couleur);
+    public int getJoueurID() {
+        id++;
+        if (id % 2 == 0) {
+            tour.add(id);
         }
-        return false;
+        return id;
     }
 
-    private void ajouterCoordToMap(int row, int col, int rowDest, int colDest, Map map) {
+    private Map ajouterCoordToMap(int row, int col, int rowDest, int colDest) {
+        Map map = new Hashtable();
         map.put("row", row);
         map.put("col", col);
         map.put("rowDest", rowDest);
         map.put("colDest", colDest);
+        return map;
     }
 
-    public boolean postCoord(int row, int col, int rowDest, int colDest, boolean couleur) {
-        if (couleur) {
-            ajouterCoordToMap(row, col, rowDest, colDest, joueur1);
-            return true;
-        } else if (!couleur) {
-            ajouterCoordToMap(row, col, rowDest, colDest, joueur2);
-            return true;
+    public boolean postCoord(int row, int col, int rowDest, int colDest, int idJoueur) {
+        mouvementListe.add(idJoueur, ajouterCoordToMap(row, col, rowDest, colDest));
+        return true;
+    }
+
+    public Map getCoord(int idJoueur) {
+        try {
+            Map map = mouvementListe.get(idJoueur);
+            return map;
+        } catch (IndexOutOfBoundsException e) {
+            return new Hashtable();
         }
-        return false;
     }
 
-    public Map getCoord(boolean couleur) {
-        return (couleur) ? joueur1 : joueur2;
+    public boolean clearMap(int idJoueur) {
+        mouvementListe.get(idJoueur).clear();
+        return true;
     }
 
-    public boolean clearMap(boolean couleur) {
-        if (couleur) {
-            joueur1.clear();
-            return true;
-        } else if (!couleur) {
-            joueur2.clear();
-            return true;
+    public boolean setJoueurAJouer(int idJoueur) {
+        int idJoueurAJouer = (idJoueur % 2 == 0) ? idJoueur + 1 : idJoueur - 1;
+        tour.add(idJoueurAJouer);
+        tour.remove(new Integer(idJoueur));
+        return true;
+    }
+
+    public int getJoueurAJouer(int idJoueur) {
+        int joueurAJouer = -1;
+        int idAutreJoueur;
+        if (idJoueur % 2 == 0) {
+            idAutreJoueur = idJoueur + 1;
+        } else {
+            idAutreJoueur = idJoueur - 1;
         }
-        return false;
-    }
-
-    public boolean setTourAJouer() {
-        if (joueur == 1) {
-            joueur = 2;
-            return true;
-        } else if (joueur == 2) {
-            joueur = 1;
-            return true;
+        if (tour.contains(idJoueur)) {
+            joueurAJouer = idJoueur;
         }
-        return false;
+        if (tour.contains(idAutreJoueur)) {
+            joueurAJouer = idAutreJoueur;
+        }
+        return joueurAJouer;
     }
 
-    public int getTourAJouer() {
-        return joueur;
+    public boolean serveurEnLigne() {
+        return true;
     }
-
 }
