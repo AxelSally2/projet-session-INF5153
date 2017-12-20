@@ -34,7 +34,7 @@ public class VisualiserPartieControleur implements Initializable {
     private int pos = 1;
 
     @FXML
-    AnchorPane paneVisualiserPartie;
+    private AnchorPane paneVisualiserPartie;
     
     private final SingletonPartie partie = SingletonPartie.getInstance();
 

@@ -24,7 +24,7 @@ public class RpcClient {
 
     static final int HTTP_PORT_NUMBER = 8081;
 
-    public void postCoord(Mouvement mouv, boolean couleur) {
+    public void postCoord(Mouvement mouv, int idJoueur) {
         try {
             XmlRpcClient server = new XmlRpcClient("localhost", HTTP_PORT_NUMBER);
             Vector params = new Vector();
@@ -32,7 +32,7 @@ public class RpcClient {
             params.addElement(mouv.getCol());
             params.addElement(mouv.getRowDest());
             params.addElement(mouv.getColDest());
-            params.addElement(couleur);
+            params.addElement(idJoueur);
             server.execute("services.postCoord", params);
         } catch (Exception exception) {
             System.err.println(exception);
@@ -40,12 +40,12 @@ public class RpcClient {
 
     }
 
-    public Map getCoord(boolean couleur, Mouvement mouv) {
+    public Map getCoord(int idJoueur, Mouvement mouv) {
         Map coord = new Hashtable();
         try {
             XmlRpcClient server = new XmlRpcClient("localhost", HTTP_PORT_NUMBER);
             Vector params = new Vector();
-            params.addElement(couleur);
+            params.addElement(idJoueur);
             Object result = server.execute("services.getCoord", params);
             coord = (Map) result;
         } catch (Exception exception) {
@@ -58,25 +58,24 @@ public class RpcClient {
 
     }
 
-    public boolean getColor(String couleur) {
-        boolean count = false;
+    public int getJoueurID() {
+        int count = 0;
         try {
             XmlRpcClient server = new XmlRpcClient("localhost", HTTP_PORT_NUMBER);
             Vector params = new Vector();
-            params.addElement(couleur);
-            Object result = server.execute("services.getColor", params);
-            count = (Boolean) result;
+            Object result = server.execute("services.getJoueurID", params);
+            count = (int) result;
         } catch (Exception exception) {
             System.err.println(exception);
         }
         return count;
     }
 
-    public void clearMap(boolean couleur) {
+    public void clearMap(int idJoueur) {
         try {
             XmlRpcClient server = new XmlRpcClient("localhost", HTTP_PORT_NUMBER);
             Vector params = new Vector();
-            params.addElement(couleur);
+            params.addElement(idJoueur);
             server.execute("services.clearMap", params);
         } catch (Exception exception) {
             System.err.println(exception);
@@ -84,21 +83,23 @@ public class RpcClient {
 
     }
 
-    public void setJoueurAJouer() {
+    public void setJoueurAJouer(int idJoueur) {
         try {
             XmlRpcClient server = new XmlRpcClient("localhost", HTTP_PORT_NUMBER);
             Vector params = new Vector();
+            params.addElement(idJoueur);
             server.execute("services.setJoueurAJouer", params);
         } catch (Exception exception) {
             System.err.println(exception);
         }
     }
 
-    public int getJoueurAJouer() {
+    public int getJoueurAJouer(int idJoueur) {
         int joueurAjouer = 0;
         try {
             XmlRpcClient server = new XmlRpcClient("localhost", HTTP_PORT_NUMBER);
             Vector params = new Vector();
+            params.addElement(idJoueur);
             Object result = server.execute("services.getJoueurAJouer", params);
             joueurAjouer = (int) result;
         } catch (Exception exception) {

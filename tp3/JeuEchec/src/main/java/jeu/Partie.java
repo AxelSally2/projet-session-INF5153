@@ -64,26 +64,26 @@ public class Partie {
         }
     }
 
-    public void jouerMouvementContreHumain(boolean idJoueur) {
+    public void jouerMouvementContreHumain(int idJoueur) {
         RpcClient client = new RpcClient();
-        int idJoueurAjouer = (idJoueur) ? 1 : 2;
-        Couleur couleur = (idJoueur) ? Couleur.BLANC : Couleur.NOIR;
-        if (client.getJoueurAJouer() == idJoueurAjouer) {
+        Couleur couleur = (idJoueur % 2 == 0) ? Couleur.BLANC : Couleur.NOIR;
+        if (client.getJoueurAJouer(idJoueur) == idJoueur) {
             if (joueur1.effectueMouvement(table, mouv, couleur)) {
                 client.postCoord(mouv, idJoueur);
-                client.setJoueurAJouer();
+                client.setJoueurAJouer(idJoueur);
             }
         }
     }
 
-    public boolean getMouvementAdversaireHumain(boolean idJoueur) {
-        Couleur couleur = (!idJoueur) ? Couleur.BLANC : Couleur.NOIR;
+    public boolean getMouvementAdversaireHumain(int idJoueur) {
+        int id = (idJoueur % 2 == 0) ? idJoueur + 1 : idJoueur - 1;
+        Couleur couleur = (idJoueur % 2 == 0) ? Couleur.NOIR : Couleur.BLANC;
         RpcClient client = new RpcClient();
         Map coord = new Hashtable();
-        coord = client.getCoord(!idJoueur, mouv);
+        coord = client.getCoord(id, mouv);
         if (!coord.isEmpty()) {
             joueur2.effectueMouvement(table, mouv, couleur);
-            client.clearMap(!idJoueur);
+            client.clearMap(id);
             return true;
         }
         return false;

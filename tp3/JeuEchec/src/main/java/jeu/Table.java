@@ -272,13 +272,19 @@ public class Table {
         return (tablePieces[row][col] == null
                 || !(piece.getCouleur().equals(tablePieces[row][col].getCouleur())));
     }
+    
+    private boolean dameEstPresente(Couleur couleur) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (tablePieces[i][j] instanceof Dame && tablePieces[i][j].getCouleur().equals(couleur)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     public boolean estValide(Mouvement mouv, Couleur couleur) {
-        //System.out.println(tablePieces[row][col].getRow() + "---" + tablePieces[row][col].getCol());
-        //System.out.println(rowDest + "-" + colDest);
-        //System.out.println(tablePieces[row][col].estDeplacementValide(rowDest, colDest));
-        //System.out.println(cheminEstDegage(tablePieces[row][col], rowDest, colDest));
-        //System.out.println(piecePeutManger(tablePieces[row][col], rowDest, colDest));
         return tablePieces[mouv.getRow()][mouv.getCol()].estDeplacementValide(mouv.getRowDest(), mouv.getColDest())
                 && cheminEstDegage(tablePieces[mouv.getRow()][mouv.getCol()], mouv.getRowDest(), mouv.getColDest())
                 && piecePeutManger(tablePieces[mouv.getRow()][mouv.getCol()], mouv.getRowDest(), mouv.getColDest())
@@ -287,13 +293,15 @@ public class Table {
 
     public void remplacerPionParDame(Piece piece) {
         if (piece instanceof Pion) {
-            if (piece.getCouleur().equals(Couleur.BLANC) && piece.getRow() == 0) {
+            if (piece.getCouleur().equals(Couleur.BLANC) && piece.getRow() == 0 && !dameEstPresente(Couleur.BLANC)) {
                 tablePieces[piece.getRow()][piece.getCol()] = new Dame(piece.getCouleur(), piece.getRow(), piece.getCol());
-            } else if (piece.getCouleur().equals(Couleur.NOIR) && piece.getRow() == 7) {
+            } else if (piece.getCouleur().equals(Couleur.NOIR) && piece.getRow() == 7  && !dameEstPresente(Couleur.NOIR)) {
                 tablePieces[piece.getRow()][piece.getCol()] = new Dame(piece.getCouleur(), piece.getRow(), piece.getCol());
             }
         }
     }
+    
+    
 
     public boolean estEchecEtMath(Couleur couleur) {
         for (int i = 0; i < 8; i++) {

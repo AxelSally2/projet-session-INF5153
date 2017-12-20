@@ -95,7 +95,7 @@ public class FacadePartie {
         }
     }
 
-    public void deplacerPiece(int rowDest, int colDest, Button[][] table, boolean idJoueur, int adversaireChoisie) {
+    public void deplacerPiece(int rowDest, int colDest, Button[][] table, int idJoueur, int adversaireChoisie) {
         cpt++;
         if (cpt == 1) {
             if (partie.getTable().getPiece(rowDest, colDest) == null) {
@@ -112,7 +112,7 @@ public class FacadePartie {
         }
     }
 
-    private void jouerUnTour(boolean idJoueur, int adversaireChoisie) {
+    private void jouerUnTour(int idJoueur, int adversaireChoisie) {
         if (adversaireChoisie == 1) {
             partie.jouerMouvementContreHumain(idJoueur);
         } else {
@@ -120,15 +120,15 @@ public class FacadePartie {
         }
     }
 
-    public void actualiserPartieContreHumain(Button[][] table, Boolean idJoueur) {
+    public void actualiserPartieContreHumain(Button[][] table, int idJoueur) {
         if (partie.getMouvementAdversaireHumain(idJoueur)) {
             afficherPieces(table);
         }
     }
 
-    public String msgVainceur(boolean idJoueur) {
-        Couleur couleur = (idJoueur) ? Couleur.BLANC : Couleur.NOIR;
-        Couleur couleurEnn = (!idJoueur) ? Couleur.BLANC : Couleur.NOIR;
+    public String msgVainceur(int idJoueur) {
+        Couleur couleur = (idJoueur % 2 == 0) ? Couleur.BLANC : Couleur.NOIR;
+        Couleur couleurEnn = (idJoueur% 2 != 0) ? Couleur.BLANC : Couleur.NOIR;
         if (partie.getTable().estEchecEtMath(couleurEnn)) {
             return "Vous avez gagné!";
         } else if (partie.getTable().estEchecEtMath(couleur)) {
@@ -142,10 +142,9 @@ public class FacadePartie {
                 || partie.getTable().estEchecEtMath(Couleur.BLANC);
     }
 
-    public String msgJoueurAJouer(boolean idJoueur) {
+    public String msgJoueurAJouer(int idJoueur) {
         RpcClient client = new RpcClient();
-        int idJoueurAjouer = (idJoueur) ? 1 : 2;
-        if (client.getJoueurAJouer() == idJoueurAjouer) {
+        if (client.getJoueurAJouer(idJoueur) == idJoueur) {
             return "C'est votre tour à jouer!";
         } else {
             return "Ce n'est pas votre tour à jouer!";

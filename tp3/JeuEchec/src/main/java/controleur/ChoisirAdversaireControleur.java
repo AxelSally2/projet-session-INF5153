@@ -34,10 +34,10 @@ public class ChoisirAdversaireControleur implements Initializable {
     public static int joueurChoisie;
 
     @FXML
-    AnchorPane paneChoisirAdversaire;
+    private AnchorPane paneChoisirAdversaire;
 
     @FXML
-    public Label labelServeur;
+    private Label labelServeur;
 
     @FXML
     private void buttonJoueurHumain(ActionEvent event) throws IOException {

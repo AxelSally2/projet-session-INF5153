@@ -9,7 +9,7 @@
 <AnchorPane id="AnchorPane" fx:id="panePartie" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.PartieControleur">
     <children>
         <Button layoutX="1074.0" layoutY="644.0" mnemonicParsing="false" onAction="#buttonRetourMenu" text="Retour au Menu" />
-        <Button fx:id="buttonVisualiser" layoutX="1007.0" layoutY="601.0" mnemonicParsing="false" onAction="#buttonVisualiserPartieTermine" prefHeight="4.0" prefWidth="195.0" text="Visualiser la partie terminé" />
+        <Button fx:id="buttonVisualiser" layoutX="1007.0" layoutY="601.0" mnemonicParsing="false" onAction="#buttonVisualiserPartieTermine" prefHeight="4.0" prefWidth="195.0" text="Visualiser la partie" />
         <Button fx:id="buttonEnregistrerP" layoutX="1052.0" layoutY="558.0" mnemonicParsing="false" onAction="#buttonEnregistrerPartie" text="Enregistrer la partie" />
         <Button fx:id="case00" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#case00Action" prefHeight="86.0" prefWidth="86.0" styleClass="tuilePale" stylesheets="@../styles/Styles.css" />
         <Button fx:id="case10" layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#case10Action" prefHeight="86.0" prefWidth="86.0" styleClass="tuileFonce" stylesheets="@../styles/Styles.css" />
@@ -81,5 +81,6 @@
       <Button fx:id="buttonEnregistrerT" layoutX="949.0" layoutY="379.0" mnemonicParsing="false" onAction="#buttonEnregistrerTemps" text="Enregistrer" />
       <Label fx:id="msgFelicitation" layoutX="745.0" layoutY="323.0" prefHeight="21.0" prefWidth="363.0" text="Félicitation! Vouz avez un nouveau record." />
       <Label fx:id="msgNom" layoutX="745.0" layoutY="350.0" text="Entrez votre nom :" />
+      <Label fx:id="labelCouleur" layoutX="728.0" layoutY="665.0" prefHeight="21.0" prefWidth="216.0" text="Label" />
     </children>
 </AnchorPane>

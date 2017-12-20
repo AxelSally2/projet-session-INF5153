@@ -41,42 +41,45 @@ public class PartieControleur implements Initializable {
 
     private final SingletonPartie partie = SingletonPartie.getInstance();
 
-    RpcClient client = new RpcClient();
+    private final Timer timer = new Timer();
 
-    public Timer timer = new Timer();
+    private final int idJoueur = setIdJoueur();
 
-    public boolean idJoueur = test();
-
-    private boolean test() {
-        if (ChoisirAdversaireControleur.joueurChoisie == 1) {
-            return client.getColor("noir");
+    private int setIdJoueur() {
+        RpcClient client = new RpcClient();
+        if (ChoisirAdversaireControleur.joueurChoisie != 1) {
+            return 0;
+        } else {
+            return client.getJoueurID();
         }
-        return true;
     }
+    
+    @FXML
+    private Label labelCouleur;
 
     @FXML
-    public TextField textNom;
+    private TextField textNom;
 
     @FXML
-    public Button buttonEnregistrerP;
+    private Button buttonEnregistrerP;
 
     @FXML
-    public Button buttonEnregistrerT;
+    private Button buttonEnregistrerT;
 
     @FXML
-    public Label labelGagnant;
+    private Label labelGagnant;
 
     @FXML
-    public Button buttonVisualiser;
+    private Button buttonVisualiser;
 
     @FXML
-    public Label labelTour;
+    private Label labelTour;
 
     @FXML
-    public Label msgFelicitation;
+    private Label msgFelicitation;
 
     @FXML
-    public Label msgNom;
+    private Label msgNom;
 
     @FXML
     private Button case00, case01, case02, case03, case04, case05, case06, case07,
@@ -89,7 +92,7 @@ public class PartieControleur implements Initializable {
             case70, case71, case72, case73, case74, case75, case76, case77;
 
     @FXML
-    AnchorPane panePartie;
+    private AnchorPane panePartie;
 
     private Button[][] table() {
         Button table[][] = {{case00, case01, case02, case03, case04, case05, case06, case07},
@@ -468,6 +471,8 @@ public class PartieControleur implements Initializable {
     }
 
     private void setControls() {
+        String couleur = (idJoueur % 2 == 0) ? "blanche" : "noire";
+        labelCouleur.setText("Vous êtes la couleur " + couleur);
         msgFelicitation.setVisible(false);
         msgNom.setVisible(false);
         textNom.setVisible(false);

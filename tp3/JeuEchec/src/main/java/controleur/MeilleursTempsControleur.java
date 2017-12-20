@@ -34,7 +34,7 @@ import jeu.Temps;
 public class MeilleursTempsControleur implements Initializable {
 
     @FXML
-    AnchorPane paneMeilleursTemps;
+    private AnchorPane paneMeilleursTemps;
 
     @FXML
     private Label meilleurTempsDebutant;

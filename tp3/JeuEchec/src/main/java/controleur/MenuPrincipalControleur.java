@@ -34,7 +34,7 @@ public class MenuPrincipalControleur implements Initializable {
     private Label label;
 
     @FXML
-    AnchorPane paneMenu;
+    private AnchorPane paneMenu;
 
     public static int partieChoisie;
 
