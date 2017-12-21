@@ -14,7 +14,10 @@ Audrey​ ​Eugene​ ​(EUGA21589707)
 
 ## Fonctionnement
 
-Pour lancer le projet, il suffit d'ouvrir le projet avec Netblean.  
+Pour lancer le un client d'un jeu d'échec, il suffit d'ouvrir le projet "JeuEchec" avec Netblean.  
+Puis, effectuer un clean and build et rouler le projet.
+
+Pour lancer le serveur dans le but de jouer contre des joueurs humains, il suffit d'ouvrir le projet "XmlRpcServer" avec Netblean.  
 Puis, effectuer un clean and build et rouler le projet.
 
 ## License
@@ -25,9 +28,4 @@ Les images des pièces d'échec ont été créé par : [Yuri Mazursky](https://w
 Licenses des images : [Creative Commons (Attribution 2.5 Generic)](https://creativecommons.org/licenses/by/2.5/).  
 
 ## À faire
-- ~~Le patron facade dans la classe FacadePartie~~  
-- ~~Le patron singleton avec l'instance d'une partie (Classe SingletonPartie)~~  
-- Validation un roi est échec et math ou la partie est une égalité  
-- ~~Partie contre un humain en ligne~~ 
-- ~~Partie contre une IA avancé~~  
-- Les meilleurs temps  
+- Le projet est complet.
