@@ -15,16 +15,14 @@
  */
 package jeu;
 
-import mouvement.Mouvement;
 import donnee.ConvertirDonnees;
+import fichier.ChargerFichier;
 import fichier.EnregistrerFichier;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Button;
-import joueur.Humain;
-import joueur.IAAvance;
-import joueur.IADebutant;
+import joueur.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import piece.*;
@@ -66,13 +64,13 @@ public class FacadePartie {
 
     private void creerPartie(int adversaireChoisie) {
         if (adversaireChoisie == 1) {
-            partie = new Partie(new Table(), new Humain(), new Humain(), new Mouvement());
+            partie = new Partie(new Humain());
         } else if (adversaireChoisie == 2) {
-            partie = new Partie(new Table(), new Humain(), new IADebutant(), new Mouvement());
+            partie = new Partie(new IADebutant());
         } else if (adversaireChoisie == 3) {
-            partie = new Partie(new Table(), new Humain(), new IAAvance(), new Mouvement());
+            partie = new Partie(new IAAvance());
         } else {
-            partie = new Partie(new Table(), new Humain(), new IADebutant(), new Mouvement());
+            partie = new Partie(new IADebutant());
         }
     }
 
@@ -231,6 +229,18 @@ public class FacadePartie {
         } else {
             return client.getJoueurID();
         }
+    }
+
+    public void initMeilleurTemps(Label meilleurTempsDebutant, Label meilleurTempsAvance, Label nomIADebutant, Label nomIAAvance) {
+        ConvertirDonnees conv = new ConvertirDonnees();
+        ChargerFichier fichier = new ChargerFichier("temps.xml");
+        Temps meilleurTemps = (Temps) conv.XMLToObjet(fichier.contenuFichierPredefinie());
+        double tempsDebutant = meilleurTemps.getTempsIADebutant() / 1000.0;
+        double tempsAvance = meilleurTemps.getTempsIAAvance() / 1000.0;
+        meilleurTempsDebutant.setText(String.valueOf(String.format("%.2f", tempsDebutant) + " Secondes"));
+        meilleurTempsAvance.setText(String.valueOf(String.format("%.2f", tempsAvance) + " Secondes"));
+        nomIADebutant.setText(meilleurTemps.getNomIADebutant());
+        nomIAAvance.setText(meilleurTemps.getNomIAAvance());
     }
 
 }

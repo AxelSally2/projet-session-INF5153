@@ -19,7 +19,7 @@ import mouvement.Mouvement;
 import java.io.FileNotFoundException;
 import java.util.Hashtable;
 import java.util.Map;
-import joueur.Joueur;
+import joueur.*;
 
 /**
  *
@@ -32,11 +32,11 @@ public class Partie {
     private Joueur joueur2;
     private Mouvement mouv;
 
-    public Partie(Table table, Joueur joueur1, Joueur joueur2, Mouvement mouv) {
-        this.table = table;
-        this.joueur1 = joueur1;
+    public Partie(Joueur joueur2) {
+        this.table = new Table();
+        this.joueur1 = new Humain();
         this.joueur2 = joueur2;
-        this.mouv = mouv;
+        this.mouv = new Mouvement();
     }
 
     public Table getTable() {

@@ -15,8 +15,6 @@
  */
 package controleur;
 
-import fichier.ChargerFichier;
-import donnee.ConvertirDonnees;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,12 +24,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import jeu.Temps;
+import jeu.SingletonPartie;
 
 /**
  * FXML Controller class
  */
 public class MeilleursTempsControleur implements Initializable {
+
+    private final SingletonPartie partie = SingletonPartie.getInstance();
 
     @FXML
     private AnchorPane paneMeilleursTemps;
@@ -59,15 +59,7 @@ public class MeilleursTempsControleur implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ConvertirDonnees conv = new ConvertirDonnees();
-        ChargerFichier fichier = new ChargerFichier("temps.xml");
-        Temps temps = (Temps) conv.XMLToObjet(fichier.contenuFichierPredefinie());
-        double tempsDebutant = temps.getTempsIADebutant() / 1000.0;
-        double tempsAvance = temps.getTempsIAAvance() / 1000.0;
-        meilleurTempsDebutant.setText(String.valueOf(String.format("%.2f", tempsDebutant) + " Secondes"));
-        meilleurTempsAvance.setText(String.valueOf(String.format("%.2f", tempsAvance) + " Secondes"));
-        nomIADebutant.setText(temps.getNomIADebutant());
-        nomIAAvance.setText(temps.getNomIAAvance());
+        partie.getFacade().initMeilleurTemps(meilleurTempsDebutant, meilleurTempsAvance, nomIADebutant, nomIAAvance);
     }
 
 }
