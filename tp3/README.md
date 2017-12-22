@@ -14,10 +14,10 @@ Audrey​ ​Eugene​ ​(EUGA21589707)
 
 ## Fonctionnement
 
-Pour lancer le un client d'un jeu d'échec, il suffit d'ouvrir le projet "JeuEchec" avec Netblean.  
+Pour lancer le un client d'un jeu d'échec, il suffit d'ouvrir le projet "JeuEchec" avec Netbeans.  
 Puis, effectuer un clean and build et rouler le projet.
 
-Pour lancer le serveur dans le but de jouer contre des joueurs humains, il suffit d'ouvrir le projet "XmlRpcServer" avec Netblean.  
+Pour lancer le serveur dans le but de jouer contre des joueurs humains, il suffit d'ouvrir le projet "XmlRpcServer" avec Netbeans.  
 Puis, effectuer un clean and build et rouler le projet.
 
 ## License
