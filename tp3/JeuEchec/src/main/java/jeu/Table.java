@@ -272,7 +272,7 @@ public class Table {
         return (tablePieces[row][col] == null
                 || !(piece.getCouleur().equals(tablePieces[row][col].getCouleur())));
     }
-    
+
     private boolean dameEstPresente(Couleur couleur) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -288,12 +288,12 @@ public class Table {
         if (piece instanceof Pion) {
             if (piece.getCouleur().equals(Couleur.BLANC) && piece.getRow() == 0 && !dameEstPresente(Couleur.BLANC)) {
                 tablePieces[piece.getRow()][piece.getCol()] = new Dame(piece.getCouleur(), piece.getRow(), piece.getCol());
-            } else if (piece.getCouleur().equals(Couleur.NOIR) && piece.getRow() == 7  && !dameEstPresente(Couleur.NOIR)) {
+            } else if (piece.getCouleur().equals(Couleur.NOIR) && piece.getRow() == 7 && !dameEstPresente(Couleur.NOIR)) {
                 tablePieces[piece.getRow()][piece.getCol()] = new Dame(piece.getCouleur(), piece.getRow(), piece.getCol());
             }
         }
     }
-   
+
     public boolean estEchecEtMath(Couleur couleur) {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
@@ -303,5 +303,17 @@ public class Table {
             }
         }
         return true;
+    }
+
+    public boolean estMatchNul() {
+        int cpt = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (tablePieces[i][j] != null) {
+                    cpt++;
+                }
+            }
+        }
+        return cpt == 2;
     }
 }

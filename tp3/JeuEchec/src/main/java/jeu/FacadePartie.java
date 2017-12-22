@@ -146,6 +146,8 @@ public class FacadePartie {
             return "Vous avez gagné!";
         } else if (partie.getTable().estEchecEtMath(couleur)) {
             return "Vous avez perdu!";
+        } else if (partie.getTable().estMatchNul()) {
+            return "Match nul!";
         }
         return "";
     }
